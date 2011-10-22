@@ -1,12 +1,12 @@
 <?php
 
-namespace lithium\storage\session\strategy;
+namespace arthur\storage\session\strategy;
 
 use RuntimeException;
-use lithium\core\ConfigException;
-use lithium\storage\session\strategy\MissingSignatureException;
+use arthur\core\ConfigException;
+use arthur\storage\session\strategy\MissingSignatureException;
 
-class Hmac extends \lithium\core\Object 
+class Hmac extends \arthur\core\Object 
 {
 	protected static $_secret = null;
 

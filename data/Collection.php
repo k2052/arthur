@@ -1,8 +1,8 @@
 <?php
 
-namespace lithium\data;
+namespace arthur\data;
 
-abstract class Collection extends \lithium\util\Collection 
+abstract class Collection extends \arthur\util\Collection 
 {
 	protected $_parent = null;
 	protected $_pathKey = null;

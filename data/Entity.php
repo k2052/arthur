@@ -1,12 +1,12 @@
 <?php
 
-namespace lithium\data;
+namespace arthur\data;
 
 use BadMethodCallException;
 use UnexpectedValueException;
-use lithium\data\Collection;
+use arthur\data\Collection;
 
-class Entity extends \lithium\core\Object 
+class Entity extends \arthur\core\Object 
 {
 	protected $_model = null;
 	protected $_data = array();

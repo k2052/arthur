@@ -5,7 +5,7 @@ namespace arthur\template\helper;
 use arthur\util\Set;
 use arthur\util\Inflector;
 
-class Form extends \lithium\template\Helper 
+class Form extends \arthur\template\Helper 
 {
 	protected $_strings = array(
 		'button'         => '<button{:options}>{:name}</button>',

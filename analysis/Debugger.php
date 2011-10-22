@@ -1,12 +1,12 @@
 <?php
 
-namespace lithium\analysis;
+namespace arthur\analysis;
 
 use ReflectionClass;
-use lithium\util\String;
-use lithium\analysis\Inspector;
+use arthur\util\String;
+use arthur\analysis\Inspector;
 
-class Debugger extends \lithium\core\Object 
+class Debugger extends \arthur\core\Object 
 {
 	protected static $_closureCache = array();
 

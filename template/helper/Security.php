@@ -6,7 +6,7 @@ class Security extends \arthur\template\Helper
 {
 
 	protected $_classes = array(
-		'requestToken' => 'lithium\security\validation\RequestToken'
+		'requestToken' => 'arthur\security\validation\RequestToken'
 	);
 
 	public function __construct(array $config = array()) 

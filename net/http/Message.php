@@ -2,13 +2,13 @@
 
 namespace arthur\net\http;
 
-class Message extends \lithium\net\Message 
+class Message extends \arthur\net\Message 
 {
 	public $protocol = null;
 	public $version = '1.1';
 	public $headers = array();
 	protected $_type = 'html';
-	protected $_classes = array('media' => 'lithium\net\http\Media');
+	protected $_classes = array('media' => 'arthur\net\http\Media');
 
 	public function __construct(array $config = array()) 
 	{

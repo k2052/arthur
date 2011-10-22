@@ -1,17 +1,17 @@
 <?php
 
-namespace lithium\data\source;
+namespace arthur\data\source;
 
-use lithium\util\String;
+use arthur\util\String;
 
-class Http extends \lithium\data\Source 
+class Http extends \arthur\data\Source 
 {
 	public $connection = null;
 	protected $_autoConfig = array('classes' => 'merge');
 	
 	protected $_classes = array(
-		'service'      => 'lithium\net\http\Service',
-		'relationship' => 'lithium\data\model\Relationship'
+		'service'      => 'arthur\net\http\Service',
+		'relationship' => 'arthur\data\model\Relationship'
 	);
              
 	protected $_isConnected = false;

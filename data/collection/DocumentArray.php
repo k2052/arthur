@@ -1,10 +1,10 @@
 <?php
 
-namespace lithium\data\collection;
+namespace arthur\data\collection;
 
-use lithium\util\Collection;
+use arthur\util\Collection;
 
-class DocumentArray extends \lithium\data\Collection 
+class DocumentArray extends \arthur\data\Collection 
 {
 	protected $_exists = false;
 	protected $_original = array();

@@ -1,6 +1,6 @@
 <?php
 
-namespace lithium\data\model;
+namespace arthur\data\model;
 
 class QueryException extends \RuntimeException 
 {

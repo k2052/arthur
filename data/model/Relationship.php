@@ -1,12 +1,12 @@
 <?php
 
-namespace lithium\data\model;
+namespace arthur\data\model;
 
-use lithium\core\Libraries;
-use lithium\util\Inflector;
-use lithium\core\ClassNotFoundException;
+use arthur\core\Libraries;
+use arthur\util\Inflector;
+use arthur\core\ClassNotFoundException;
 
-class Relationship extends \lithium\core\Object 
+class Relationship extends \arthur\core\Object 
 {
 	const LINK_EMBEDDED = 'embedded';
 	const LINK_CONTAINED = 'contained';

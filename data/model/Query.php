@@ -1,12 +1,12 @@
 <?php
 
-namespace lithium\data\model;
+namespace arthur\data\model;
 
-use lithium\data\Source;
-use lithium\core\ConfigException;
-use lithium\data\model\QueryException;
+use arthur\data\Source;
+use arthur\core\ConfigException;
+use arthur\data\model\QueryException;
 
-class Query extends \lithium\core\Object 
+class Query extends \arthur\core\Object 
 {
 	protected $_type = null;
 	protected $_map = array();

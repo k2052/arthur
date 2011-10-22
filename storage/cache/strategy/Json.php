@@ -1,8 +1,8 @@
 <?php
 
-namespace lithium\storage\cache\strategy;
+namespace arthur\storage\cache\strategy;
 
-class Json extends \lithium\core\Object
+class Json extends \arthur\core\Object
 {
 	public function write($data) 
 	{

@@ -1,11 +1,11 @@
 <?php
 
-namespace lithium\analysis\logger\adapter;
+namespace arthur\analysis\logger\adapter;
 
-use lithium\util\String;
-use lithium\core\Libraries;
+use arthur\util\String;
+use arthur\core\Libraries;
 
-class File extends \lithium\core\Object 
+class File extends \arthur\core\Object 
 {
 	public function __construct(array $config = array()) 
 	{

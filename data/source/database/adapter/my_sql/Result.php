@@ -1,8 +1,8 @@
 <?php
 
-namespace lithium\data\source\database\adapter\my_sql;
+namespace arthur\data\source\database\adapter\my_sql;
 
-class Result extends \lithium\data\source\database\Result 
+class Result extends \arthur\data\source\database\Result 
 {
 	public function prev() 
 	{

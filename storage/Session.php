@@ -4,7 +4,7 @@ namespace arthur\storage;
 
 use arthur\core\Libraries;
 
-class Session extends \lithium\core\Adaptable 
+class Session extends \arthur\core\Adaptable 
 {
 	protected static $_configurations = array();
 	protected static $_adapters = 'adapter.storage.session';

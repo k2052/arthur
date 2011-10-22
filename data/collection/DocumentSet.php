@@ -1,8 +1,8 @@
 <?php
 
-namespace lithium\data\collection;
+namespace arthur\data\collection;
 
-class DocumentSet extends \lithium\data\Collection 
+class DocumentSet extends \arthur\data\Collection 
 {
 
 	public function __set($name, $value = null) 

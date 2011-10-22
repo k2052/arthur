@@ -5,7 +5,7 @@ namespace arthur\util;
 use arthur\util\Set;
 use InvalidArgumentException;
 
-class Validator extends \lithium\core\StaticObject 
+class Validator extends \arthur\core\StaticObject 
 {
 	protected static $_rules = array();
 	protected static $_options = array(

@@ -6,11 +6,11 @@
  * @license       http://opensource.org/licenses/bsd-license.php The BSD License
  */
 
-namespace lithium\data\entity;
+namespace arthur\data\entity;
 
 use UnexpectedValueException;
 
-class Document extends \lithium\data\Entity implements \Iterator, \ArrayAccess 
+class Document extends \arthur\data\Entity implements \Iterator, \ArrayAccess 
 {
 	protected $_pathKey = null;
 	protected $_stats = array();

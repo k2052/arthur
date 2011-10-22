@@ -1,10 +1,10 @@
 <?php
 
-namespace lithium\analysis;
+namespace arthur\analysis;
 
 use UnexpectedValueException;
 
-class Logger extends \lithium\core\Adaptable 
+class Logger extends \arthur\core\Adaptable 
 {
 	protected static $_configurations = array();
 	protected static $_adapters = 'adapter.analysis.logger';

@@ -1,8 +1,8 @@
 <?php
 
-namespace lithium\storage;
+namespace arthur\storage;
 
-class Cache extends \lithium\core\Adaptable 
+class Cache extends \arthur\core\Adaptable 
 {
 	protected static $_configurations = array();
 	protected static $_adapters = 'adapter.storage.cache';

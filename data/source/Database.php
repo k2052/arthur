@@ -1,12 +1,12 @@
 <?php
 
-namespace lithium\data\source;
+namespace arthur\data\source;
 
-use lithium\util\String;
-use lithium\util\Inflector;
+use arthur\util\String;
+use arthur\util\Inflector;
 use InvalidArgumentException;
 
-abstract class Database extends \lithium\data\Source 
+abstract class Database extends \arthur\data\Source 
 {
 	protected $_columns = array(
 		'string' => array('length' => 255)
@@ -21,9 +21,9 @@ abstract class Database extends \lithium\data\Source
 	);
 
 	protected $_classes = array(
-		'entity'       => 'lithium\data\entity\Record',
-		'set'          => 'lithium\data\collection\RecordSet',
-		'relationship' => 'lithium\data\model\Relationship'
+		'entity'       => 'arthur\data\entity\Record',
+		'set'          => 'arthur\data\collection\RecordSet',
+		'relationship' => 'arthur\data\model\Relationship'
 	);
 
 	protected $_operators = array(

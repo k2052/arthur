@@ -1,8 +1,8 @@
 <?php
 
-namespace lithium\data\source\database;
+namespace arthur\data\source\database;
 
-abstract class Result extends \lithium\core\Object implements \Iterator 
+abstract class Result extends \arthur\core\Object implements \Iterator 
 {
 
 	protected $_iterator = 0;

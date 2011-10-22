@@ -1,17 +1,17 @@
 <?php
 
-namespace lithium\data;
+namespace arthur\data;
 
-use lithium\core\NetworkException;
+use arthur\core\NetworkException;
 
-abstract class Source extends \lithium\core\Object 
+abstract class Source extends \arthur\core\Object 
 {
 	protected $_autoConfig = array('classes' => 'merge');
 
 	protected $_classes = array(
-		'entity'       => 'lithium\data\Entity',
-		'set'          => 'lithium\data\Collection',
-		'relationship' => 'lithium\data\model\Relationship'
+		'entity'       => 'arthur\data\Entity',
+		'set'          => 'arthur\data\Collection',
+		'relationship' => 'arthur\data\model\Relationship'
 	);
 
 	public $connection = null;

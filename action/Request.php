@@ -5,7 +5,7 @@ namespace arthur\action;
 use arthur\util\Set;
 use arthur\util\Validator;
 
-class Request extends \lithium\net\http\Request 
+class Request extends \arthur\net\http\Request 
 {
 	public $url = null;
 	public $params = array();

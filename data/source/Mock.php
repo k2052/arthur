@@ -1,8 +1,8 @@
 <?php
 
-namespace lithium\data\source;
+namespace arthur\data\source;
 
-class Mock extends \lithium\data\Source 
+class Mock extends \arthur\data\Source 
 {
 	public function connect() 
 	{

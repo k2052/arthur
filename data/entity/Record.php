@@ -1,8 +1,8 @@
 <?php
 
-namespace lithium\data\entity;
+namespace arthur\data\entity;
 
-class Record extends \lithium\data\Entity 
+class Record extends \arthur\data\Entity 
 {
   
 }

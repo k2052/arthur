@@ -1,8 +1,8 @@
 <?php
 
-namespace lithium\data\collection;
+namespace arthur\data\collection;
 
-class RecordSet extends \lithium\data\Collection 
+class RecordSet extends \arthur\data\Collection 
 {
 	protected $_index = array();
 	protected $_pointer = 0;

@@ -6,7 +6,7 @@ use arthur\core\Environment;
 use SplDoublyLinkedList;
 use arthur\core\ConfigException;
 
-class Adaptable extends \lithium\core\StaticObject 
+class Adaptable extends \arthur\core\StaticObject 
 {
 	protected static $_configurations = array();
 	protected static $_strategies = null;

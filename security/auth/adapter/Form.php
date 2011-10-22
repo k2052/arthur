@@ -1,12 +1,12 @@
 <?php
 
-namespace lithium\security\auth\adapter;
+namespace arthur\security\auth\adapter;
 
-use lithium\core\Libraries;
+use arthur\core\Libraries;
 use UnexpectedValueException;
-use lithium\security\Password;
+use arthur\security\Password;
 
-class Form extends \lithium\core\Object 
+class Form extends \arthur\core\Object 
 {
 	protected $_model = '';
 	protected $_fields = array();

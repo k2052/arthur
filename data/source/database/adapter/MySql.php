@@ -1,16 +1,16 @@
 <?php
 
-namespace lithium\data\source\database\adapter;
+namespace arthur\data\source\database\adapter;
 
-use lithium\data\model\QueryException;
+use arthur\data\model\QueryException;
 
-class MySql extends \lithium\data\source\Database 
+class MySql extends \arthur\data\source\Database 
 {
 	protected $_classes = array(          
-		'entity'       => 'lithium\data\entity\Record',
-		'set'          => 'lithium\data\collection\RecordSet',
-		'relationship' => 'lithium\data\model\Relationship',
-		'result'       => 'lithium\data\source\database\adapter\my_sql\Result'
+		'entity'       => 'arthur\data\entity\Record',
+		'set'          => 'arthur\data\collection\RecordSet',
+		'relationship' => 'arthur\data\model\Relationship',
+		'result'       => 'arthur\data\source\database\adapter\my_sql\Result'
 	);
 	protected $_columns = array(
 		'primary_key' => array('name' => 'NOT NULL AUTO_INCREMENT'),

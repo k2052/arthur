@@ -4,7 +4,7 @@ namespace arthur\storage\session\adapter;
 
 use arthur\util\String;
 
-class Memory extends \lithium\core\Object 
+class Memory extends \arthur\core\Object 
 {
 	public $_session = array();
 

@@ -1,13 +1,13 @@
 <?php
 
-namespace lithium\data;
+namespace arthur\data;
 
-use lithium\util\Set;
-use lithium\util\Inflector;
-use lithium\core\ConfigException;
+use arthur\util\Set;
+use arthur\util\Inflector;
+use arthur\core\ConfigException;
 use BadMethodCallException;
 
-class Model extends \lithium\core\StaticObject 
+class Model extends \arthur\core\StaticObject 
 {
 	public $validates = array();
 	public $hasOne = array();
@@ -17,9 +17,9 @@ class Model extends \lithium\core\StaticObject
 	protected $_instanceFilters = array();
 
 	protected static $_classes = array(
-		'connections' => 'lithium\data\Connections',
-		'query'       => 'lithium\data\model\Query',
-		'validator'   => 'lithium\util\Validator'
+		'connections' => 'arthur\data\Connections',
+		'query'       => 'arthur\data\model\Query',
+		'validator'   => 'arthur\util\Validator'
 	);
 
 	protected $_relations = array();

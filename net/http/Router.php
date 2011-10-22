@@ -9,7 +9,7 @@ class Router extends \arthur\core\StaticObject
 {
 	protected static $_configurations = array();
 	protected static $_classes = array(
-		'route' => 'lithium\net\http\Route'
+		'route' => 'arthur\net\http\Route'
 	);
 
 	public static function config($config = array()) 

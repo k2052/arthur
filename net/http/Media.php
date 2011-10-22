@@ -6,7 +6,7 @@ use arthur\util\String;
 use arthur\core\Libraries;
 use arthur\net\http\MediaException;
 
-class Media extends \lithium\core\StaticObject 
+class Media extends \arthur\core\StaticObject 
 {
 	protected static $_types = array();
 	protected static $_handlers = array();
@@ -421,7 +421,7 @@ class Media extends \lithium\core\StaticObject
 	{
 		$handlers = static::$_handlers + array(
 			'default' => array(
-				'view'     => 'lithium\template\View',
+				'view'     => 'arthur\template\View',
 				'encode'   => false,
 				'decode'   => false,
 				'cast'     => false,

@@ -6,11 +6,11 @@
  * @license       http://opensource.org/licenses/bsd-license.php The BSD License
  */
 
-namespace lithium\storage\session\strategy;
+namespace arthur\storage\session\strategy;
 
-use lithium\core\ConfigException;
+use arthur\core\ConfigException;
 
-class Encrypt extends \lithium\core\Object 
+class Encrypt extends \arthur\core\Object 
 {
 	protected static $_vector = null;
 

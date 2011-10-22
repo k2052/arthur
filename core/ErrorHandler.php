@@ -1,12 +1,12 @@
 <?php
 
-namespace lithium\core;
+namespace arthur\core;
 
 use Exception;
 use ErrorException;
-use lithium\util\collection\Filters;
+use arthur\util\collection\Filters;
 
-class ErrorHandler extends \lithium\core\StaticObject 
+class ErrorHandler extends \arthur\core\StaticObject 
 {
 	protected static $_config = array();
 	protected static $_handlers = array();

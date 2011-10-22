@@ -1,8 +1,8 @@
 <?php
 
-namespace lithium\storage\cache\strategy;
+namespace arthur\storage\cache\strategy;
 
-class Serializer extends \lithium\core\Object 
+class Serializer extends \arthur\core\Object 
 {
 
 	public function write($data) 

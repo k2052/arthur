@@ -1,16 +1,16 @@
 <?php
 
-namespace lithium\security;
+namespace arthur\security;
 
-use lithium\core\ConfigException;
+use arthur\core\ConfigException;
 
-class Auth extends \lithium\core\Adaptable 
+class Auth extends \arthur\core\Adaptable 
 {
 	protected static $_configurations = array();
 	protected static $_adapters = 'adapter.security.auth';
 
 	protected static $_classes = array(
-		'session' => 'lithium\storage\Session'
+		'session' => 'arthur\storage\Session'
 	);                             
 	
 	protected static function _initConfig($name, $config) 

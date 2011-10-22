@@ -9,7 +9,7 @@ use arthur\util\Set;
 class RequestToken 
 {
 	protected static $_classes = array(
-		'session' => 'lithium\storage\Session'
+		'session' => 'arthur\storage\Session'
 	);
 
 	public static function config(array $config = array()) 
