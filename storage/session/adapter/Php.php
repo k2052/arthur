@@ -23,7 +23,7 @@ class Php extends \arthur\core\Object
 		unset($config['adapter'], $config['strategies'], $config['filters'], $config['init']);
 
 		if(!isset($config['session.name']))
-			$config['session.name'] = basename(LITHIUM_APP_PATH); 
+			$config['session.name'] = basename(ARTHUR_APP_PATH); 
 			
 		foreach($config as $key => $value) 
 		{

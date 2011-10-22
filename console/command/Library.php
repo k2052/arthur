@@ -99,8 +99,8 @@ class Library extends \arthur\console\Command
 	{
 		$replacements = array(
 			'config/bootstrap/libraries.php' => array(
-				'define(\'LITHIUM_LIBRARY_PATH\', dirname(LITHIUM_APP_PATH) . \'/libraries\');' =>
-					'define(\'LITHIUM_LIBRARY_PATH\', \'' . LITHIUM_LIBRARY_PATH . '\');'
+				'define(\'ARTHUR_LIBRARY_PATH\', dirname(ARTHUR_APP_PATH) . \'/libraries\');' =>
+					'define(\'ARTHUR_LIBRARY_PATH\', \'' . ARTHUR_LIBRARY_PATH . '\');'
 			)
 		);
 

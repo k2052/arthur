@@ -12,7 +12,7 @@ class Route extends \arthur\console\Command
 
 	public function __construct($config = array()) 
 	{
-		$defaults = array('routes_file' => LITHIUM_APP_PATH . '/config/routes.php');
+		$defaults = array('routes_file' => ARTHUR_APP_PATH . '/config/routes.php');
 		parent::__construct($config + $defaults);
 	}
 

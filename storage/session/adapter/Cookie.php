@@ -22,7 +22,7 @@ class Cookie extends \arthur\core\Object
 		parent::_init();
 
 		if(!$this->_config['name'])
-			$this->_config['name'] = Inflector::slug(basename(LITHIUM_APP_PATH)) . 'cookie';
+			$this->_config['name'] = Inflector::slug(basename(ARTHUR_APP_PATH)) . 'cookie';
 	}
 
 	public function key() 

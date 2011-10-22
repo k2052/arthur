@@ -100,9 +100,9 @@ class Libraries
 		if(isset($config['default']) && $config['default']) 
 		{
 			static::$_default = $name;
-			$defaults['path'] = LITHIUM_APP_PATH;
+			$defaults['path'] = ARTHUR_APP_PATH;
 			$defaults['bootstrap'] = false;
-			$defaults['resources'] = LITHIUM_APP_PATH . '/resources';
+			$defaults['resources'] = ARTHUR_APP_PATH . '/resources';
 		}
 		$config += $defaults;
 
@@ -465,7 +465,7 @@ class Libraries
 		if(!isset(static::$_paths[$type]))
 			return;
 
-		$params += array('app' => LITHIUM_APP_PATH, 'root' => LITHIUM_LIBRARY_PATH);
+		$params += array('app' => ARTHUR_APP_PATH, 'root' => ARTHUR_LIBRARY_PATH);
 
 		foreach(static::$_paths[$type] as $path) 
 		{
