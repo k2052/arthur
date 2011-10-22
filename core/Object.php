@@ -1,6 +1,6 @@
 <?php
 
-namespace arhtur\core;
+namespace arthur\core;
 
 use arthur\core\Libraries;
 use arthur\util\collection\Filters;  

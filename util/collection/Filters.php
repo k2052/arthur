@@ -2,7 +2,7 @@
 
 namespace arthur\util\collection;
 
-class Filters extends Collection 
+class Filters extends \arthur\util\Collection
 {
 	protected static $_lazyFilters = array();
 	protected $_autoConfig = array('data', 'class', 'method');
