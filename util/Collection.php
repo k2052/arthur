@@ -2,7 +2,7 @@
 
 namespace arthur\util;
 
-class Collection extends \arthur\core\Object implements ArrayAccess, Iterator, Countable 
+class Collection extends \arthur\core\Object implements \ArrayAccess, \Iterator, \Countable 
 {       
   protected static $_formats = array(
   	'array' => 'Collection::toArray'
