@@ -1,13 +1,13 @@
 <?php
 
-namespace lithium\data\source\mongo_db;
+namespace arthur\data\source\mongo_db;
 
-use lithium\util\Set;
+use arthur\util\Set;
 
-class Exporter extends \lithium\core\StaticObject 
+class Exporter extends \arthur\core\StaticObject 
 {
 	protected static $_classes = array(
-		'array' => 'lithium\data\collection\DocumentArray'
+		'array' => 'arthur\data\collection\DocumentArray'
 	);
 
 	protected static $_commands = array(

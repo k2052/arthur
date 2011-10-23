@@ -1,10 +1,10 @@
 <?php
 
-namespace lithium\data\source\database\adapter\sqlite3;
+namespace arthur\data\source\database\adapter\sqlite3;
 
 use SQLite3Result;
 
-class Result extends \lithium\data\source\database\Result 
+class Result extends \arthur\data\source\database\Result 
 {
 	protected function _prev() 
 	{

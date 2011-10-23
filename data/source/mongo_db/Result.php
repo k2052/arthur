@@ -1,10 +1,10 @@
 <?php
 
-namespace lithium\data\source\mongo_db;
+namespace arthur\data\source\mongo_db;
 
 use MongoGridFSFile;
 
-class Result extends \lithium\core\Object implements \Iterator 
+class Result extends \arthur\core\Object implements \Iterator 
 {
 	protected $_iterator = 0;
 	protected $_current = null;

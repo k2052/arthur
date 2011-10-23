@@ -1,6 +1,6 @@
 <?php
 
-namespace lithium\data\source;
+namespace arthur\data\source;
 
 use Mongo;
 use MongoId;
@@ -8,22 +8,22 @@ use MongoCode;
 use MongoDate;
 use MongoRegex;
 use MongoBinData;
-use lithium\util\Inflector;
-use lithium\core\NetworkException;
+use arthur\util\Inflector;
+use arthur\core\NetworkException;
 use Exception;
 
-class MongoDb extends \lithium\data\Source
+class MongoDb extends \arthur\data\Source
 {
 	public $server = null;
 	public $connection = null;
 
 	protected $_classes = array(
-		'entity'       => 'lithium\data\entity\Document',
-		'array'        => 'lithium\data\collection\DocumentArray',
-		'set'          => 'lithium\data\collection\DocumentSet',
-		'result'       => 'lithium\data\source\mongo_db\Result',
-		'exporter'     => 'lithium\data\source\mongo_db\Exporter',
-		'relationship' => 'lithium\data\model\Relationship'
+		'entity'       => 'arthur\data\entity\Document',
+		'array'        => 'arthur\data\collection\DocumentArray',
+		'set'          => 'arthur\data\collection\DocumentSet',
+		'result'       => 'arthur\data\source\mongo_db\Result',
+		'exporter'     => 'arthur\data\source\mongo_db\Exporter',
+		'relationship' => 'arthur\data\model\Relationship'
 	);
 
 	protected $_operators = array(
