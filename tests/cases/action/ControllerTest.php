@@ -1,20 +1,20 @@
 <?php
 
-namespace lithium\tests\cases\action;
+namespace arthur\tests\cases\action;
 
-use lithium\action\Request;
-use lithium\action\Controller;
-use lithium\tests\mocks\action\MockPostsController;
-use lithium\tests\mocks\action\MockControllerRequest;
+use arthur\action\Request;
+use arthur\action\Controller;
+use arthur\tests\mocks\action\MockPostsController;
+use arthur\tests\mocks\action\MockControllerRequest;
 
-class ControllerTest extends \lithium\test\Unit 
+class ControllerTest extends \arthur\test\Unit 
 {
 	public function testConstructionWithCustomRequest() 
 	{
 		$request         = new MockControllerRequest();
 		$postsController = new MockPostsController(compact('request'));
 		$result          = get_class($postsController->request);
-		$this->assertEqual($result, 'lithium\tests\mocks\action\MockControllerRequest');
+		$this->assertEqual($result, 'arthur\tests\mocks\action\MockControllerRequest');
 	}
 
 	public function testMethodInvocation() 
@@ -22,7 +22,7 @@ class ControllerTest extends \lithium\test\Unit
 		$postsController = new MockPostsController();
 		$result          = $postsController->__invoke(null, array('action' => 'index', 'args' => array()));
 
-		$this->assertTrue(is_a($result, 'lithium\action\Response'));
+		$this->assertTrue(is_a($result, 'arthur\action\Response'));
 		$this->assertEqual('List of posts', $result->body());
 		$this->assertEqual(array('Content-type' => 'text/plain; charset=UTF-8'), $result->headers);
 
@@ -33,7 +33,7 @@ class ControllerTest extends \lithium\test\Unit
 		$this->expectException('/Unhandled media type/');
 		$result = $postsController(null, array('action' => 'index', 'args' => array(true)));
 
-		$this->assertTrue(is_a($result, 'lithium\action\Response'));
+		$this->assertTrue(is_a($result, 'arthur\action\Response'));
 		$this->assertEqual($result->body, '');
 
 		$headers = array('Content-type' => 'text/html; charset=UTF-8');
@@ -45,7 +45,7 @@ class ControllerTest extends \lithium\test\Unit
 		$postsController = new MockPostsController();
 		$result = $postsController(null, array('action' => 'view', 'args' => array('2')));
 
-		$this->assertTrue(is_a($result, 'lithium\action\Response'));
+		$this->assertTrue(is_a($result, 'arthur\action\Response'));
 		$this->assertEqual($result->body, "Array\n(\n    [0] => This is a post\n)\n");
 
 		$headers = array('status' => 200, 'Content-type' => 'text/plain; charset=UTF-8');
@@ -72,7 +72,7 @@ class ControllerTest extends \lithium\test\Unit
 		$this->assertFalse($postsController->stopped);
 
 		$postsController = new MockPostsController(array('classes' => array(
-			'response' => 'lithium\tests\mocks\action\MockControllerResponse'
+			'response' => 'arthur\tests\mocks\action\MockControllerResponse'
 		)));
 		$this->assertFalse($postsController->stopped);
 
@@ -92,7 +92,7 @@ class ControllerTest extends \lithium\test\Unit
 	public function testRenderWithAlternateTemplate() 
 	{
 		$postsController = new MockPostsController(array('classes' => array(
-			'media' => 'lithium\tests\mocks\action\MockMediaClass'
+			'media' => 'arthur\tests\mocks\action\MockMediaClass'
 		)));
 
 		$result = $postsController(null, array('action' => 'view2'));
@@ -107,10 +107,10 @@ class ControllerTest extends \lithium\test\Unit
 	public function testRenderWithNamespacedController() 
 	{
 		$request = new Request();
-		$request->params['controller'] = 'lithium\tests\mocks\action\MockPostsController';
+		$request->params['controller'] = 'arthur\tests\mocks\action\MockPostsController';
 
 		$controller = new MockPostsController(compact('request') + array('classes' => array(
-			'media' => 'lithium\tests\mocks\action\MockMediaClass'
+			'media' => 'arthur\tests\mocks\action\MockMediaClass'
 		)));
 
 		$controller->render();
@@ -120,10 +120,10 @@ class ControllerTest extends \lithium\test\Unit
 	public function testRenderWithDataArray() 
 	{
 		$request = new Request();
-		$request->params['controller'] = 'lithium\tests\mocks\action\MockPostsController';
+		$request->params['controller'] = 'arthur\tests\mocks\action\MockPostsController';
 
 		$controller = new MockPostsController(compact('request') + array('classes' => array(
-			'media' => 'lithium\tests\mocks\action\MockMediaClass'
+			'media' => 'arthur\tests\mocks\action\MockMediaClass'
 		)));
 
 		$controller->set(array('set' => 'data'));
@@ -140,10 +140,10 @@ class ControllerTest extends \lithium\test\Unit
 	public function testRenderWithDataSingleIndexedArray() 
 	{
 		$request = new Request();
-		$request->params['controller'] = 'lithium\tests\mocks\action\MockPostsController';
+		$request->params['controller'] = 'arthur\tests\mocks\action\MockPostsController';
 
 		$controller = new MockPostsController(compact('request') + array('classes' => array(
-			'media' => 'lithium\tests\mocks\action\MockMediaClass'
+			'media' => 'arthur\tests\mocks\action\MockMediaClass'
 		)));
 
 		$expected = array(array('id' => 1));
@@ -172,7 +172,7 @@ class ControllerTest extends \lithium\test\Unit
 	public function testResponseStatus() 
 	{
 		$postsController = new MockPostsController(array('classes' => array(
-			'response' => 'lithium\tests\mocks\action\MockControllerResponse'
+			'response' => 'arthur\tests\mocks\action\MockControllerResponse'
 		)));
 		$this->assertFalse($postsController->stopped);
 
@@ -196,7 +196,7 @@ class ControllerTest extends \lithium\test\Unit
 		$postsController = new MockPostsController(array(
 			'request' => $request,
 			'classes' => array(
-				'response' => 'lithium\tests\mocks\action\MockControllerResponse'
+				'response' => 'arthur\tests\mocks\action\MockControllerResponse'
 			)
 		));
 		$this->assertFalse($postsController->stopped);
@@ -225,7 +225,7 @@ class ControllerTest extends \lithium\test\Unit
 		$postsController = new MockPostsController(array(
 			'request' => $request,
 			'classes' => array(
-				'response' => 'lithium\tests\mocks\action\MockControllerResponse'
+				'response' => 'arthur\tests\mocks\action\MockControllerResponse'
 			)
 		));
 		$this->assertFalse($postsController->stopped);
@@ -250,7 +250,7 @@ class ControllerTest extends \lithium\test\Unit
 	public function testManuallySettingTemplate() 
 	{
 		$postsController = new MockPostsController(array('classes' => array(
-			'media' => 'lithium\tests\mocks\action\MockMediaClass'
+			'media' => 'arthur\tests\mocks\action\MockMediaClass'
 		)));             
 		
 		$postsController(new Request(), array('action' => 'changeTemplate'));
@@ -290,7 +290,7 @@ class ControllerTest extends \lithium\test\Unit
 
 		$postsController = new MockPostsController(array(
 			'request' => $request,
-			'classes' => array('response' => 'lithium\tests\mocks\action\MockControllerResponse'),
+			'classes' => array('response' => 'arthur\tests\mocks\action\MockControllerResponse'),
 			'render' => array('negotiate' => true)
 		));
 		$this->assertFalse($postsController->stopped);
@@ -315,7 +315,7 @@ class ControllerTest extends \lithium\test\Unit
 	{
 		$request = new Request(array('url' => '/'));
 		$request->params = array(
-			'controller' => 'lithium\tests\mocks\action\MockPostsController',
+			'controller' => 'arthur\tests\mocks\action\MockPostsController',
 			'action'     => 'index'
 		);
 

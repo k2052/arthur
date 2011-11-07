@@ -1,18 +1,18 @@
 <?php
 
-namespace lithium\tests\cases\data\source;
+namespace arthur\tests\cases\data\source;
 
-use lithium\data\source\Http;
-use lithium\data\Connections;
-use lithium\data\model\Query;
+use arthur\data\source\Http;
+use arthur\data\Connections;
+use arthur\data\model\Query;
 
-class HttpTest extends \lithium\test\Unit 
+class HttpTest extends \arthur\test\Unit 
 {
 
-	protected $_model = 'lithium\tests\mocks\data\source\MockHttpModel';
+	protected $_model = 'arthur\tests\mocks\data\source\MockHttpModel';
 
 	protected $_testConfig = array(
-		'classes'    => array('response' => 'lithium\net\http\Response'),
+		'classes'    => array('response' => 'arthur\net\http\Response'),
 		'persistent' => false,
 		'scheme'     => 'tcp',
 		'host'       => 'localhost',
@@ -20,7 +20,7 @@ class HttpTest extends \lithium\test\Unit
 		'password'   => '',
 		'port'       => 80,
 		'timeout'    => 2,
-		'socket'     => 'lithium\tests\mocks\data\source\http\adapter\MockSocket'
+		'socket'     => 'arthur\tests\mocks\data\source\http\adapter\MockSocket'
 	);
 
 	public function setUp() 

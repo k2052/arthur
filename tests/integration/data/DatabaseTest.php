@@ -51,7 +51,7 @@ class DatabaseTest extends \arthur\test\Integration
 
 		$this->db = Connections::get('test');
 
-		$mockBase = ARTHUR_LIBRARY_PATH . '/lithium/tests/mocks/data/source/database/adapter/';
+		$mockBase = ARTHUR_LIBRARY_PATH . '/arthur/tests/mocks/data/source/database/adapter/';
 		$files    = array('galleries' => '_galleries.sql', 'images' => '_images.sql');
 		$files    = array_diff_key($files, array_flip($this->db->sources()));
 

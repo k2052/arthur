@@ -1,17 +1,17 @@
 <?php
 
-namespace lithium\tests\cases\data\source\mongo_db;
+namespace arthur\tests\cases\data\source\mongo_db;
 
 use MongoId;
 use MongoDate;
-use lithium\data\source\MongoDb;
-use lithium\data\entity\Document;
-use lithium\data\collection\DocumentArray;
-use lithium\data\source\mongo_db\Exporter;
+use arthur\data\source\MongoDb;
+use arthur\data\entity\Document;
+use arthur\data\collection\DocumentArray;
+use arthur\data\source\mongo_db\Exporter;
 
-class ExporterTest extends \lithium\test\Unit 
+class ExporterTest extends \arthur\test\Unit 
 {
-	protected $_model = 'lithium\tests\mocks\data\source\MockMongoPost';
+	protected $_model = 'arthur\tests\mocks\data\source\MockMongoPost';
 
 	protected $_schema = array(
 		'_id'               => array('type' => 'id'),

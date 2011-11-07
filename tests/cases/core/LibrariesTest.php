@@ -1,13 +1,13 @@
 <?php
 
-namespace lithium\tests\cases\core;
+namespace arthur\tests\cases\core;
 
 use stdClass;
 use SplFileInfo;
-use lithium\util\Inflector;
-use lithium\core\Libraries;
+use arthur\util\Inflector;
+use arthur\core\Libraries;
 
-class LibrariesTest extends \lithium\test\Unit 
+class LibrariesTest extends \arthur\test\Unit 
 {
 	protected $_cache = array();
 
@@ -25,13 +25,13 @@ class LibrariesTest extends \lithium\test\Unit
 
 	public function testNamespaceToFileTranslation()
 	{
-		$result = Libraries::path('\lithium\core\Libraries');
-		$this->assertTrue(strpos($result, '/lithium/core/Libraries.php'));
+		$result = Libraries::path('\arthur\core\Libraries');
+		$this->assertTrue(strpos($result, '/arthur/core/Libraries.php'));
 		$this->assertTrue(file_exists($result));
 		$this->assertFalse(strpos($result, '\\'));
 
-		$result = Libraries::path('lithium\core\Libraries');
-		$this->assertTrue(strpos($result, '/lithium/core/Libraries.php'));
+		$result = Libraries::path('arthur\core\Libraries');
+		$this->assertTrue(strpos($result, '/arthur/core/Libraries.php'));
 		$this->assertTrue(file_exists($result));
 		$this->assertFalse(strpos($result, '\\'));
 	}
@@ -45,12 +45,12 @@ class LibrariesTest extends \lithium\test\Unit
 		$this->assertNull(Libraries::locate('authAdapter', 'Form'));
 
 		$paths = Libraries::paths();
-		$test  = array('authAdapter' => array('lithium\security\auth\adapter\{:name}'));
+		$test  = array('authAdapter' => array('arthur\security\auth\adapter\{:name}'));
 		Libraries::paths($test);
 		$this->assertEqual($paths + $test, Libraries::paths());
 
 		$class    = Libraries::locate('authAdapter', 'Form');
-		$expected = 'lithium\security\auth\adapter\Form';
+		$expected = 'arthur\security\auth\adapter\Form';
 		$this->assertEqual($expected, $class);
 
 		Libraries::paths($paths + array('authAdapter' => false));
@@ -78,12 +78,12 @@ class LibrariesTest extends \lithium\test\Unit
 
 	public function testPathFiltering() 
 	{
-		$tests  = Libraries::find('lithium', array('recursive' => true, 'path' => '/tests/cases'));
-		$result = preg_grep('/^lithium\\\\tests\\\\cases\\\\/', $tests);
+		$tests  = Libraries::find('arthur', array('recursive' => true, 'path' => '/tests/cases'));
+		$result = preg_grep('/^arthur\\\\tests\\\\cases\\\\/', $tests);
 		$this->assertIdentical($tests, $result);
 
-		$all    = Libraries::find('lithium', array('recursive' => true));
-		$result = array_values(preg_grep('/^lithium\\\\tests\\\\cases\\\\/', $all));
+		$all    = Libraries::find('arthur', array('recursive' => true));
+		$result = array_values(preg_grep('/^arthur\\\\tests\\\\cases\\\\/', $all));
 		$this->assertIdentical($tests, $result);
 
 		$tests  = Libraries::find('app', array('recursive' => true, 'path' => '/tests/cases'));
@@ -93,12 +93,12 @@ class LibrariesTest extends \lithium\test\Unit
 
 	public function testLibraryConfigAccess()
 	{
-		$result   = Libraries::get('lithium');
+		$result   = Libraries::get('arthur');
 		$expected = array(
-			'path'        => str_replace('\\', '/', realpath(realpath(LITHIUM_LIBRARY_PATH) . '/lithium')),
-			'prefix'      => 'lithium\\',
+			'path'        => str_replace('\\', '/', realpath(realpath(LITHIUM_LIBRARY_PATH) . '/arthur')),
+			'prefix'      => 'arthur\\',
 			'suffix'      => '.php',
-			'loader'      => 'lithium\\core\\Libraries::load',
+			'loader'      => 'arthur\\core\\Libraries::load',
 			'includePath' => false,
 			'transform'   => null,
 			'bootstrap'   => false,
@@ -110,29 +110,29 @@ class LibrariesTest extends \lithium\test\Unit
 		$this->assertNull(Libraries::get('foo'));
 
 		$result = Libraries::get();
-		$this->assertTrue(isset($result['lithium']));
+		$this->assertTrue(isset($result['arthur']));
 		$this->assertTrue(isset($result['app']));
-		$this->assertEqual($expected, $result['lithium']);
+		$this->assertEqual($expected, $result['arthur']);
 	}
 
 	public function testLibraryAddRemove() 
 	{
-		$lithium = Libraries::get('lithium');
-		$this->assertFalse(empty($lithium));
+		$arthur = Libraries::get('arthur');
+		$this->assertFalse(empty($arthur));
 
 		$app = Libraries::get(true);
 		$this->assertFalse(empty($app));
 
-		Libraries::remove(array('lithium', 'app'));
+		Libraries::remove(array('arthur', 'app'));
 
-		$result = Libraries::get('lithium');
+		$result = Libraries::get('arthur');
 		$this->assertTrue(empty($result));
 
 		$result = Libraries::get('app');
 		$this->assertTrue(empty($result));
 
-		$result = Libraries::add('lithium', array('bootstrap' => false) + $lithium);
-		$this->assertEqual($lithium, $result);
+		$result = Libraries::add('arthur', array('bootstrap' => false) + $arthur);
+		$this->assertEqual($arthur, $result);
 
 		$result = Libraries::add('app', array('bootstrap' => false) + $app);
 		$this->assertEqual(array('bootstrap' => false) + $app, $result);
@@ -180,23 +180,23 @@ class LibrariesTest extends \lithium\test\Unit
 
 	public function testExcludeNonClassFiles() 
 	{
-		$result = Libraries::find('lithium');
+		$result = Libraries::find('arthur');
 		$this->assertFalse($result);
 
-		$result = Libraries::find('lithium', array('namespaces' => true));
+		$result = Libraries::find('arthur', array('namespaces' => true));
 
-		$this->assertTrue(in_array('lithium\action', $result));
-		$this->assertTrue(in_array('lithium\core', $result));
-		$this->assertTrue(in_array('lithium\util', $result));
+		$this->assertTrue(in_array('arthur\action', $result));
+		$this->assertTrue(in_array('arthur\core', $result));
+		$this->assertTrue(in_array('arthur\util', $result));
 
-		$this->assertFalse(in_array('lithium\LICENSE.txt', $result));
-		$this->assertFalse(in_array('lithium\readme.wiki', $result));
+		$this->assertFalse(in_array('arthur\LICENSE.txt', $result));
+		$this->assertFalse(in_array('arthur\readme.wiki', $result));
 
-		$this->assertFalse(Libraries::find('lithium'));
-		$result = Libraries::find('lithium', array('path' => '/test/filter/reporter/template'));
+		$this->assertFalse(Libraries::find('arthur'));
+		$result = Libraries::find('arthur', array('path' => '/test/filter/reporter/template'));
 		$this->assertFalse($result);
 
-		$result = Libraries::find('lithium', array(
+		$result = Libraries::find('arthur', array(
 			'path'       => '/test/filter/reporter/template',
 			'namespaces' => true
 		));
@@ -232,22 +232,22 @@ class LibrariesTest extends \lithium\test\Unit
 
 	public function testFindingClasses() 
 	{
-		$result = Libraries::find('lithium', array(
+		$result = Libraries::find('arthur', array(
 			'recursive' => true, 'path' => '/tests/cases', 'filter' => '/LibrariesTest/'
 		));
 		$this->assertIdentical(array(__CLASS__), $result);
 
-		$result = Libraries::find('lithium', array(
+		$result = Libraries::find('arthur', array(
 			'path' => '/tests/cases/', 'filter' => '/LibrariesTest/'
 		));
 		$this->assertIdentical(array(), $result);
 
-		$result = Libraries::find('lithium', array(
+		$result = Libraries::find('arthur', array(
 			'path' => '/tests/cases/core', 'filter' => '/LibrariesTest/'
 		));
 		$this->assertIdentical(array(__CLASS__), $result);
 
-		$count  = Libraries::find('lithium', array('recursive' => true));
+		$count  = Libraries::find('arthur', array('recursive' => true));
 		$count2 = Libraries::find(true, array('recursive' => true));
 		$this->assertTrue($count < $count2);
 
@@ -271,17 +271,17 @@ class LibrariesTest extends \lithium\test\Unit
 			'filter'    => false,
 			'exclude'   => '/\w+Test$|webroot|index$|^app\\\\config|^\w+\\\\views\/|\./'
 		);
-		$classes = Libraries::find('lithium', $options);
+		$classes = Libraries::find('arthur', $options);
 
-		$this->assertTrue(in_array('lithium\util\Set', $classes));
-		$this->assertTrue(in_array('lithium\util\Collection', $classes));
-		$this->assertTrue(in_array('lithium\core\Libraries', $classes));
-		$this->assertTrue(in_array('lithium\action\Dispatcher', $classes));
+		$this->assertTrue(in_array('arthur\util\Set', $classes));
+		$this->assertTrue(in_array('arthur\util\Collection', $classes));
+		$this->assertTrue(in_array('arthur\core\Libraries', $classes));
+		$this->assertTrue(in_array('arthur\action\Dispatcher', $classes));
 
-		$this->assertFalse(in_array('lithium\tests\integration\data\SourceTest', $classes));
+		$this->assertFalse(in_array('arthur\tests\integration\data\SourceTest', $classes));
 		$this->assertFalse(preg_grep('/\w+Test$/', $classes));
 
-		$expected = Libraries::find('lithium', array(
+		$expected = Libraries::find('arthur', array(
 			'filter' => '/\w+Test$/', 'recursive' => true
 		));
 		$result = preg_grep('/\w+Test/', $expected);
@@ -294,24 +294,24 @@ class LibrariesTest extends \lithium\test\Unit
 		$this->assertTrue(count($result) > 30);
 
 		$expected = array(
-			'lithium\template\view\adapter\File',
-			'lithium\template\view\adapter\Simple'
+			'arthur\template\view\adapter\File',
+			'arthur\template\view\adapter\Simple'
 		);
 		$result = Libraries::locate('adapter.template.view');
 		$this->assertEqual($expected, $result);
 
 		$result = Libraries::locate('test.filter');
 		$this->assertTrue(count($result) >= 4);
-		$this->assertTrue(in_array('lithium\test\filter\Affected', $result));
-		$this->assertTrue(in_array('lithium\test\filter\Complexity', $result));
-		$this->assertTrue(in_array('lithium\test\filter\Coverage', $result));
-		$this->assertTrue(in_array('lithium\test\filter\Profiler', $result));
+		$this->assertTrue(in_array('arthur\test\filter\Affected', $result));
+		$this->assertTrue(in_array('arthur\test\filter\Complexity', $result));
+		$this->assertTrue(in_array('arthur\test\filter\Coverage', $result));
+		$this->assertTrue(in_array('arthur\test\filter\Profiler', $result));
 	}
 
 	public function testServiceLocateInstantiation()
 	{
 		$result = Libraries::instance('adapter.template.view', 'Simple');
-		$this->assertTrue(is_a($result, 'lithium\template\view\adapter\Simple'));
+		$this->assertTrue(is_a($result, 'arthur\template\view\adapter\Simple'));
 		$this->expectException("Class `Foo` of type `adapter.template.view` not found.");
 		$result = Libraries::instance('adapter.template.view', 'Foo');
 	}
@@ -321,7 +321,7 @@ class LibrariesTest extends \lithium\test\Unit
 		$result = Libraries::locate('command');
 		$this->assertTrue(count($result) > 7);
 
-		$expected = array('lithium\console\command\g11n\Extract');
+		$expected = array('arthur\console\command\g11n\Extract');
 		$result   = Libraries::locate('command.g11n');
 		$this->assertEqual($expected, $result);
 	}
@@ -333,22 +333,22 @@ class LibrariesTest extends \lithium\test\Unit
 		$this->assertNull(Libraries::locate('invalid_package', 'InvalidClass'));
 
 		$result = Libraries::locate('adapter.template.view', 'File');
-		$this->assertEqual('lithium\template\view\adapter\File', $result);
+		$this->assertEqual('arthur\template\view\adapter\File', $result);
 
 		$result   = Libraries::locate('adapter.storage.cache', 'File');
-		$expected = 'lithium\storage\cache\adapter\File';
+		$expected = 'arthur\storage\cache\adapter\File';
 		$this->assertEqual($expected, $result);
 
 		$result   = Libraries::locate('data.source', 'Database');
-		$expected = 'lithium\data\source\Database';
+		$expected = 'arthur\data\source\Database';
 		$this->assertEqual($expected, $result);
 
 		$result   = Libraries::locate('adapter.data.source.database', 'MySql');
-		$expected = 'lithium\data\source\database\adapter\MySql';
+		$expected = 'arthur\data\source\database\adapter\MySql';
 		$this->assertEqual($expected, $result);
 
-		$result   = Libraries::locate(null, '\lithium\data\source\Database');
-		$expected = '\lithium\data\source\Database';
+		$result   = Libraries::locate(null, '\arthur\data\source\Database');
+		$expected = '\arthur\data\source\Database';
 		$this->assertEqual($expected, $result);
 
 		$expected = new stdClass();
@@ -370,49 +370,49 @@ class LibrariesTest extends \lithium\test\Unit
 	public function testServiceLocateCommand() 
 	{
 		$result   = Libraries::locate('command.g11n', 'Extract');
-		$expected = 'lithium\console\command\g11n\Extract';
+		$expected = 'arthur\console\command\g11n\Extract';
 		$this->assertEqual($expected, $result);
 	}
 
 	public function testCaseSensitivePathLookups() 
 	{
 		Libraries::cache(false);
-		$library = Libraries::get('lithium');
+		$library = Libraries::get('arthur');
 		$base    = $library['path'] . '/';
 
 		$expected = $base . 'template/View.php';
 
-		$result = Libraries::path('\lithium\template\View');
+		$result = Libraries::path('\arthur\template\View');
 		$this->assertEqual($expected, $result);
 
-		$result = Libraries::path('lithium\template\View');
+		$result = Libraries::path('arthur\template\View');
 		$this->assertEqual($expected, $result);
 
 		$expected = $base . 'template/view';
 
-		$result = Libraries::path('\lithium\template\view', array('dirs' => true));
+		$result = Libraries::path('\arthur\template\view', array('dirs' => true));
 		$this->assertEqual($expected, $result);
 
-		$result = Libraries::path('lithium\template\view', array('dirs' => true));
+		$result = Libraries::path('arthur\template\view', array('dirs' => true));
 		$this->assertEqual($expected, $result);
 	}
 
 	public function testPathDirectoryLookups() 
 	{
-		$library = Libraries::get('lithium');
+		$library = Libraries::get('arthur');
 		$base    = $library['path'] . '/';
 
-		$result   = Libraries::path('lithium\template\View', array('dirs' => true));
+		$result   = Libraries::path('arthur\template\View', array('dirs' => true));
 		$expected = $base . 'template/View.php';
 		$this->assertEqual($expected, $result);
 
-		$result = Libraries::path('lithium\template\views', array('dirs' => true));
+		$result = Libraries::path('arthur\template\views', array('dirs' => true));
 		$this->assertNull($result);
 	}
 
 	public function testFindingClassesWithCallableFilters() 
 	{
-		$result = Libraries::find('lithium', array(
+		$result = Libraries::find('arthur', array(
 			'recursive' => true, 'path' => '/tests/cases', 'format' => function($file, $config) 
 			{
 				return new SplFileInfo($file);
@@ -429,7 +429,7 @@ class LibrariesTest extends \lithium\test\Unit
 
 	public function testFindingClassesWithCallableExcludes() 
 	{
-		$result = Libraries::find('lithium', array(
+		$result = Libraries::find('arthur', array(
 			'recursive' => true, 'path' => '/tests/cases',
 			'format' => function($file, $config)
 			{
@@ -448,7 +448,7 @@ class LibrariesTest extends \lithium\test\Unit
 
 	public function testFindWithOptions() 
 	{
-		$result = Libraries::find('lithium', array(
+		$result = Libraries::find('arthur', array(
 			'path'       => '/console/command/create/template',
 			'namespaces' => false,
 			'suffix'     => false,
@@ -472,40 +472,40 @@ class LibrariesTest extends \lithium\test\Unit
 		$this->assertEqual($expected, $result);
 	}
 
-	public function testLocateCommandInLithium() 
+	public function testLocateCommandInArthur() 
 	{
 		$expected = array(
-			'lithium\console\command\Create',
-			'lithium\console\command\G11n',
-			'lithium\console\command\Help',
-			'lithium\console\command\Library',
-			'lithium\console\command\Route',
-			'lithium\console\command\Test'
+			'arthur\console\command\Create',
+			'arthur\console\command\G11n',
+			'arthur\console\command\Help',
+			'arthur\console\command\Library',
+			'arthur\console\command\Route',
+			'arthur\console\command\Test'
 		);
 		$result = Libraries::locate('command', null, array(
-			'library' => 'lithium', 'recursive' => false
+			'library' => 'arthur', 'recursive' => false
 		));
 		$this->assertEqual($expected, $result);
 	}
 
-	public function testLocateCommandInLithiumRecursiveTrue() 
+	public function testLocateCommandInArthurRecursiveTrue() 
 	{
 		$expected = array(
-			'lithium\console\command\Create',
-			'lithium\console\command\G11n',
-			'lithium\console\command\Help',
-			'lithium\console\command\Library',
-			'lithium\console\command\Route',
-			'lithium\console\command\Test',
-			'lithium\console\command\g11n\Extract',
-			'lithium\console\command\create\Controller',
-			'lithium\console\command\create\Mock',
-			'lithium\console\command\create\Model',
-			'lithium\console\command\create\Test',
-			'lithium\console\command\create\View'
+			'arthur\console\command\Create',
+			'arthur\console\command\G11n',
+			'arthur\console\command\Help',
+			'arthur\console\command\Library',
+			'arthur\console\command\Route',
+			'arthur\console\command\Test',
+			'arthur\console\command\g11n\Extract',
+			'arthur\console\command\create\Controller',
+			'arthur\console\command\create\Mock',
+			'arthur\console\command\create\Model',
+			'arthur\console\command\create\Test',
+			'arthur\console\command\create\View'
 		);
 		$result = Libraries::locate('command', null, array(
-			'library' => 'lithium', 'recursive' => true
+			'library' => 'arthur', 'recursive' => true
 		));
 		$this->assertEqual($expected, $result);
 	}
@@ -517,15 +517,15 @@ class LibrariesTest extends \lithium\test\Unit
     $this->assertIdentical($expected, $result);    
 	}
 
-	public function testLocateWithLithiumLibrary()
+	public function testLocateWithArthurLibrary()
 	{
-    $expected = (array) Libraries::find('lithium', array(
+    $expected = (array) Libraries::find('arthur', array(
   	  'path'      => '/tests',
   		'preFilter' => '/[A-Z][A-Za-z0-9]+\Test\./',
       'recursive' => true,
       'filter'    => '/cases|integration|functional|mocks/'     
     ));
-    $result = (array) Libraries::locate("tests", null, array('library' => 'lithium'));
+    $result = (array) Libraries::locate("tests", null, array('library' => 'arthur'));
     $this->assertEqual($expected, $result);       
 	}
 
@@ -538,7 +538,7 @@ class LibrariesTest extends \lithium\test\Unit
 		mkdir($testApp . '/tests/cases/models', 0777, true);
 		file_put_contents($testApp . '/tests/cases/models/UserTest.php',
 		"<?php namespace test_app\\tests\\cases\\models;\n
-			class UserTest extends \\lithium\\test\\Unit { public function testMe() {
+			class UserTest extends \\arthur\\test\\Unit { public function testMe() {
 				\$this->assertTrue(true);
 			}}"
 		);
@@ -553,7 +553,7 @@ class LibrariesTest extends \lithium\test\Unit
 
 	public function testPathsInPharArchives() 
 	{
-		$base = Libraries::get('lithium', 'path');
+		$base = Libraries::get('arthur', 'path');
 		$path = "{$base}/console/command/create/template/app.phar.gz";
 
 		$expected = "phar://{$path}/controllers/HelloWorldController.php";
@@ -578,7 +578,7 @@ class LibrariesTest extends \lithium\test\Unit
 			mkdir($testApp . $path, 0777, true);
 			file_put_contents($testApp . $path . "/{$class}Controller.php",
 			"<?php namespace test_app{$namespace};\n
-				class {$class}Controller extends \\lithium\\action\\Controller {
+				class {$class}Controller extends \\arthur\\action\\Controller {
 				public function index() {
 					return true;
 				}}"

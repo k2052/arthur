@@ -1,12 +1,12 @@
 <?php
 
-namespace lithium\tests\cases\data\collection;
+namespace arthur\tests\cases\data\collection;
 
-use lithium\data\collection\DocumentArray;
+use arthur\data\collection\DocumentArray;
 
-class DocumentArrayTest extends \lithium\test\Unit 
+class DocumentArrayTest extends \arthur\test\Unit 
 {
-	protected $_model = 'lithium\tests\mocks\data\model\MockDocumentPost';
+	protected $_model = 'arthur\tests\mocks\data\model\MockDocumentPost';
 
 	public function testInitialCasting() 
 	{

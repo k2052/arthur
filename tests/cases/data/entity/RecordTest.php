@@ -1,11 +1,11 @@
 <?php
 
-namespace lithium\tests\cases\data\entity;
+namespace arthur\tests\cases\data\entity;
 
-use lithium\data\Connections;
-use lithium\data\entity\Record;
+use arthur\data\Connections;
+use arthur\data\entity\Record;
 
-class RecordTest extends \lithium\test\Unit 
+class RecordTest extends \arthur\test\Unit 
 {
 	protected $_configs = array();
 
@@ -14,9 +14,9 @@ class RecordTest extends \lithium\test\Unit
 		$this->_configs = Connections::config();
 
 		Connections::config(array('mock-source' => array(
-			'type' => '\lithium\tests\mocks\data\MockSource'
+			'type' => '\arthur\tests\mocks\data\MockSource'
 		)));
-		$model = 'lithium\tests\mocks\data\MockPost';
+		$model = 'arthur\tests\mocks\data\MockPost';
 		$model::config(array('connection' => 'mock-source', 'key' => 'id'));
 		$this->record = new Record(compact('model'));
 	}

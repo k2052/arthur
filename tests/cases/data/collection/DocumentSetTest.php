@@ -1,19 +1,19 @@
 <?php
 
-namespace lithium\tests\cases\data\collection;
+namespace arthur\tests\cases\data\collection;
 
-use lithium\data\Connections;
-use lithium\data\source\MongoDb;
-use lithium\data\source\http\adapter\CouchDb;
-use lithium\data\entity\Document;
-use lithium\data\collection\DocumentSet;
-use lithium\tests\mocks\data\model\MockDocumentPost;
-use lithium\tests\mocks\data\source\mongo_db\MockResult;
-use lithium\tests\mocks\data\model\MockDocumentMultipleKey;
+use arthur\data\Connections;
+use arthur\data\source\MongoDb;
+use arthur\data\source\http\adapter\CouchDb;
+use arthur\data\entity\Document;
+use arthur\data\collection\DocumentSet;
+use arthur\tests\mocks\data\model\MockDocumentPost;
+use arthur\tests\mocks\data\source\mongo_db\MockResult;
+use arthur\tests\mocks\data\model\MockDocumentMultipleKey;
 
-class DocumentSetTest extends \lithium\test\Unit 
+class DocumentSetTest extends \arthur\test\Unit 
 {
-	protected $_model = 'lithium\tests\mocks\data\model\MockDocumentPost';
+	protected $_model = 'arthur\tests\mocks\data\model\MockDocumentPost';
 	protected $_backup = array();
 
 	public function skip() 

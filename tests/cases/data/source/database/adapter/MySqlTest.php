@@ -1,13 +1,13 @@
 <?php
 
-namespace lithium\tests\cases\data\source\database\adapter;
+namespace arthur\tests\cases\data\source\database\adapter;
 
-use lithium\data\Connections;
-use lithium\data\model\Query;
-use lithium\data\source\database\adapter\MySql;
-use lithium\tests\mocks\data\source\database\adapter\MockMySql;
+use arthur\data\Connections;
+use arthur\data\model\Query;
+use arthur\data\source\database\adapter\MySql;
+use arthur\tests\mocks\data\source\database\adapter\MockMySql;
 
-class MySqlTest extends \lithium\test\Unit 
+class MySqlTest extends \arthur\test\Unit 
 {
 	protected $_dbConfig = array();
 	public $db = null;
@@ -23,8 +23,8 @@ class MySqlTest extends \lithium\test\Unit
 
 		$this->db = new MySql($this->_dbConfig);
 
-		$lithium = LITHIUM_LIBRARY_PATH . '/lithium';
-		$sqlFile = $lithium . '/tests/mocks/data/source/database/adapter/mysql_companies.sql';
+		$arthur = LITHIUM_LIBRARY_PATH . '/arthur';
+		$sqlFile = $arthur . '/tests/mocks/data/source/database/adapter/mysql_companies.sql';
 		$sql     = file_get_contents($sqlFile);
 		$this->db->read($sql, array('return' => 'resource'));
 	}

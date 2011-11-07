@@ -1,21 +1,21 @@
 <?php
 
-namespace lithium\tests\cases\data;
+namespace arthur\tests\cases\data;
 
-use lithium\data\Model;
-use lithium\data\Entity;
-use lithium\data\model\Query;
-use lithium\data\Connections;
-use lithium\data\entity\Record;
-use lithium\tests\mocks\data\MockTag;
-use lithium\tests\mocks\data\MockPost;
-use lithium\tests\mocks\data\MockComment;
-use lithium\tests\mocks\data\MockTagging;
-use lithium\tests\mocks\data\MockCreator;
-use lithium\tests\mocks\data\MockPostForValidates;
-use lithium\tests\mocks\data\source\MockMongoConnection;
+use arthur\data\Model;
+use arthur\data\Entity;
+use arthur\data\model\Query;
+use arthur\data\Connections;
+use arthur\data\entity\Record;
+use arthur\tests\mocks\data\MockTag;
+use arthur\tests\mocks\data\MockPost;
+use arthur\tests\mocks\data\MockComment;
+use arthur\tests\mocks\data\MockTagging;
+use arthur\tests\mocks\data\MockCreator;
+use arthur\tests\mocks\data\MockPostForValidates;
+use arthur\tests\mocks\data\source\MockMongoConnection;
 
-class ModelTest extends \lithium\test\Unit 
+class ModelTest extends \arthur\test\Unit 
 {
 	protected $_configs = array();
 
@@ -30,7 +30,7 @@ class ModelTest extends \lithium\test\Unit
 	{
 		$this->_configs = Connections::config();
 		Connections::config(array('mock-source' => array(
-			'type' => 'lithium\tests\mocks\data\MockSource'
+			'type' => 'arthur\tests\mocks\data\MockSource'
 		)));          
 		
 		MockPost::config(array('connection' => 'mock-source'));
@@ -90,7 +90,7 @@ class ModelTest extends \lithium\test\Unit
 	public function testMetaInformation() 
 	{
 		$expected = array(
-			'class'       => 'lithium\tests\mocks\data\MockPost',
+			'class'       => 'arthur\tests\mocks\data\MockPost',
 			'name'        => 'MockPost',
 			'key'         => 'id',
 			'title'       => 'title',
@@ -103,7 +103,7 @@ class ModelTest extends \lithium\test\Unit
 		$this->assertEqual($expected, MockPost::meta());
 
 		$expected = array(
-			'class'       => 'lithium\tests\mocks\data\MockComment',
+			'class'       => 'arthur\tests\mocks\data\MockComment',
 			'name'        => 'MockComment',
 			'key'         => 'comment_id',
 			'title'       => 'comment_id',
@@ -160,8 +160,8 @@ class ModelTest extends \lithium\test\Unit
 			'name'       => 'MockPost',
 			'type'       => 'belongsTo',
 			'key'        => array('mock_post_id' => 'id'),
-			'from'       => 'lithium\tests\mocks\data\MockComment',
-			'to'         => 'lithium\tests\mocks\data\MockPost',
+			'from'       => 'arthur\tests\mocks\data\MockComment',
+			'to'         => 'arthur\tests\mocks\data\MockPost',
 			'link'       => 'key',
 			'fields'     => true,
 			'fieldName'  => 'mock_post',
@@ -176,8 +176,8 @@ class ModelTest extends \lithium\test\Unit
 		$expected = array(
 			'name'       => 'MockComment',
 			'type'       => 'hasMany',
-			'from'       => 'lithium\tests\mocks\data\MockPost',
-			'to'         => 'lithium\tests\mocks\data\MockComment',
+			'from'       => 'arthur\tests\mocks\data\MockPost',
+			'to'         => 'arthur\tests\mocks\data\MockComment',
 			'fields'     => true,
 			'key'        => array('id' => 'mock_post_id'),
 			'link'       => 'key',
@@ -286,7 +286,7 @@ class ModelTest extends \lithium\test\Unit
 			'page'  => null,
 			'with'  => array(),
 			'type'  => 'read',
-			'model' => 'lithium\tests\mocks\data\MockPost'
+			'model' => 'arthur\tests\mocks\data\MockPost'
 		);
 		$this->assertEqual($expected, $result['options']);
 	}
@@ -462,7 +462,7 @@ class ModelTest extends \lithium\test\Unit
 
 		$this->assertEqual('create', $result['query']->type());
 		$this->assertEqual($data, $result['query']->data());
-		$this->assertEqual('lithium\tests\mocks\data\MockPost', $result['query']->model());
+		$this->assertEqual('arthur\tests\mocks\data\MockPost', $result['query']->model());
 		MockPost::overrideSchema($schema);
 	}
 
@@ -476,7 +476,7 @@ class ModelTest extends \lithium\test\Unit
 
 		$this->assertEqual('create', $result['query']->type());
 		$this->assertEqual($data, $result['query']->data());
-		$this->assertEqual('lithium\tests\mocks\data\MockPost', $result['query']->model());
+		$this->assertEqual('arthur\tests\mocks\data\MockPost', $result['query']->model());
 		MockPost::overrideSchema($schema);
 	}
 
@@ -495,7 +495,7 @@ class ModelTest extends \lithium\test\Unit
 	{
 		$result = MockPost::find(10);
 		$this->assertEqual('read', $result['query']->type());
-		$this->assertEqual('lithium\tests\mocks\data\MockPost', $result['query']->model());
+		$this->assertEqual('arthur\tests\mocks\data\MockPost', $result['query']->model());
 		$this->assertEqual(array('id' => 10), $result['query']->conditions());
 	}
 

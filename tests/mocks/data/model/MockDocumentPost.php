@@ -32,7 +32,7 @@ class MockDocumentPost extends \arthur\data\Model
 
 	public function medicin($record) 
 	{
-		return 'lithium';
+		return 'arthur';
 	}
 
 	public static function &connection() 

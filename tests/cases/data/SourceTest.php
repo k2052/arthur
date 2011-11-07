@@ -1,11 +1,11 @@
 <?php
 
-namespace lithium\tests\cases\data;
+namespace arthur\tests\cases\data;
 
-use lithium\data\Entity;
-use lithium\tests\mocks\data\MockSource;
+use arthur\data\Entity;
+use arthur\tests\mocks\data\MockSource;
 
-class SourceTest extends \lithium\test\Unit 
+class SourceTest extends \arthur\test\Unit 
 {
 	public function testMethods() 
 	{

@@ -1,16 +1,16 @@
 <?php
 
-namespace lithium\tests\cases\core;
+namespace arthur\tests\cases\core;
 
-use lithium\core\StaticObject;
-use lithium\tests\mocks\core\MockRequest;
-use lithium\tests\mocks\core\MockStaticInstantiator;
+use arthur\core\StaticObject;
+use arthur\tests\mocks\core\MockRequest;
+use arthur\tests\mocks\core\MockStaticInstantiator;
 
-class StaticObjectTest extends \lithium\test\Unit 
+class StaticObjectTest extends \arthur\test\Unit 
 {
 	public function testMethodFiltering() 
 	{
-		$class = 'lithium\tests\mocks\core\MockStaticMethodFiltering';
+		$class = 'arthur\tests\mocks\core\MockStaticMethodFiltering';
 
 		$result = $class::method(array('Starting test'));
 		$expected = array(
@@ -65,7 +65,7 @@ class StaticObjectTest extends \lithium\test\Unit
 
 	public function testMethodInvocationWithParameters() 
 	{
-		$class = '\lithium\tests\mocks\core\MockStaticMethodFiltering';
+		$class = '\arthur\tests\mocks\core\MockStaticMethodFiltering';
 
 		$this->assertEqual($class::invokeMethod('foo'), array());
 		$this->assertEqual($class::invokeMethod('foo', array('bar')), array('bar'));
@@ -98,7 +98,7 @@ class StaticObjectTest extends \lithium\test\Unit
 
 	public function testCallingUnfilteredMethods() 
 	{
-		$class  = 'lithium\tests\mocks\core\MockStaticMethodFiltering';
+		$class  = 'arthur\tests\mocks\core\MockStaticMethodFiltering';
 		$result = $class::manual(array(function($self, $params, $chain) {
 			return '-' . $chain->next($self, $params, $chain) . '-';
 		}));
@@ -108,17 +108,17 @@ class StaticObjectTest extends \lithium\test\Unit
 
 	public function testCallingSubclassMethodsInFilteredMethods() 
 	{
-		$class = 'lithium\tests\mocks\core\MockStaticFilteringExtended';
+		$class = 'arthur\tests\mocks\core\MockStaticFilteringExtended';
 		$this->assertEqual('Working', $class::callSubclassMethod());
 	}
 
 	public function testClassParents() 
 	{
-		$class = 'lithium\tests\mocks\core\MockStaticMethodFiltering';
+		$class = 'arthur\tests\mocks\core\MockStaticMethodFiltering';
 		$class::parents(null);
 
 		$result   = $class::parents();
-		$expected = array('lithium\core\StaticObject' => 'lithium\core\StaticObject');
+		$expected = array('arthur\core\StaticObject' => 'arthur\core\StaticObject');
 		$this->assertEqual($expected, $result);
 
 		$cache = $class::parents(true);
@@ -127,16 +127,16 @@ class StaticObjectTest extends \lithium\test\Unit
 
 	public function testInstanceWithClassesKey() 
 	{
-		$expected = 'lithium\tests\mocks\core\MockRequest';
+		$expected = 'arthur\tests\mocks\core\MockRequest';
 		$result   = get_class(MockStaticInstantiator::instance('request'));
 		$this->assertEqual($expected, $result);
 	}
 
 	public function testInstanceWithNamespacedClass() 
 	{
-		$expected = 'lithium\tests\mocks\core\MockRequest';
+		$expected = 'arthur\tests\mocks\core\MockRequest';
 		$result   = get_class(MockStaticInstantiator::instance(
-			'lithium\tests\mocks\core\MockRequest'
+			'arthur\tests\mocks\core\MockRequest'
 		));        
 		
 		$this->assertEqual($expected, $result);
@@ -145,7 +145,7 @@ class StaticObjectTest extends \lithium\test\Unit
 	public function testInstanceWithObject() 
 	{
 		$request   = new MockRequest();
-		$expected  = 'lithium\tests\mocks\core\MockRequest';
+		$expected  = 'arthur\tests\mocks\core\MockRequest';
 		$result    = get_class(MockStaticInstantiator::instance($request));
 		$this->assertEqual($expected, $result);
 	}

@@ -1,28 +1,28 @@
 <?php
 
-namespace lithium\tests\cases\data\source;
+namespace arthur\tests\cases\data\source;
 
-use lithium\data\source\MongoDb;
+use arthur\data\source\MongoDb;
 use Exception;
 use MongoId;
 use MongoCode;
 use MongoDate;
 use MongoRegex;
-use lithium\data\Connections;
-use lithium\data\model\Query;
-use lithium\data\entity\Document;
-use lithium\data\collection\DocumentSet;
-use lithium\tests\mocks\data\source\MockMongoSource;
-use lithium\tests\mocks\data\source\MockMongoConnection;
+use arthur\data\Connections;
+use arthur\data\model\Query;
+use arthur\data\entity\Document;
+use arthur\data\collection\DocumentSet;
+use arthur\tests\mocks\data\source\MockMongoSource;
+use arthur\tests\mocks\data\source\MockMongoConnection;
 
-class MongoDbTest extends \lithium\test\Unit 
+class MongoDbTest extends \arthur\test\Unit 
 {
-	protected $_model = 'lithium\tests\mocks\data\source\MockMongoPost';
+	protected $_model = 'arthur\tests\mocks\data\source\MockMongoPost';
 
 	protected $_testConfig = array(
 		'type'        => 'MongoDb',
 		'adapter'     => false,
-		'database'    => 'lithium_test',
+		'database'    => 'arthur_test',
 		'host'        => 'localhost',
 		'port'        => '27017',
 		'persistent'  => null,
@@ -71,7 +71,7 @@ class MongoDbTest extends \lithium\test\Unit
 		
 		$this->_configs = Connections::config();
 		$result         = parent::run($options);
-		Connections::get('lithium_mongo_test')->dropDB('lithium_test');
+		Connections::get('arthur_mongo_test')->dropDB('arthur_test');
 		Connections::reset();
 		Connections::config($this->_configs); 
 		
@@ -80,9 +80,9 @@ class MongoDbTest extends \lithium\test\Unit
 
 	public function setUp() 
 	{
-		Connections::config(array('lithium_mongo_test' => $this->_testConfig));  
+		Connections::config(array('arthur_mongo_test' => $this->_testConfig));  
 		
-		$this->db = Connections::get('lithium_mongo_test');
+		$this->db = Connections::get('arthur_mongo_test');
 		$model    = $this->_model;     
 		
 		$model::config(array('key' => '_id'));
@@ -362,7 +362,7 @@ class MongoDbTest extends \lithium\test\Unit
 		$data   = array('title' => 'New Item');
 		$result = $this->db->item($model, $data);
 
-		$this->assertTrue($result instanceof \lithium\data\entity\Document);
+		$this->assertTrue($result instanceof \arthur\data\entity\Document);
 
 		$expected = $data;
 		$result   = $result->to('array');
@@ -396,7 +396,7 @@ class MongoDbTest extends \lithium\test\Unit
 	public function testDocumentSorting() 
 	{
 		$model = $this->_model;
-		$model::config(array('connection' => 'lithium_mongo_test', 'source' => 'ordered_docs'));
+		$model::config(array('connection' => 'arthur_mongo_test', 'source' => 'ordered_docs'));
 
 		$model::create(array('title' => 'Third document',  'position' => 3))->save();
 		$model::create(array('title' => 'First document',  'position' => 1))->save();
@@ -452,13 +452,13 @@ class MongoDbTest extends \lithium\test\Unit
 	public function testMongoIdPreservation() 
 	{
 		$model = $this->_model;
-		$model::config(array('connection' => 'lithium_mongo_test', 'source' => 'ordered_docs'));
+		$model::config(array('connection' => 'arthur_mongo_test', 'source' => 'ordered_docs'));
 
 		$post = $model::create(array('title' => 'A post'));
 		$post->save();
 		$id = $post->_id;
 
-		$data = Connections::get('lithium_mongo_test')->connection->ordered_docs->findOne(array(
+		$data = Connections::get('arthur_mongo_test')->connection->ordered_docs->findOne(array(
 			'_id' => $id
 		));
 		$this->assertEqual('A post', $data['title']);
@@ -468,7 +468,7 @@ class MongoDbTest extends \lithium\test\Unit
 		$post->title = 'An updated post';
 		$post->save();
 
-		$data = Connections::get('lithium_mongo_test')->connection->ordered_docs->findOne(array(
+		$data = Connections::get('arthur_mongo_test')->connection->ordered_docs->findOne(array(
 			'_id' => new MongoId($id)
 		));
 		$this->assertEqual('An updated post', $data['title']);
@@ -478,8 +478,8 @@ class MongoDbTest extends \lithium\test\Unit
 	public function testRelationshipGeneration() 
 	{
 		Connections::add('mock-source', $this->_testConfig);
-		$from = 'lithium\tests\mocks\data\MockComment';
-		$to   = 'lithium\tests\mocks\data\MockPost';
+		$from = 'arthur\tests\mocks\data\MockComment';
+		$to   = 'arthur\tests\mocks\data\MockPost';
 
 		$from::config(array('connection' => 'mock-source'));
 		$to::config(array('connection' => 'mock-source', 'key' => '_id'));
@@ -539,7 +539,7 @@ class MongoDbTest extends \lithium\test\Unit
 	public function testAtomicUpdate() 
 	{
 		$model = $this->_model;
-		$model::config(array('connection' => 'lithium_mongo_test', 'source' => 'posts'));
+		$model::config(array('connection' => 'arthur_mongo_test', 'source' => 'posts'));
 
 		$document = $model::create(array('initial' => 'one', 'values' => 'two'));
 		$document->save();
@@ -558,7 +558,7 @@ class MongoDbTest extends \lithium\test\Unit
 	public function testPreserveId() 
 	{
 		$model = $this->_model;
-		$model::config(array('connection' => 'lithium_mongo_test', 'source' => 'posts'));
+		$model::config(array('connection' => 'arthur_mongo_test', 'source' => 'posts'));
 
 		$document = $model::create(array('_id' => 'custom'));
 		$document->save();

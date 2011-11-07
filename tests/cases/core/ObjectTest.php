@@ -1,17 +1,17 @@
 <?php
 
-namespace lithium\tests\cases\core;
+namespace arthur\tests\cases\core;
 
-use lithium\core\Object;
-use lithium\tests\mocks\core\MockRequest;
-use lithium\tests\mocks\core\MockMethodFiltering;
-use lithium\tests\mocks\core\MockExposed;
-use lithium\tests\mocks\core\MockCallable;
-use lithium\tests\mocks\core\MockObjectForParents;
-use lithium\tests\mocks\core\MockObjectConfiguration;
-use lithium\tests\mocks\core\MockInstantiator;
+use arthur\core\Object;
+use arthur\tests\mocks\core\MockRequest;
+use arthur\tests\mocks\core\MockMethodFiltering;
+use arthur\tests\mocks\core\MockExposed;
+use arthur\tests\mocks\core\MockCallable;
+use arthur\tests\mocks\core\MockObjectForParents;
+use arthur\tests\mocks\core\MockObjectConfiguration;
+use arthur\tests\mocks\core\MockInstantiator;
 
-class ObjectTest extends \lithium\test\Unit 
+class ObjectTest extends \arthur\test\Unit 
 {
 	public function testMethodFiltering() 
 	{
@@ -120,7 +120,7 @@ class ObjectTest extends \lithium\test\Unit
 
 	public function testParents() 
 	{
-		$expected = array('lithium\\core\\Object' => 'lithium\\core\\Object');
+		$expected = array('arthur\\core\\Object' => 'arthur\\core\\Object');
 
 		$result = MockObjectForParents::parents();
 		$this->assertEqual($expected, $result);
@@ -152,7 +152,7 @@ class ObjectTest extends \lithium\test\Unit
 		$result = MockObjectConfiguration::__set_state(array(
 			'key' => 'value', '_protected' => 'test'
 		));
-		$expected = 'lithium\tests\mocks\core\MockObjectConfiguration';
+		$expected = 'arthur\tests\mocks\core\MockObjectConfiguration';
 		$this->assertEqual($expected, get_class($result));
 
 		$this->assertEqual('test', $result->getProtected());
@@ -161,7 +161,7 @@ class ObjectTest extends \lithium\test\Unit
 	public function testInstanceWithClassesKey() 
 	{
 		$object   = new MockInstantiator();
-		$expected = 'lithium\tests\mocks\core\MockRequest';
+		$expected = 'arthur\tests\mocks\core\MockRequest';
 		$result   = get_class($object->instance('request'));
 		$this->assertEqual($expected, $result);
 	}
@@ -169,8 +169,8 @@ class ObjectTest extends \lithium\test\Unit
 	public function testInstanceWithNamespacedClass() 
 	{
 		$object   = new MockInstantiator();
-		$expected = 'lithium\tests\mocks\core\MockRequest';
-		$result   = get_class($object->instance('lithium\tests\mocks\core\MockRequest'));
+		$expected = 'arthur\tests\mocks\core\MockRequest';
+		$result   = get_class($object->instance('arthur\tests\mocks\core\MockRequest'));
 		$this->assertEqual($expected, $result);
 	}
 
@@ -178,7 +178,7 @@ class ObjectTest extends \lithium\test\Unit
 	{
 		$object   = new MockInstantiator();
 		$request  = new MockRequest();
-		$expected = 'lithium\tests\mocks\core\MockRequest';
+		$expected = 'arthur\tests\mocks\core\MockRequest';
 		$result   = get_class($object->instance($request));
 		$this->assertEqual($expected, $result);
 	}

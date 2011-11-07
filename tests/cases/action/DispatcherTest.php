@@ -1,14 +1,14 @@
 <?php
 
-namespace lithium\tests\cases\action;
+namespace arthur\tests\cases\action;
 
-use lithium\action\Request;
-use lithium\action\Response;
-use lithium\net\http\Router;
-use lithium\action\Dispatcher;
-use lithium\tests\mocks\action\MockDispatcher;
+use arthur\action\Request;
+use arthur\action\Response;
+use arthur\net\http\Router;
+use arthur\action\Dispatcher;
+use arthur\tests\mocks\action\MockDispatcher;
 
-class DispatcherTest extends \lithium\test\Unit 
+class DispatcherTest extends \arthur\test\Unit 
 {
 	protected $_routes = array();
 

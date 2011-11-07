@@ -1,13 +1,13 @@
 <?php
 
-namespace lithium\tests\cases\action;
+namespace arthur\tests\cases\action;
 
-use lithium\action\Request;
-use lithium\tests\mocks\action\MockIisRequest;
-use lithium\tests\mocks\action\MockNginxRequest;
-use lithium\tests\mocks\action\MockCgiRequest;
+use arthur\action\Request;
+use arthur\tests\mocks\action\MockIisRequest;
+use arthur\tests\mocks\action\MockNginxRequest;
+use arthur\tests\mocks\action\MockCgiRequest;
 
-class RequestTest extends \lithium\test\Unit 
+class RequestTest extends \arthur\test\Unit 
 {
 	public $request = null;
 	protected $_server = array();
@@ -60,10 +60,10 @@ class RequestTest extends \lithium\test\Unit
 	public function testScriptFilename() 
 	{
 		$request = new Request(array('env' => array(
-			'SCRIPT_FILENAME' => '/lithium/app/webroot/index.php'
+			'SCRIPT_FILENAME' => '/arthur/app/webroot/index.php'
 		)));
 		$result = $request->env('SCRIPT_FILENAME');
-		$this->assertEqual('/lithium/app/webroot/index.php', $result);
+		$this->assertEqual('/arthur/app/webroot/index.php', $result);
 	}
 
 	public function testPlatform() 
@@ -76,7 +76,7 @@ class RequestTest extends \lithium\test\Unit
 	public function testScriptFilenameTranslatedForIIS() 
 	{
 		$request = new MockIisRequest();
-		$this->assertEqual('\\lithium\\app\\webroot\\index.php', $request->env('SCRIPT_FILENAME'));
+		$this->assertEqual('\\arthur\\app\\webroot\\index.php', $request->env('SCRIPT_FILENAME'));
 
 		$request = new Request(array('env' => array('SCRIPT_FILENAME' => null)));
 		$path = $request->env('DOCUMENT_ROOT') . $request->env('PHP_SELF');
@@ -86,16 +86,16 @@ class RequestTest extends \lithium\test\Unit
 	public function testDocumentRoot() 
 	{
 		$request = new Request(array(
-			'env' => array('DOCUMENT_ROOT' => '/home/lithium/app/webroot')
+			'env' => array('DOCUMENT_ROOT' => '/home/arthur/app/webroot')
 		));
-		$this->assertEqual('/home/lithium/app/webroot', $request->env('DOCUMENT_ROOT'));
+		$this->assertEqual('/home/arthur/app/webroot', $request->env('DOCUMENT_ROOT'));
 	}
 
 	public function testDocumentRootTranslatedForIIS() 
 	{
 		$request = new MockIisRequest();
 
-		$expected = '\\lithium\\app\\webroot';
+		$expected = '\\arthur\\app\\webroot';
 		$result   = $request->env('DOCUMENT_ROOT');
 		$this->assertEqual($expected, $result);
 	}
@@ -117,7 +117,7 @@ class RequestTest extends \lithium\test\Unit
 	public function testHttpsFromScriptUri() 
 	{
 		$request = new Request(array('env' => array(
-			'SCRIPT_URI' => 'https://lithium.com',
+			'SCRIPT_URI' => 'https://arthur.com',
 			'HTTPS' => null
 		)));
 		$this->assertTrue($request->env('HTTPS'));
@@ -144,9 +144,9 @@ class RequestTest extends \lithium\test\Unit
 	public function testBaseWithDirectory() 
 	{
 		$request = new Request(array('env' => array(
-			'PHP_SELF' => '/lithium.com/app/webroot/index.php'
+			'PHP_SELF' => '/arthur.com/app/webroot/index.php'
 		)));
-		$this->assertEqual('/lithium.com', $request->env('base'));
+		$this->assertEqual('/arthur.com', $request->env('base'));
 	}
 
 	public function testRequestWithoutUrlQueryParam() 
@@ -185,9 +185,9 @@ class RequestTest extends \lithium\test\Unit
 	public function testBaseWithAppAndOtherDirectory() 
 	{
 		$request = new Request(array('env' => array(
-			'PHP_SELF' => '/lithium.com/app/other/webroot/index.php'
+			'PHP_SELF' => '/arthur.com/app/other/webroot/index.php'
 		)));
-		$this->assertEqual('/lithium.com/app/other', $request->env('base'));
+		$this->assertEqual('/arthur.com/app/other', $request->env('base'));
 	}
 
 	public function testPhpSelfTranslatedForIIS() 
@@ -198,10 +198,10 @@ class RequestTest extends \lithium\test\Unit
 
 	public function testServerHttpBase() 
 	{
-		$_SERVER['HTTP_HOST'] = 'sub.lithium.local';
+		$_SERVER['HTTP_HOST'] = 'sub.arthur.local';
 		$request = new Request();
 
-		$expected = '.lithium.local';
+		$expected = '.arthur.local';
 		$result   = $request->env('HTTP_BASE');
 		$this->assertEqual($expected, $result);
 	}
@@ -218,7 +218,7 @@ class RequestTest extends \lithium\test\Unit
 	{
 		$request = new MockCgiRequest();
 
-		$expected = '/lithium/app/webroot/index.php';
+		$expected = '/arthur/app/webroot/index.php';
 		$result   = $request->env('SCRIPT_NAME');
 		$this->assertEqual($expected, $result);
 	}
@@ -226,7 +226,7 @@ class RequestTest extends \lithium\test\Unit
 	public function testGetMethod() 
 	{
 		$request = new Request(array('env' => array(
-			'PHP_SELF'             => '/lithium.com/app/webroot/index.php',
+			'PHP_SELF'             => '/arthur.com/app/webroot/index.php',
 			'HTTP_ACCEPT'          => 'text/html,application/xml,image/png,*/*',
 			'HTTP_ACCEPT_LANGUAGE' => 'da, en-gb;q=0.8, en;q=0.7'
 		)));
@@ -239,7 +239,7 @@ class RequestTest extends \lithium\test\Unit
 		$result = $request->get('not:Post');
 		$this->assertNull($result);
 
-		$expected = '/lithium.com';
+		$expected = '/arthur.com';
 		$result   = $request->get('env:base');
 		$this->assertEqual($expected, $result);
 
@@ -364,10 +364,10 @@ class RequestTest extends \lithium\test\Unit
 
 	public function testRefererNotLocal() 
 	{
-		$_SERVER['HTTP_REFERER'] = 'http://lithium.com/posts/index';
+		$_SERVER['HTTP_REFERER'] = 'http://arthur.com/posts/index';
 		$request = new Request();
 
-		$expected = 'http://lithium.com/posts/index';
+		$expected = 'http://arthur.com/posts/index';
 		$result   = $request->referer('/');
 		$this->assertEqual($expected, $result);
 	}
@@ -384,7 +384,7 @@ class RequestTest extends \lithium\test\Unit
 
 	public function testRefererLocalFromNotLocal() 
 	{
-		$_SERVER['HTTP_REFERER'] = 'http://lithium.com/posts/index';
+		$_SERVER['HTTP_REFERER'] = 'http://arthur.com/posts/index';
 		$request = new Request();
 
 		$expected = '/';

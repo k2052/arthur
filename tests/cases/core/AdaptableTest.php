@@ -1,16 +1,16 @@
 <?php
 
-namespace lithium\tests\cases\core;
+namespace arthur\tests\cases\core;
 
 use SplDoublyLinkedList;
-use lithium\core\Adaptable;
-use lithium\storage\cache\adapter\Memory;
-use lithium\tests\mocks\core\MockAdapter;
-use lithium\tests\mocks\core\MockStrategy;
-use lithium\tests\mocks\storage\cache\strategy\MockSerializer;
-use lithium\tests\mocks\storage\cache\strategy\MockConfigurizer;
+use arthur\core\Adaptable;
+use arthur\storage\cache\adapter\Memory;
+use arthur\tests\mocks\core\MockAdapter;
+use arthur\tests\mocks\core\MockStrategy;
+use arthur\tests\mocks\storage\cache\strategy\MockSerializer;
+use arthur\tests\mocks\storage\cache\strategy\MockConfigurizer;
 
-class AdaptableTest extends \lithium\test\Unit 
+class AdaptableTest extends \arthur\test\Unit 
 {
 	public function setUp() 
 	{
@@ -104,7 +104,7 @@ class AdaptableTest extends \lithium\test\Unit
 	{
 		$strategy = new MockStrategy();
 		$items = array('default' => array(
-			'strategies' => array('lithium\tests\mocks\storage\cache\strategy\MockSerializer'),
+			'strategies' => array('arthur\tests\mocks\storage\cache\strategy\MockSerializer'),
 			'filters'    => array(),
 			'adapter'    => null
 		));
@@ -129,7 +129,7 @@ class AdaptableTest extends \lithium\test\Unit
 		));
 		$strategy::config($items);
 
-		$class   = 'lithium\tests\mocks\core\MockStrategy';
+		$class   = 'arthur\tests\mocks\core\MockStrategy';
 		$message = "Could not find strategy `InvalidStrategy` in class `{$class}`.";
 		$this->expectException($message);
 
@@ -142,7 +142,7 @@ class AdaptableTest extends \lithium\test\Unit
 		$strategy = new MockStrategy();
 		$items    = array('default' => array(
 			'strategies' => array(
-				'lithium\tests\mocks\storage\cache\strategy\MockConfigurizer' => array(
+				'arthur\tests\mocks\storage\cache\strategy\MockConfigurizer' => array(
 					'key1' => 'value1', 'key2' => 'value2'
 				)
 			),
@@ -181,7 +181,7 @@ class AdaptableTest extends \lithium\test\Unit
 		$items = array('default' => array(
 			'filters'    => array(),
 			'adapter'    => null,
-			'strategies' => array('lithium\tests\mocks\storage\cache\strategy\MockSerializer')
+			'strategies' => array('arthur\tests\mocks\storage\cache\strategy\MockSerializer')
 		));
 		$strategy::config($items);
 		$result   = $strategy::config();
@@ -201,7 +201,7 @@ class AdaptableTest extends \lithium\test\Unit
 			'filters'    => array(),
 			'adapter'    => null,
 			'strategies' => array(
-				'lithium\tests\mocks\storage\cache\strategy\MockConfigurizer' => $params
+				'arthur\tests\mocks\storage\cache\strategy\MockConfigurizer' => $params
 			)
 		));
 		$strategy::config($items);
@@ -220,7 +220,7 @@ class AdaptableTest extends \lithium\test\Unit
 			'filters'    => array(),
 			'adapter'    => null,
 			'strategies' => array(
-				'lithium\tests\mocks\storage\cache\strategy\MockSerializer', 'Base64'
+				'arthur\tests\mocks\storage\cache\strategy\MockSerializer', 'Base64'
 			)
 		));
 		$strategy::config($items);
@@ -299,7 +299,7 @@ class AdaptableTest extends \lithium\test\Unit
 		$this->assertEqual($expected, $result);
 
 		$message  = 'Could not find adapter `NonExistent` in ';
-		$message .= 'class `lithium\tests\mocks\core\MockAdapter`.';
+		$message .= 'class `arthur\tests\mocks\core\MockAdapter`.';
 		$this->expectException($message);
 
 		$result = $adapter::adapter('default');
@@ -334,7 +334,7 @@ class AdaptableTest extends \lithium\test\Unit
 		$adapter::config($items);
 
 		$message  = 'No adapter set for configuration in ';
-		$message .= 'class `lithium\tests\mocks\core\MockAdapter`.';
+		$message .= 'class `arthur\tests\mocks\core\MockAdapter`.';
 		$this->expectException($message);
 		$result = $adapter::adapter('default');
 	}

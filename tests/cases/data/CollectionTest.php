@@ -1,13 +1,13 @@
 <?php
 
-namespace lithium\tests\cases\data;
+namespace arthur\tests\cases\data;
 
-use lithium\data\collection\DocumentSet;
-use lithium\data\Connections;
+use arthur\data\collection\DocumentSet;
+use arthur\data\Connections;
 
-class CollectionTest extends \lithium\test\Unit 
+class CollectionTest extends \arthur\test\Unit 
 {
-	protected $_model = 'lithium\tests\mocks\data\MockPost';
+	protected $_model = 'arthur\tests\mocks\data\MockPost';
 	protected $_backup = array();
 
 	public function setUp() 
@@ -47,7 +47,7 @@ class CollectionTest extends \lithium\test\Unit
 	public function testAccessorMethods() 
 	{
 		Connections::config(array('mock-source' => array(
-			'type' => 'lithium\tests\mocks\data\MockSource'
+			'type' => 'arthur\tests\mocks\data\MockSource'
 		)));
 		$model = $this->_model;
 		$model::config(array('connection' => false, 'key' => 'id'));

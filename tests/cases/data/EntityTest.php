@@ -1,12 +1,12 @@
 <?php
 
-namespace lithium\tests\cases\data;
+namespace arthur\tests\cases\data;
 
-use lithium\data\Entity;
+use arthur\data\Entity;
 
-class EntityTest extends \lithium\test\Unit 
+class EntityTest extends \arthur\test\Unit 
 {
-	protected $_model = 'lithium\tests\mocks\data\source\MockMongoPost';
+	protected $_model = 'arthur\tests\mocks\data\source\MockMongoPost';
 
 	public function testSchemaAccess() 
 	{

@@ -1,12 +1,12 @@
 <?php
 
-namespace lithium\tests\cases\data\source\database\adapter;
+namespace arthur\tests\cases\data\source\database\adapter;
 
-use lithium\data\Connections;
-use lithium\data\source\database\adapter\Sqlite3;
-use lithium\tests\mocks\data\source\database\adapter\MockSqlite3;
+use arthur\data\Connections;
+use arthur\data\source\database\adapter\Sqlite3;
+use arthur\tests\mocks\data\source\database\adapter\MockSqlite3;
 
-class Sqlite3Test extends \lithium\test\Unit 
+class Sqlite3Test extends \arthur\test\Unit 
 {
 	protected $_dbConfig = array();
 	public $db = null;

@@ -1,11 +1,11 @@
 <?php
 
-namespace lithium\tests\cases\action;
+namespace arthur\tests\cases\action;
 
-use lithium\action\Response;
-use lithium\tests\mocks\action\MockResponse;
+use arthur\action\Response;
+use arthur\tests\mocks\action\MockResponse;
 
-class ResponseTest extends \lithium\test\Unit 
+class ResponseTest extends \arthur\test\Unit 
 {
 	public $response = null;
 

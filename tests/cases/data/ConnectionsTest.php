@@ -1,14 +1,14 @@
 <?php
 
-namespace lithium\tests\cases\data;
+namespace arthur\tests\cases\data;
 
 use Exception;
-use lithium\data\Connections;
-use lithium\data\source\Http;
-use lithium\data\source\Mock;
-use lithium\data\source\database\adapter\MySql;
+use arthur\data\Connections;
+use arthur\data\source\Http;
+use arthur\data\source\Mock;
+use arthur\data\source\database\adapter\MySql;
 
-class ConnectionsTest extends \lithium\test\Unit 
+class ConnectionsTest extends \arthur\test\Unit 
 {
 	public $config = array(
 		'type'     => 'database',

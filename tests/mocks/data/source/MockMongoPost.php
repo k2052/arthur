@@ -7,7 +7,7 @@ use arthur\data\source\MongoDb;
 class MockMongoPost extends \arthur\data\Model 
 {
 	protected $_meta = array(
-		'connection' => 'lithium_mongo_test',
+		'connection' => 'arthur_mongo_test',
 		'source'     => 'posts'
 	);
 

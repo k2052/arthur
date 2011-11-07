@@ -1,22 +1,22 @@
 <?php
 
-namespace lithium\tests\cases\data\model;
+namespace arthur\tests\cases\data\model;
 
-use lithium\data\Connections;
-use lithium\data\model\Query;
-use lithium\data\entity\Record;
-use lithium\tests\mocks\data\MockPostObject;
-use lithium\tests\mocks\data\model\MockDatabase;
-use lithium\tests\mocks\data\model\MockQueryPost;
-use lithium\tests\mocks\data\model\MockQueryComment;
+use arthur\data\Connections;
+use arthur\data\model\Query;
+use arthur\data\entity\Record;
+use arthur\tests\mocks\data\MockPostObject;
+use arthur\tests\mocks\data\model\MockDatabase;
+use arthur\tests\mocks\data\model\MockQueryPost;
+use arthur\tests\mocks\data\model\MockQueryComment;
 
-class QueryTest extends \lithium\test\Unit 
+class QueryTest extends \arthur\test\Unit 
 {
-	protected $_model = 'lithium\tests\mocks\data\model\MockQueryPost';
+	protected $_model = 'arthur\tests\mocks\data\model\MockQueryPost';
 	protected $_configs = array();
 
 	protected $_queryArr = array(
-		'model'      => 'lithium\tests\mocks\data\model\MockQueryPost',
+		'model'      => 'arthur\tests\mocks\data\model\MockQueryPost',
 		'type'       => 'read',
 		'order'      => 'created DESC',
 		'limit'      => 10,
@@ -61,9 +61,9 @@ class QueryTest extends \lithium\test\Unit
 		$query = new Query($this->_queryArr);
 		$this->assertEqual($this->_model, $query->model());
 
-		$query->model('lithium\tests\mocks\data\model\MockQueryComment');
+		$query->model('arthur\tests\mocks\data\model\MockQueryComment');
 
-		$expected = 'lithium\tests\mocks\data\model\MockQueryComment';
+		$expected = 'arthur\tests\mocks\data\model\MockQueryComment';
 		$result   = $query->model();
 		$this->assertEqual($expected, $result);
 	}
@@ -360,7 +360,7 @@ class QueryTest extends \lithium\test\Unit
 	{
 		$model = $this->_model;
 		$model::bind('hasMany', 'MockQueryComment', array(
-			'class' => 'lithium\tests\mocks\data\model\MockQueryComment'
+			'class' => 'arthur\tests\mocks\data\model\MockQueryComment'
 		));
 
 		$query  = new Query(compact('model') + array('with' => 'MockQueryComment'));
@@ -368,7 +368,7 @@ class QueryTest extends \lithium\test\Unit
 
 		$expected = array('MockQueryComment' => array(
 			'type'      => 'hasMany',
-			'model'     => 'lithium\tests\mocks\data\model\MockQueryComment',
+			'model'     => 'arthur\tests\mocks\data\model\MockQueryComment',
 			'fieldName' => 'mock_query_comments'
 		));
 		$keyExists = isset($export['relationships']);
@@ -430,7 +430,7 @@ class QueryTest extends \lithium\test\Unit
 			'type'       => 'update',
 			'data'       => array('title' => '..'),
 			'conditions' => array('title' => 'FML'),
-			'model'      => 'lithium\tests\mocks\data\model\MockQueryPost'
+			'model'      => 'arthur\tests\mocks\data\model\MockQueryPost'
 		);
 		$query  = new Query($options);
 		$result = $query->export(Connections::get('mock-database-connection'));
@@ -478,7 +478,7 @@ class QueryTest extends \lithium\test\Unit
 
 	public function testQueryWithCustomAlias() 
 	{
-		$model = 'lithium\tests\mocks\data\model\MockQueryComment';
+		$model = 'arthur\tests\mocks\data\model\MockQueryComment';
 
 		$query = new Query(compact('model') + array(
 			'source' => 'my_custom_table',

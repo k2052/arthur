@@ -1,20 +1,20 @@
 <?php
 
-namespace lithium\tests\cases\data\source;
+namespace arthur\tests\cases\data\source;
 
-use lithium\data\Connections;
-use lithium\data\model\Query;
-use lithium\data\entity\Record;
-use lithium\data\collection\RecordSet;
-use lithium\tests\mocks\data\model\MockDatabase;
-use lithium\tests\mocks\data\model\MockDatabasePost;
-use lithium\tests\mocks\data\model\MockDatabaseComment;
+use arthur\data\Connections;
+use arthur\data\model\Query;
+use arthur\data\entity\Record;
+use arthur\data\collection\RecordSet;
+use arthur\tests\mocks\data\model\MockDatabase;
+use arthur\tests\mocks\data\model\MockDatabasePost;
+use arthur\tests\mocks\data\model\MockDatabaseComment;
 
-class DatabaseTest extends \lithium\test\Unit 
+class DatabaseTest extends \arthur\test\Unit 
 {
 	public $db = null;
 	protected $_configs = array();
-	protected $_model = 'lithium\tests\mocks\data\model\MockDatabasePost';
+	protected $_model = 'arthur\tests\mocks\data\model\MockDatabasePost';
 
 	public function setUp() 
 	{
@@ -247,7 +247,7 @@ class DatabaseTest extends \lithium\test\Unit
 			'conditions' => array('Post.id' => new Query(array(
 				'type'       => 'read',
 				'fields'     => array('post_id'),
-				'model'      => 'lithium\tests\mocks\data\model\MockDatabaseTagging',
+				'model'      => 'arthur\tests\mocks\data\model\MockDatabaseTagging',
 				'conditions' => array('MockDatabaseTag.tag' => array('foo', 'bar', 'baz'))
 			)))
 		));
@@ -266,7 +266,7 @@ class DatabaseTest extends \lithium\test\Unit
 			'conditions' => array('Post.id' => array('!=' => new Query(array(
 				'type'       => 'read',
 				'fields'     => array('post_id'),
-				'model'      => 'lithium\tests\mocks\data\model\MockDatabaseTagging',
+				'model'      => 'arthur\tests\mocks\data\model\MockDatabaseTagging',
 				'conditions' => array('MockDatabaseTag.tag' => array('foo', 'bar', 'baz'))
 			))))
 		));
@@ -288,7 +288,7 @@ class DatabaseTest extends \lithium\test\Unit
 			'fields'     => array('MockDatabasePost.title', 'MockDatabasePost.body'),
 			'conditions' => array('MockDatabaseTag.tag' => array('foo', 'bar', 'baz')),
 			'joins'      => array(new Query(array(
-				'model'      => 'lithium\tests\mocks\data\model\MockDatabaseTag',
+				'model'      => 'arthur\tests\mocks\data\model\MockDatabaseTag',
 				'constraint' => 'MockDatabaseTagging.tag_id = MockDatabaseTag.id'
 			)))
 		));
@@ -370,7 +370,7 @@ class DatabaseTest extends \lithium\test\Unit
 	{
 		$options = array(
 			'type'  => 'read',
-			'model' => 'lithium\tests\mocks\data\model\MockDatabasePost'
+			'model' => 'arthur\tests\mocks\data\model\MockDatabasePost'
 		);
 		$this->expectException('Undefined offset: 0');
 		$result   = $this->db->calculation('count', new Query($options), $options);
@@ -393,7 +393,7 @@ class DatabaseTest extends \lithium\test\Unit
 	{
 		$query = new Query(array(
 			'type'  => 'read',
-			'model' => 'lithium\tests\mocks\data\model\MockDatabasePost'
+			'model' => 'arthur\tests\mocks\data\model\MockDatabasePost'
 		));
 		$result = $this->db->read($query);
 		$this->assertTrue($result instanceof RecordSet);
@@ -407,7 +407,7 @@ class DatabaseTest extends \lithium\test\Unit
 	{
 		$query = new Query(array(
 			'type'  => 'read',
-			'model' => 'lithium\tests\mocks\data\model\MockDatabasePost'
+			'model' => 'arthur\tests\mocks\data\model\MockDatabasePost'
 		));
 		$result = $this->db->read($query, array('return' => 'array'));
 		$this->assertTrue(is_array($result));
@@ -649,7 +649,7 @@ class DatabaseTest extends \lithium\test\Unit
 
 	public function testRelationshipGeneration() 
 	{
-		$comment = 'lithium\tests\mocks\data\model\MockDatabaseComment';
+		$comment = 'arthur\tests\mocks\data\model\MockDatabaseComment';
 
 		$hasMany = $this->db->relationship($this->_model, 'hasMany', 'Comments', array(
 			'to' => $comment
@@ -715,7 +715,7 @@ class DatabaseTest extends \lithium\test\Unit
 
 	public function testRenderArrayJoinConstraintComplex() 
 	{
-		$model = 'lithium\tests\mocks\data\model\MockQueryComment';
+		$model = 'arthur\tests\mocks\data\model\MockQueryComment';
 
 		$query = new Query(compact('model') + array(
 			'type'       => 'read',
@@ -738,7 +738,7 @@ class DatabaseTest extends \lithium\test\Unit
 
 	public function testRenderArrayJoin() 
 	{
-		$model = 'lithium\tests\mocks\data\model\MockQueryComment';
+		$model = 'arthur\tests\mocks\data\model\MockQueryComment';
 
 		$query = new Query(compact('model') + array(
 			'type'       => 'read',

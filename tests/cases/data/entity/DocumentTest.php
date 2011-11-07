@@ -1,21 +1,21 @@
 <?php
 
-namespace lithium\tests\cases\data\entity;
+namespace arthur\tests\cases\data\entity;
 
 use MongoId;
 use MongoDate;
-use lithium\data\Connections;
-use lithium\data\source\MongoDb;
-use lithium\data\source\http\adapter\CouchDb;
-use lithium\data\entity\Document;
-use lithium\data\collection\DocumentSet;
-use lithium\data\collection\DocumentArray;
-use lithium\tests\mocks\data\model\MockDocumentPost;
-use lithium\tests\mocks\data\model\MockDocumentMultipleKey;
+use arthur\data\Connections;
+use arthur\data\source\MongoDb;
+use arthur\data\source\http\adapter\CouchDb;
+use arthur\data\entity\Document;
+use arthur\data\collection\DocumentSet;
+use arthur\data\collection\DocumentArray;
+use arthur\tests\mocks\data\model\MockDocumentPost;
+use arthur\tests\mocks\data\model\MockDocumentMultipleKey;
 
-class DocumentTest extends \lithium\test\Unit 
+class DocumentTest extends \arthur\test\Unit 
 {
-	protected $_model = 'lithium\tests\mocks\data\model\MockDocumentPost';
+	protected $_model = 'arthur\tests\mocks\data\model\MockDocumentPost';
 	protected $_backup = array();
 
 	public function skip() 
@@ -297,7 +297,7 @@ class DocumentTest extends \lithium\test\Unit
 
 	public function testUpdateWithMultipleKeys() 
 	{
-		$model = 'lithium\tests\mocks\data\model\MockDocumentMultipleKey';
+		$model = 'arthur\tests\mocks\data\model\MockDocumentMultipleKey';
 		$model::config(array('key' => array('id', 'rev'), 'foo' => true));
 		$doc = new Document(compact('model'));
 
@@ -317,7 +317,7 @@ class DocumentTest extends \lithium\test\Unit
 	public function testArrayValueNestedDocument() 
 	{
 		$doc = new Document(array(
-			'model' => 'lithium\tests\mocks\data\model\MockDocumentPost',
+			'model' => 'arthur\tests\mocks\data\model\MockDocumentPost',
 			'data' => array(
 				'id' => 12, 'arr' => array('id' => 33, 'name' => 'stone'), 'name' => 'bird'
 			)
@@ -376,9 +376,9 @@ class DocumentTest extends \lithium\test\Unit
 	}
 
 	public function testCall() {
-		$doc = new Document(array('model' => 'lithium\tests\mocks\data\model\MockDocumentPost'));
+		$doc = new Document(array('model' => 'arthur\tests\mocks\data\model\MockDocumentPost'));
 
-		$expected = 'lithium';
+		$expected = 'arthur';
 		$result   = $doc->medicin();
 		$this->assertEqual($expected, $result);
 
@@ -397,7 +397,7 @@ class DocumentTest extends \lithium\test\Unit
 	public function testEmptyValues() 
 	{
 		$doc = new Document(array(
-			'model' => 'lithium\tests\mocks\data\model\MockDocumentPost',
+			'model' => 'arthur\tests\mocks\data\model\MockDocumentPost',
 			'data' => array(
 				'title'     => 'Post',
 				'content'   => 'Lorem Ipsum',

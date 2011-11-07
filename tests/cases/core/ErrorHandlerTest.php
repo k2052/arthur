@@ -1,13 +1,13 @@
 <?php
 
-namespace lithium\tests\cases\core;
+namespace arthur\tests\cases\core;
 
 use Closure;
 use Exception;
 use UnexpectedValueException;
-use lithium\core\ErrorHandler;
+use arthur\core\ErrorHandler;
 
-class ErrorHandlerTest extends \lithium\test\Unit 
+class ErrorHandlerTest extends \arthur\test\Unit 
 {
 	public $errors = array();
 
@@ -132,7 +132,7 @@ class ErrorHandlerTest extends \lithium\test\Unit
 		$current = debug_backtrace();
 		$results = ErrorHandler::trace($current);
 		$this->assertEqual(count($current), count($results));
-		$this->assertEqual($results[0], 'lithium\tests\cases\core\ErrorHandlerTest::testTrace');
+		$this->assertEqual($results[0], 'arthur\tests\cases\core\ErrorHandlerTest::testTrace');
 	}
 
 	public function testRun() 

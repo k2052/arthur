@@ -1,11 +1,11 @@
 <?php
 
-namespace lithium\tests\cases\core;
+namespace arthur\tests\cases\core;
 
-use lithium\core\Environment;
-use lithium\tests\mocks\core\MockRequest;
+use arthur\core\Environment;
+use arthur\tests\mocks\core\MockRequest;
 
-class EnvironmentTest extends \lithium\test\Unit 
+class EnvironmentTest extends \arthur\test\Unit 
 {
 	public function setUp() 
 	{

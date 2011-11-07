@@ -1,16 +1,16 @@
 <?php
 
-namespace lithium\tests\cases\data\collection;
+namespace arthur\tests\cases\data\collection;
 
-use lithium\data\collection\RecordSet;
-use lithium\tests\mocks\data\collection\MockRecordSet;
-use lithium\tests\mocks\data\model\mock_database\MockResult;
-use lithium\tests\mocks\data\MockPostObject;
-use lithium\util\Collection;
+use arthur\data\collection\RecordSet;
+use arthur\tests\mocks\data\collection\MockRecordSet;
+use arthur\tests\mocks\data\model\mock_database\MockResult;
+use arthur\tests\mocks\data\MockPostObject;
+use arthur\util\Collection;
 
-class RecordSetTest extends \lithium\test\Unit 
+class RecordSetTest extends \arthur\test\Unit 
 {
-	protected $_model = 'lithium\tests\mocks\data\MockModel';
+	protected $_model = 'arthur\tests\mocks\data\MockModel';
 	protected $_recordSet = null;
 	protected $_objectRecordSet = null;
 
@@ -350,16 +350,16 @@ class RecordSetTest extends \lithium\test\Unit
 
 	public function testMeta() 
 	{
-		$expected = array('model' => 'lithium\tests\mocks\data\MockModel');
+		$expected = array('model' => 'arthur\tests\mocks\data\MockModel');
 		$this->assertEqual($expected, $this->_recordSet->meta());
 
-		$expected = array('model' => 'lithium\tests\mocks\data\MockModel');
+		$expected = array('model' => 'arthur\tests\mocks\data\MockModel');
 		$this->assertEqual($expected, $this->_objectRecordSet->meta());
 	}
 
 	public function testTo() 
 	{
-		Collection::formats('\lithium\net\http\Media');
+		Collection::formats('\arthur\net\http\Media');
 
 		$this->assertFalse(isset($this->_recordSet[0]));
 		$expected = array(
