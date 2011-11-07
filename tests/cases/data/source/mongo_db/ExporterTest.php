@@ -138,10 +138,10 @@ class ExporterTest extends \arthur\test\Unit
 
 		$doc = new Document(compact('model', 'exists') + array('data' => array(
 			'numbers' => new DocumentArray(compact('model', 'exists') + array(
-				'data' => array(7, 8, 9), 'pathKey' => 'numbers'
+				'data'  => array(7, 8, 9), 'pathKey' => 'numbers'
 			)),
 			'objects' => new DocumentArray(compact('model', 'exists') + array(
-				'data' => array(
+				'data'  => array(
 					new Document(
 						compact('model', 'exists') + array('data' => array('foo' => 'bar'))
 					),

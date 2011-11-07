@@ -9,7 +9,7 @@ class SourceTest extends \arthur\test\Unit
 {
 	public function testMethods() 
 	{
-		$source  = new MockSource(array('autoConnect' => false));
+		$source   = new MockSource(array('autoConnect' => false));
 		$methods  = $source->methods();
 		$expected = array(
 			'connect', 'disconnect', 'sources', 'describe', 'create', 'read', 'update', 'delete',

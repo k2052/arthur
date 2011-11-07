@@ -23,7 +23,7 @@ class MySqlTest extends \arthur\test\Unit
 
 		$this->db = new MySql($this->_dbConfig);
 
-		$arthur = LITHIUM_LIBRARY_PATH . '/arthur';
+		$arthur = ARTHUR_LIBRARY_PATH . '/arthur';
 		$sqlFile = $arthur . '/tests/mocks/data/source/database/adapter/mysql_companies.sql';
 		$sql     = file_get_contents($sqlFile);
 		$this->db->read($sql, array('return' => 'resource'));

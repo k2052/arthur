@@ -95,7 +95,7 @@ class LibrariesTest extends \arthur\test\Unit
 	{
 		$result   = Libraries::get('arthur');
 		$expected = array(
-			'path'        => str_replace('\\', '/', realpath(realpath(LITHIUM_LIBRARY_PATH) . '/arthur')),
+			'path'        => str_replace('\\', '/', realpath(realpath(ARTHUR_LIBRARY_PATH) . '/arthur')),
 			'prefix'      => 'arthur\\',
 			'suffix'      => '.php',
 			'loader'      => 'arthur\\core\\Libraries::load',
