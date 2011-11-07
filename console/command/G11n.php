@@ -1,10 +1,10 @@
 <?php
 
-namespace lithium\console\command;
+namespace arthur\console\command;
 
-use lithium\console\command\g11n\Extract;
+use arthur\console\command\g11n\Extract;
 
-class G11n extends \lithium\console\Command 
+class G11n extends \arthur\console\Command 
 {
 	public function run() {}
 	

@@ -1,12 +1,12 @@
 <?php
 
-namespace lithium\console\command\g11n;
+namespace arthur\console\command\g11n;
 
 use Exception;
-use lithium\g11n\Catalog;
-use lithium\core\Libraries;
+use arthur\g11n\Catalog;
+use arthur\core\Libraries;
 
-class Extract extends \lithium\console\Command 
+class Extract extends \arthur\console\Command 
 {
 	public $source;
 	public $destination;
@@ -15,7 +15,7 @@ class Extract extends \lithium\console\Command
 	public function _init() 
 	{
 		parent::_init();
-		$this->source      = $this->source ?: LITHIUM_APP_PATH;
+		$this->source      = $this->source ?: ARTHUR_APP_PATH;
 		$this->destination = $this->destination ?: Libraries::get(true, 'resources') . '/g11n';
 	}
 
