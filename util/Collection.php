@@ -5,7 +5,7 @@ namespace arthur\util;
 class Collection extends \arthur\core\Object implements \ArrayAccess, \Iterator, \Countable 
 {       
   protected static $_formats = array(
-  	'array' => 'Collection::toArray'
+  	'array' => 'arthur\util\Collection::toArray'
 	);              
 	
 	protected $_data = array();
@@ -15,7 +15,7 @@ class Collection extends \arthur\core\Object implements \ArrayAccess, \Iterator,
 	public static function formats($format, $handler = null) 
 	{
 		if($format === false)
-			return static::$_formats = array('array' => 'Collection::toArray');
+			return static::$_formats = array('array' => '\arthur\util\Collection::toArray');
 		if((is_null($handler)) && class_exists($format))
 			return static::$_formats[] = $format;
 
