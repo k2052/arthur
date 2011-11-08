@@ -7,7 +7,7 @@ use arthur\net\socket\Curl;
 
 class CurlTest extends \arthur\test\Unit 
 {
-\	protected $_testConfig = array(
+  protected $_testConfig = array(
 		'persistent' => false,
 		'scheme'     => 'http',
 		'host'       => 'lithify.me',
