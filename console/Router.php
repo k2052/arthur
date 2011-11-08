@@ -30,7 +30,7 @@ class Router extends \arthur\core\Object
 		
 		foreach(array('command', 'action') as $param) 
 		{
-			if(!empty($params['args'])) {
+			if(!empty($params['args']))
 				$params[$param] = array_shift($params['args']);
 		}  
 		
