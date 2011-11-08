@@ -1,10 +1,10 @@
 <?php
-namespace lithium\tests\cases\analysis;
+namespace arthur\tests\cases\analysis;
 
-use lithium\analysis\Docblock;
-use lithium\analysis\Inspector;
+use arthur\analysis\Docblock;
+use arthur\analysis\Inspector;
 
-class DocblockTest extends \lithium\test\Unit 
+class DocblockTest extends \arthur\test\Unit 
 {
 	public function testComment() 
 	{
@@ -16,8 +16,8 @@ class DocblockTest extends \lithium\test\Unit
 		$result = Docblock::comment('');
 		$this->assertEqual($expected, $result);
 
-		$comment  = "/**\n * Lithium is cool\n * @foo bar\n * @baz qux\n */";
-		$expected = array('description' => 'Lithium is cool', 'text' => '', 'tags' => array());
+		$comment  = "/**\n * Arthur is cool\n * @foo bar\n * @baz qux\n */";
+		$expected = array('description' => 'Arthur is cool', 'text' => '', 'tags' => array());
 		$result   = Docblock::comment($comment);
 		$this->assertEqual($expected, $result);
 
@@ -27,9 +27,9 @@ class DocblockTest extends \lithium\test\Unit
 		$result           = Docblock::comment($comment);
 		$this->assertEqual($expected, $result);
 
-		$comment = "/**\n * Lithium is cool\n *\n * Very cool\n * @foo bar\n * @baz qux\n */";
+		$comment = "/**\n * Arthur is cool\n *\n * Very cool\n * @foo bar\n * @baz qux\n */";
 		$expected = array(
-			'description' => 'Lithium is cool',
+			'description' => 'Arthur is cool',
 			'text'        => 'Very cool',
 			'tags'        => array('foo' => 'bar', 'baz' => 'qux')
 		);
@@ -39,9 +39,9 @@ class DocblockTest extends \lithium\test\Unit
 
 	public function testParamTag() 
 	{
-		$comment = "/**\n * Lithium is cool\n * @param string \$str Some string\n */";
+		$comment = "/**\n * Arthur is cool\n * @param string \$str Some string\n */";
 		$expected = array(
-			'description' => 'Lithium is cool',
+			'description' => 'Arthur is cool',
 			'text'        => '',
 			'tags'        => array('params' => array(
 				'$str' => array('type' => 'string', 'text' => 'Some string')
@@ -65,7 +65,7 @@ class DocblockTest extends \lithium\test\Unit
 	 * lines.
 	 * @discuss The second discussion item
 	 * @link http://example.com/
-	 * @see lithium\analysis\Docblock
+	 * @see arthur\analysis\Docblock
 	 * @return void This tag contains a email@address.com.
 	 */
 	public function testTagParsing() 

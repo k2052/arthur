@@ -1,7 +1,7 @@
 <?php
 
-namespace lithium\tests\cases\analysis;
+namespace arthur\tests\cases\analysis;
 
-class DebuggerTest extends \lithium\test\Unit 
+class DebuggerTest extends \arthur\test\Unit 
 {
 }

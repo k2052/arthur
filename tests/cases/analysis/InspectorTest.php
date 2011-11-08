@@ -1,11 +1,11 @@
 <?php
 
-namespace lithium\tests\cases\analysis;
+namespace arthur\tests\cases\analysis;
 
 use ReflectionMethod;
-use lithium\analysis\Inspector;
+use arthur\analysis\Inspector;
 
-class InspectorTest extends \lithium\test\Unit 
+class InspectorTest extends \arthur\test\Unit 
 {
 	public $test = 'foo';
 	public static $test2 = 'bar';
@@ -13,8 +13,8 @@ class InspectorTest extends \lithium\test\Unit
 
 	public function testBasicMethodInspection() 
 	{
-		$class  = '\lithium\analysis\Inspector';
-		$parent = '\lithium\core\StaticObject';
+		$class  = '\arthur\analysis\Inspector';
+		$parent = '\arthur\core\StaticObject';
 
 		$expected = array_diff(get_class_methods($class), get_class_methods($parent));
 		$result = array_keys(Inspector::methods($class, 'extents'));
@@ -25,7 +25,7 @@ class InspectorTest extends \lithium\test\Unit
 		)));
 		$this->assertEqual($expected, $result);
 
-		$this->assertNull(Inspector::methods('\lithium\core\Foo'));
+		$this->assertNull(Inspector::methods('\arthur\core\Foo'));
 
 		$result = Inspector::methods('stdClass', 'extents');
 		$this->assertEqual(array(), $result);
@@ -36,7 +36,7 @@ class InspectorTest extends \lithium\test\Unit
 		$result = Inspector::methods($this, null);
 		$this->assertTrue($result[0] instanceof ReflectionMethod);
 
-		$result   = Inspector::info('lithium\core\Object::_init()');
+		$result   = Inspector::info('arthur\core\Object::_init()');
 		$expected = '_init';
 		$this->assertEqual($expected, $result['name']);
 
@@ -69,22 +69,22 @@ class InspectorTest extends \lithium\test\Unit
 		$this->assertEqual($expected, $result);
 
 		$result   = Inspector::lines(__CLASS__, array(14));
-		$expected = array(14 => 'class InspectorTest extends \lithium\test\Unit {');
+		$expected = array(14 => 'class InspectorTest extends \arthur\test\Unit {');
 		$this->assertEqual($expected, $result);
 
 		$this->expectException('/Missing argument 2/');
-		$this->assertNull(Inspector::lines('\lithium\core\Foo'));
+		$this->assertNull(Inspector::lines('\arthur\core\Foo'));
 		$this->assertNull(Inspector::lines(__CLASS__, array()));
 	}
 	public function testClassParents() 
 	{
 		$result = Inspector::parents($this);
-		$this->assertEqual('lithium\test\Unit', current($result));
+		$this->assertEqual('arthur\test\Unit', current($result));
 
 		$result2 = Inspector::parents(__CLASS__);
 		$this->assertEqual($result2, $result);
 
-		$this->assertFalse(Inspector::parents('lithium\core\Foo', array('autoLoad' => false)));
+		$this->assertFalse(Inspector::parents('arthur\core\Foo', array('autoLoad' => false)));
 	}
 
 	public function testClassFileIntrospection() 
@@ -102,18 +102,18 @@ class InspectorTest extends \lithium\test\Unit
 
 	public function testTypeDetection() 
 	{
-		$this->assertEqual('namespace', Inspector::type('\lithium\util'));
-		$this->assertEqual('namespace', Inspector::type('\lithium\analysis'));
-		$this->assertEqual('class', Inspector::type('\lithium\analysis\Inspector'));
+		$this->assertEqual('namespace', Inspector::type('\arthur\util'));
+		$this->assertEqual('namespace', Inspector::type('\arthur\analysis'));
+		$this->assertEqual('class', Inspector::type('\arthur\analysis\Inspector'));
 		$this->assertEqual('property', Inspector::type('Inspector::$_classes'));
 		$this->assertEqual('method', Inspector::type('Inspector::type'));
 		$this->assertEqual('method', Inspector::type('Inspector::type()'));
 
-		$this->assertEqual('class', Inspector::type('\lithium\security\Auth'));
-		$this->assertEqual('class', Inspector::type('lithium\security\Auth'));
+		$this->assertEqual('class', Inspector::type('\arthur\security\Auth'));
+		$this->assertEqual('class', Inspector::type('arthur\security\Auth'));
 
-		$this->assertEqual('namespace', Inspector::type('\lithium\security\auth'));
-		$this->assertEqual('namespace', Inspector::type('lithium\security\auth'));
+		$this->assertEqual('namespace', Inspector::type('\arthur\security\auth'));
+		$this->assertEqual('namespace', Inspector::type('arthur\security\auth'));
 	}
 
 	public function testIdentifierIntrospection() 
@@ -122,52 +122,52 @@ class InspectorTest extends \lithium\test\Unit
 		$this->assertEqual(array('public'), $result['modifiers']);
 		$this->assertEqual(__FUNCTION__, $result['name']);
 
-		$this->assertNull(Inspector::info('\lithium\util'));
+		$this->assertNull(Inspector::info('\arthur\util'));
 
-		$info   = Inspector::info('\lithium\analysis\Inspector');
+		$info   = Inspector::info('\arthur\analysis\Inspector');
 		$result = str_replace('\\', '/', $info['file']);
 		$this->assertTrue(strpos($result, '/analysis/Inspector.php'));
-		$this->assertEqual('lithium\analysis', $info['namespace']);
+		$this->assertEqual('arthur\analysis', $info['namespace']);
 		$this->assertEqual('Inspector', $info['shortName']);
 
-		$result = Inspector::info('\lithium\analysis\Inspector::$_methodMap');
+		$result = Inspector::info('\arthur\analysis\Inspector::$_methodMap');
 		$this->assertEqual('_methodMap', $result['name']);
 
 		$expected = 'Maps reflect method names to result array keys.';
 		$this->assertEqual($expected, $result['description']);
 		$this->assertEqual(array('var' => 'array'), $result['tags']);
 
-		$result = Inspector::info('\lithium\analysis\Inspector::info()', array(
+		$result = Inspector::info('\arthur\analysis\Inspector::info()', array(
 			'modifiers', 'namespace', 'foo'
 		));
 		$this->assertEqual(array('modifiers', 'namespace'), array_keys($result));
 
-		$this->assertNull(Inspector::info('\lithium\analysis\Inspector::$foo'));
-		$this->assertNull(Inspector::info('\lithium\core\Foo::$foo'));
+		$this->assertNull(Inspector::info('\arthur\analysis\Inspector::$foo'));
+		$this->assertNull(Inspector::info('\arthur\core\Foo::$foo'));
 	}
 
 	public function testClassDependencies() 
 	{
 		$expected = array(
 			'Exception', 'ReflectionClass', 'ReflectionProperty', 'ReflectionException',
-			'lithium\\core\\Libraries'
+			'arthur\\core\\Libraries'
 		);
 
 		$result = Inspector::dependencies($this->subject(), array('type' => 'static'));
 		$this->assertEqual($expected, $result);
 
-		$expected[] = 'lithium\\util\\Collection';
+		$expected[] = 'arthur\\util\\Collection';
 		$result     = Inspector::dependencies($this->subject());
 		$this->assertEqual($expected, $result);
 	}
 
 	public function testCaseSensitiveIdentifiers() 
 	{
-		$result   = Inspector::type('lithium\storage\Cache');
+		$result   = Inspector::type('arthur\storage\Cache');
 		$expected = 'class';
 		$this->assertEqual($expected, $result);
 
-		$result   = Inspector::type('lithium\storage\cache');
+		$result   = Inspector::type('arthur\storage\cache');
 		$expected = 'namespace';
 		$this->assertEqual($expected, $result);
 	}
@@ -207,7 +207,7 @@ class InspectorTest extends \lithium\test\Unit
 
 		$result = array_map(
 			function($property) { return $property['name']; },
-			Inspector::properties('lithium\action\Controller')
+			Inspector::properties('arthur\action\Controller')
 		);
 		$this->assertTrue(in_array('request', $result));
 		$this->assertTrue(in_array('response', $result));
@@ -216,13 +216,13 @@ class InspectorTest extends \lithium\test\Unit
 
 		$result = array_map(
 			function($property) { return $property['name']; },
-			Inspector::properties('lithium\action\Controller', array('public' => false))
+			Inspector::properties('arthur\action\Controller', array('public' => false))
 		);
 		$this->assertTrue(in_array('request', $result));
 		$this->assertTrue(in_array('response', $result));
 		$this->assertTrue(in_array('_render', $result));
 		$this->assertTrue(in_array('_classes', $result));
 
-		$this->assertNull(Inspector::properties('\lithium\core\Foo'));
+		$this->assertNull(Inspector::properties('\arthur\core\Foo'));
 	}
 }

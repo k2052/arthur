@@ -1,12 +1,12 @@
 <?php
 
-namespace lithium\tests\cases\analysis\logger\adapter;
+namespace arthur\tests\cases\analysis\logger\adapter;
 
-use lithium\core\Libraries;
-use lithium\util\collection\Filters;
-use lithium\analysis\logger\adapter\File;
+use arthur\core\Libraries;
+use arthur\util\collection\Filters;
+use arthur\analysis\logger\adapter\File;
 
-class FileTest extends \lithium\test\Unit 
+class FileTest extends \arthur\test\Unit 
 {
 	public $subject;
 
@@ -36,7 +36,7 @@ class FileTest extends \lithium\test\Unit
 		$message   = 'This is a debug message';
 		$function  = $this->subject->write($priority, $message);
 		$now       = date('Y-m-d H:i:s');
-		$function('lithium\analysis\Logger', compact('priority', 'message'), new Filters());
+		$function('arthur\analysis\Logger', compact('priority', 'message'), new Filters());
 
 		$log = file_get_contents("{$this->path}/debug.log");
 		$this->assertEqual("{$now} This is a debug message\n", $log);
@@ -51,7 +51,7 @@ class FileTest extends \lithium\test\Unit
 		$message  = 'This is a debug message';
 		$function = $this->subject->write($priority, $message);
 		$now      = date('Y-m-d H:i:s');
-		$function('lithium\analysis\Logger', compact('priority', 'message'), new Filters());
+		$function('arthur\analysis\Logger', compact('priority', 'message'), new Filters());
 
 		$log = file_get_contents("{$this->path}/debug.log");
 		$this->assertEqual("This is a debug message\n", $log);

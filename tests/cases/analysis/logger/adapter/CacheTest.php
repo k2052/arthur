@@ -1,12 +1,12 @@
 <?php
 
-namespace lithium\tests\cases\analysis\logger\adapter;
+namespace arthur\tests\cases\analysis\logger\adapter;
 
-use lithium\storage\Cache As CacheStorage;
-use lithium\analysis\Logger;
-use lithium\analysis\logger\adapter\Cache;
+use arthur\storage\Cache As CacheStorage;
+use arthur\analysis\Logger;
+use arthur\analysis\logger\adapter\Cache;
 
-class CacheTest extends \lithium\test\Unit 
+class CacheTest extends \arthur\test\Unit 
 {
 
 	public function setUp() 

@@ -1,12 +1,12 @@
 <?php
 
-namespace lithium\tests\cases\analysis;
+namespace arthur\tests\cases\analysis;
 
-use lithium\core\Libraries;
-use lithium\analysis\Logger;
-use lithium\tests\mocks\analysis\MockLoggerAdapter;
+use arthur\core\Libraries;
+use arthur\analysis\Logger;
+use arthur\tests\mocks\analysis\MockLoggerAdapter;
 
-class LoggerTest extends \lithium\test\Unit 
+class LoggerTest extends \arthur\test\Unit 
 {
 	public function skip() 
 	{

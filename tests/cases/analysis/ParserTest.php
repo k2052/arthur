@@ -1,11 +1,11 @@
 <?php
 
-namespace lithium\tests\cases\analysis;
+namespace arthur\tests\cases\analysis;
 
-use lithium\core\Libraries;
-use lithium\analysis\Parser;
+use arthur\core\Libraries;
+use arthur\analysis\Parser;
 
-class ParserTest extends \lithium\test\Unit 
+class ParserTest extends \arthur\test\Unit 
 {
 	public function testSingleTokenization() 
 	{
@@ -101,7 +101,7 @@ class ParserTest extends \lithium\test\Unit
 
 	public function testFindingTokenPatterns() 
 	{
-		$code = file_get_contents(Libraries::path('lithium\analysis\Parser'));
+		$code = file_get_contents(Libraries::path('arthur\analysis\Parser'));
 
 		$expected = array('tokenize', 'matchToken', '_prepareMatchParams', 'token');
 		$results  = array_values(array_unique(array_map(function($i) { return $i[0]; }, Parser::find(
@@ -110,7 +110,7 @@ class ParserTest extends \lithium\test\Unit
 
 		$this->assertEqual($expected, $results);
 
-		$expected = array('lithium\util\Set', 'lithium\util\Collection');
+		$expected = array('arthur\util\Set', 'arthur\util\Collection');
 		$results = array_map(
 			function($i) { return join('', $i); },
 			$results = Parser::find($code, 'use *;', array(

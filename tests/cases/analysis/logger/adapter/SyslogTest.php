@@ -1,11 +1,11 @@
 <?php
 
-namespace lithium\tests\cases\analysis\logger\adapter;
+namespace arthur\tests\cases\analysis\logger\adapter;
 
-use lithium\analysis\Logger;
-use lithium\analysis\logger\adapter\Syslog;
+use arthur\analysis\Logger;
+use arthur\analysis\logger\adapter\Syslog;
 
-class SyslogTest extends \lithium\test\Unit 
+class SyslogTest extends \arthur\test\Unit 
 {
 	public function setUp() 
 	{

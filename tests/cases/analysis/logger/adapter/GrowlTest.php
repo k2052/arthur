@@ -1,22 +1,22 @@
 <?php
 
-namespace lithium\tests\cases\analysis\logger\adapter;
+namespace arthur\tests\cases\analysis\logger\adapter;
 
-use lithium\analysis\logger\adapter\Growl;
+use arthur\analysis\logger\adapter\Growl;
 
-class GrowlTest extends \lithium\test\Unit 
+class GrowlTest extends \arthur\test\Unit 
 {
 	public function testGrowlWrite() 
 	{
 		$connection = fopen('php://memory', 'w+');
 
 		$growl = new Growl(compact('connection') + array(
-			'name'  => 'Lithium',
-			'title' => 'Lithium log'
+			'name'  => 'Arthur',
+			'title' => 'Arthur log'
 		));
 		$writer = $growl->write('info', 'info: Test message.', array());
 		$params = array('message' => 'info: Test message.', 'options' => array());
-		$result = $writer('lithium\analysis\Logger', $params, null);
+		$result = $writer('arthur\analysis\Logger', $params, null);
 
 		$bytes = array(
 			1, 0, 0, 7, 2, 2, 76, 105, 116, 104, 105, 117, 109, 0, 6, 69, 114, 114, 111, 114, 115,
@@ -36,8 +36,8 @@ class GrowlTest extends \lithium\test\Unit
 	public function testInvalidConnection() 
 	{
 		$growl = new Growl(array(
-			'name'  => 'Lithium',
-			'title' => 'Lithium log',
+			'name'  => 'Arthur',
+			'title' => 'Arthur log',
 			'port'  => 0
 		));
 		$this->expectException('/^Growl connection failed/');
@@ -46,14 +46,14 @@ class GrowlTest extends \lithium\test\Unit
 		$message = 'info: Test message.';
 		$params  = compact('message') + array('priority' => 'info', 'options' => array());
 		$writer  = $growl->write('info', $message, array());
-		$writer('lithium\analysis\Logger', $params, null);
+		$writer('arthur\analysis\Logger', $params, null);
 	}
 
 	public function testInvalidConnectionWithForcedRegistration() 
 	{
 		$growl = new Growl(array(
-			'name'       => 'Lithium',
-			'title'      => 'Lithium log',
+			'name'       => 'Arthur',
+			'title'      => 'Arthur log',
 			'port'       => 0,
 			'registered' => true
 		));
@@ -63,7 +63,7 @@ class GrowlTest extends \lithium\test\Unit
 		$message = 'info: Test message.';
 		$params  = compact('message') + array('priority' => 'info', 'options' => array());
 		$writer  = $growl->write('info', $message, array());
-		$writer('lithium\analysis\Logger', $params, null);
+		$writer('arthur\analysis\Logger', $params, null);
 	}
 
 	public function testStickyMessages() 
@@ -71,12 +71,12 @@ class GrowlTest extends \lithium\test\Unit
 		$connection = fopen('php://memory', 'w+');
 
 		$growl = new Growl(compact('connection') + array(
-			'name'  => 'Lithium',
-			'title' => 'Lithium log'
+			'name'  => 'Arthur',
+			'title' => 'Arthur log'
 		));
 		$writer = $growl->write('info', 'info: Test message.', array());
 		$params = array('message' => 'info: Test message.', 'options' => array('sticky' => true));
-		$result = $writer('lithium\analysis\Logger', $params, null);
+		$result = $writer('arthur\analysis\Logger', $params, null);
 
 		$bytes = array(
 			1, 0, 0, 7, 2, 2, 76, 105, 116, 104, 105, 117, 109, 0, 6, 69, 114, 114, 111, 114, 115,
@@ -98,14 +98,14 @@ class GrowlTest extends \lithium\test\Unit
 		$connection = fopen('php://memory', 'w+');
 
 		$growl = new Growl(compact('connection') + array(
-			'name'  => 'Lithium',
-			'title' => 'Lithium log'
+			'name'  => 'Arthur',
+			'title' => 'Arthur log'
 		));
 		$writer = $growl->write('info', 'info: Test message.', array());
 		$params = array('message' => 'info: Test message.', 'options' => array(
 			'priority' => 'emergency'
 		));
-		$result = $writer('lithium\analysis\Logger', $params, null);
+		$result = $writer('arthur\analysis\Logger', $params, null);
 
 		$bytes = array(
 			1, 0, 0, 7, 2, 2, 76, 105, 116, 104, 105, 117, 109, 0, 6, 69, 114, 114, 111, 114, 115,

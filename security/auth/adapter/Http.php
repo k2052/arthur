@@ -1,13 +1,13 @@
 <?php
 
-namespace lithium\security\auth\adapter;
+namespace arthur\security\auth\adapter;
 
-class Http extends \lithium\core\Object 
+class Http extends \arthur\core\Object 
 {
 	public function __construct(array $config = array()) 
 	{
 		$defaults = array(
-			'method' => 'digest', 'realm' => basename(LITHIUM_APP_PATH), 'users' => array()
+			'method' => 'digest', 'realm' => basename(ARTHUR_APP_PATH), 'users' => array()
 		);
 		parent::__construct($config + $defaults);
 	}

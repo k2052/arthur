@@ -1,12 +1,12 @@
 <?php
 
-namespace lithium\tests\cases\analysis\logger\adapter;
+namespace arthur\tests\cases\analysis\logger\adapter;
 
-use lithium\analysis\Logger;
-use lithium\analysis\logger\adapter\FirePhp;
-use lithium\action\Response;
+use arthur\analysis\Logger;
+use arthur\analysis\logger\adapter\FirePhp;
+use arthur\action\Response;
 
-class FirePhpTest extends \lithium\test\Unit 
+class FirePhpTest extends \arthur\test\Unit 
 {
 	public function setUp() 
 	{
