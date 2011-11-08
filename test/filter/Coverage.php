@@ -1,5 +1,5 @@
 <?php
-=
+
 namespace arthur\test\filter;
 
 use arthur\core\Libraries;
