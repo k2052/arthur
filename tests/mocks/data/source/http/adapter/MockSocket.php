@@ -1,8 +1,8 @@
 <?php
 
-namespace lithium\tests\mocks\data\source\http\adapter;
+namespace arthur\tests\mocks\data\source\http\adapter;
 
-class MockSocket extends \lithium\net\Socket 
+class MockSocket extends \arthur\net\Socket 
 {
 	protected $_data = null;
 
@@ -59,7 +59,7 @@ class MockSocket extends \lithium\net\Socket
 				))
 			));
 		} 
-		else if(strpos($url, 'lithium-test/_design/latest/_view/all')) 
+		else if(strpos($url, 'arthur-test/_design/latest/_view/all')) 
 		{
 			$data = array('total_rows' => 3, 'offset' => 0, 'rows' => array(
 				array('value' => array(
@@ -79,13 +79,13 @@ class MockSocket extends \lithium\net\Socket
 				))
 			));
 		} 
-		else if(strpos($url, 'lithium-test/12345?rev=1-1')) 
+		else if(strpos($url, 'arthur-test/12345?rev=1-1')) 
 		{
 			$data = array(
 				'ok' => true, '_id' => '12345', '_rev' => '1-1'
 			);
 		}
-		else if (strpos($url, 'lithium-test/12345')) 
+		else if (strpos($url, 'arthur-test/12345')) 
 		{
 			$data = array(
 				'_id' => '12345', '_rev' => '1-2', 'author' => 'author 1', 'body' => 'body 1'

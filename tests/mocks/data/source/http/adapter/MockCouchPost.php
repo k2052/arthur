@@ -1,8 +1,8 @@
 <?php
 
-namespace lithium\tests\mocks\data\source\http\adapter;
+namespace arthur\tests\mocks\data\source\http\adapter;
 
-class MockCouchPost extends \lithium\data\Model 
+class MockCouchPost extends \arthur\data\Model 
 {
 	protected $_meta = array(
 		'source'     => 'posts',
