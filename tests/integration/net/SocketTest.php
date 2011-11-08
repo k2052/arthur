@@ -38,7 +38,7 @@ class SocketTest extends \arthur\test\Integration
 		$this->assertEqual($expected, $result);
 
 		$result = $response->body();
-		$this->assertPattern("/<title[^>]*>.*Lithium.*<\/title>/im", (string) $result);
+		$this->assertPattern("/<title[^>]*>.*Arthur.*<\/title>/im", (string) $result);
 	}
 
 	public function testCurlAdapter() 
@@ -56,7 +56,7 @@ class SocketTest extends \arthur\test\Integration
 		$this->assertEqual($expected, $result);
 
 		$result = $response->body();
-		$this->assertPattern("/<title[^>]*>.*Lithium.*<\/title>/im", (string) $result);
+		$this->assertPattern("/<title[^>]*>.*Arthur.*<\/title>/im", (string) $result);
 	}
 
 	public function testStreamAdapter() 
@@ -71,6 +71,6 @@ class SocketTest extends \arthur\test\Integration
 		$this->assertEqual($expected, $result);
 
 		$result = $response->body();
-		$this->assertPattern("/<title[^>]*>.*Lithium.*<\/title>/im", (string) $result);
+		$this->assertPattern("/<title[^>]*>.*Arthur.*<\/title>/im", (string) $result);
 	}
 }
