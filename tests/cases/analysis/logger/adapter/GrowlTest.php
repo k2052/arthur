@@ -51,9 +51,9 @@ class GrowlTest extends \arthur\test\Unit
 	public function testInvalidConnectionWithForcedRegistration() 
 	{
 		$growl = new Growl(array(
-			'name'  => 'Arthur',
-			'title' => 'Arthur log',
-			'port'  => 0,
+			'name'       => 'Arthur',
+			'title'      => 'Arthur log',
+			'port'       => 0,
 			'registered' => true
 		));
 		$this->expectException('/^Growl connection failed/');
