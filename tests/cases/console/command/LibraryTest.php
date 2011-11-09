@@ -1,13 +1,13 @@
 <?php
 
-namespace arthur\tests\cases\console\command;
+namespace lithium\tests\cases\console\command;
 
 use Phar;
-use arthur\console\command\Library;
-use arthur\core\Libraries;
-use arthur\console\Request;
+use lithium\console\command\Library;
+use lithium\core\Libraries;
+use lithium\console\Request;
 
-class LibraryTest extends \arthur\test\Unit 
+class LibraryTest extends \lithium\test\Unit 
 {
 	public $request;
 	protected $_backup = array();
@@ -36,8 +36,8 @@ class LibraryTest extends \arthur\test\Unit
 		));
 
 		$this->classes = array(
-			'service'  => 'arthur\tests\mocks\console\command\MockLibraryService',
-			'response' => 'arthur\tests\mocks\console\MockResponse'
+			'service'  => 'lithium\tests\mocks\console\command\MockLibraryService',
+			'response' => 'lithium\tests\mocks\console\MockResponse'
 		);
 		$this->request = new Request(array('input' => fopen('php://temp', 'w+')));
 		$this->library = new Library(array(
@@ -46,7 +46,8 @@ class LibraryTest extends \arthur\test\Unit
 		$this->testConf = $this->library->conf = $this->_testPath . '/library.json';
 	}
 
-	public function tearDown() {
+	public function tearDown() 
+	{
 		$_SERVER = $this->_backup['_SERVER'];
 		chdir($this->_backup['cwd']);
 		Libraries::remove('library_test');
@@ -83,9 +84,9 @@ class LibraryTest extends \arthur\test\Unit
 		$result = $this->library->extract($this->_testPath . '/library_test');
 		$this->assertTrue($result);
 
-		$path      = '/arthur/console/command/create/template/app.phar.gz';
+		$path      = '/lithium/console/command/create/template/app.phar.gz';
 		$expected  = "library_test created in {$this->_testPath} from ";
-		$expected .= realpath(ARTHUR_LIBRARY_PATH . $path) . "\n";
+		$expected .= realpath(LITHIUM_LIBRARY_PATH . $path) . "\n";
 		$result    = $this->library->response->output;
 		$this->assertEqual($expected, $result);
 	}
@@ -95,7 +96,7 @@ class LibraryTest extends \arthur\test\Unit
 		$filepath = $this->_testPath . '/library_test/config/bootstrap/libraries.php';
 		$content  = file_get_contents($filepath);
 		$lines    = explode("\n", $content);
-		$expected = 'define(\'ARTHUR_LIBRARY_PATH\', \'' . realpath(ARTHUR_LIBRARY_PATH) . '\')';
+		$expected = 'define(\'LITHIUM_LIBRARY_PATH\', \'' . realpath(LITHIUM_LIBRARY_PATH) . '\')';
 		$this->assertTrue(strpos($content, $expected));
 	}
 
@@ -178,7 +179,7 @@ class LibraryTest extends \arthur\test\Unit
 	{
 		$this->skipIf(!extension_loaded('zlib'), 'The zlib extension is not loaded.');
 		chdir($this->_testPath);
-		$app          = new Library(array('request' => new Request(), 'classes' => $this->classes));
+		$app = new Library(array('request' => new Request(), 'classes' => $this->classes));
 		$app->library = 'does_not_exist';
 
 		$result = $app->extract();
@@ -187,7 +188,7 @@ class LibraryTest extends \arthur\test\Unit
 		$this->assertTrue(file_exists($this->_testPath . '/new'));
 
 		$path     = realpath($this->_testPath);
-		$tplPath  = realpath(ARTHUR_LIBRARY_PATH . '/arthur/console/command/create/template');
+		$tplPath  = realpath(LITHIUM_LIBRARY_PATH . '/lithium/console/command/create/template');
 		$expected = "new created in {$path} from {$tplPath}/app.phar.gz\n";
 		$result   = $app->response->output;
 		$this->assertEqual($expected, $result);
@@ -205,8 +206,8 @@ class LibraryTest extends \arthur\test\Unit
 		$this->assertTrue($result);
 
 		$expected  = "library_test_plugin created in {$path} from ";
-		$target    = '/arthur/console/command/create/template/plugin.phar.gz';
-		$expected .= realpath(ARTHUR_LIBRARY_PATH . $target) . "\n";
+		$target    = '/lithium/console/command/create/template/plugin.phar.gz';
+		$expected .= realpath(LITHIUM_LIBRARY_PATH . $target) . "\n";
 		$result    = $this->library->response->output;
 		$this->assertEqual($expected, $result);
 
@@ -233,9 +234,11 @@ class LibraryTest extends \arthur\test\Unit
 
 	public function testFormulateWithFormula() 
 	{
-		$path = $this->_testPath . '/library_test_plugin';
+		$path = $this->_testPath . '/library_test_plugin';     
+		
 		mkdir($path);
-		mkdir($path . '/config');
+		mkdir($path . '/config');     
+		
 		file_put_contents(
 			$path . '/config/library_test_plugin.json',
 			json_encode(array(
@@ -243,7 +246,7 @@ class LibraryTest extends \arthur\test\Unit
 				'version' => '1.0',
 				'summary' => 'something',
 				'sources' => array(
-					'phar'  => 'http://somewhere.com/download/library_test_plugin.phar.gz'
+					'phar' => 'http://somewhere.com/download/library_test_plugin.phar.gz'
 				)
 			))
 		);
@@ -271,10 +274,12 @@ class LibraryTest extends \arthur\test\Unit
 
 	public function testFormulateNoPath() 
 	{
-		$path = $this->_testPath . '/library_test_no_plugin';
+		$path = $this->_testPath . '/library_test_no_plugin';  
+		
 		umask(0);
 		mkdir($path, 655);
-		umask(100);
+		umask(100);       
+		
 		$this->expectException('/Permission denied/');
 
 		$result = $this->library->formulate($path);
@@ -293,9 +298,11 @@ class LibraryTest extends \arthur\test\Unit
 
 	public function testPushNoName() 
 	{
-		$this->library->push();
+		$this->library->push();              
+		
 		$expected = 'please supply a name';
-		$result   = $this->library->response->output;
+		$result   = $this->library->response->output;      
+		
 		$this->assertTrue($result);
 	}
 
@@ -430,7 +437,8 @@ class LibraryTest extends \arthur\test\Unit
 		$this->_cleanUp();
 	}
 
-	public function testFind() {
+	public function testFind() 
+	{
 		$this->library->find();
 
 $expected = <<<'test'
@@ -460,11 +468,11 @@ test;
 		$library->config('server', 'localhost');
 		$library->find();
 		$expected = "No plugins at localhost\n";
-		$result   = $library->response->output;
+		$result = $library->response->output;
 		$this->assertEqual($expected, $result);
 	}
 
-	public function testForceArchive() 
+	public function testForceArchive()
 	{
 		$this->skipIf(!extension_loaded('zlib'), 'The zlib extension is not loaded.');
 		$this->skipIf(
@@ -481,9 +489,9 @@ test;
 		);
 		$this->assertTrue($result);
 
-		$expected  = "library_test_plugin.phar.gz created in {$this->_testPath} from ";
+		$expected = "library_test_plugin.phar.gz created in {$this->_testPath} from ";
 		$expected .= "{$this->_testPath}/library_test_plugin\n";
-		$result    = $this->library->response->output;
+		$result = $this->library->response->output;
 		$this->assertEqual($expected, $result);
 
 		$this->library->response->output = null;
@@ -494,8 +502,9 @@ test;
 		$this->assertFalse($result);
 
 		$expected = "library_test_plugin.phar already exists in {$this->_testPath}\n";
-		$result   = $this->library->response->error;
+		$result = $this->library->response->error;
 		$this->assertEqual($expected, $result);
+
 
 		$this->library->force = true;
 		$this->library->response->output = null;
@@ -522,7 +531,7 @@ test;
 		$this->assertFalse($result);
 
 		$expected = "library_test_plugin.phar.gz already exists in {$this->_testPath}\n";
-		$result   = $this->library->response->error;
+		$result = $this->library->response->error;
 		$this->assertEqual($expected, $result);
 
 		$this->library->force = true;
@@ -534,9 +543,9 @@ test;
 		);
 		$this->assertTrue($result);
 
-		$expected  = "library_test_plugin.phar.gz created in {$this->_testPath} from ";
+		$expected = "library_test_plugin.phar.gz created in {$this->_testPath} from ";
 		$expected .= "{$this->_testPath}/library_test_plugin\n";
-		$result    = $this->library->response->output;
+		$result = $this->library->response->output;
 		$this->assertEqual($expected, $result);
 
 		Phar::unlinkArchive($this->_testPath . '/library_test_plugin.phar');
