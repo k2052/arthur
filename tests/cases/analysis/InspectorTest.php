@@ -5,15 +5,21 @@ namespace arthur\tests\cases\analysis;
 use ReflectionMethod;
 use arthur\analysis\Inspector;
 
-class InspectorTest extends \arthur\test\Unit 
-{
+class InspectorTest extends \arthur\test\Unit {
+
 	public $test = 'foo';
+
 	public static $test2 = 'bar';
+
 	protected $_test = 'baz';
 
-	public function testBasicMethodInspection() 
-	{
-		$class  = '\arthur\analysis\Inspector';
+	/**
+	 * Tests that basic method lists and information are queried properly.
+	 *
+	 * @return void
+	 */
+	public function testBasicMethodInspection() {
+		$class = '\arthur\analysis\Inspector';
 		$parent = '\arthur\core\StaticObject';
 
 		$expected = array_diff(get_class_methods($class), get_class_methods($parent));
@@ -31,12 +37,11 @@ class InspectorTest extends \arthur\test\Unit
 		$this->assertEqual(array(), $result);
 	}
 
-	public function testMethodInspection() 
-	{
+	public function testMethodInspection() {
 		$result = Inspector::methods($this, null);
 		$this->assertTrue($result[0] instanceof ReflectionMethod);
 
-		$result   = Inspector::info('arthur\core\Object::_init()');
+		$result = Inspector::info('arthur\core\Object::_init()');
 		$expected = '_init';
 		$this->assertEqual($expected, $result['name']);
 
@@ -44,31 +49,45 @@ class InspectorTest extends \arthur\test\Unit
 		$this->assertEqual($expected, $result['tags']['return']);
 	}
 
-	public function testMethodRange() 
-	{
-		$result   = Inspector::methods(__CLASS__, 'ranges', array('methods' => __FUNCTION__));
+	/**
+	 * Tests that the range of executable lines of this test method is properly calculated.
+	 * Recursively meta.
+	 *
+	 * @return void
+	 */
+	public function testMethodRange() {
+		$result = Inspector::methods(__CLASS__, 'ranges', array('methods' => __FUNCTION__));
 		$expected = array(__FUNCTION__ => array(__LINE__ - 1, __LINE__, __LINE__ + 1));
 		$this->assertEqual($expected, $result);
 	}
 
-	public function testExecutableLines() 
-	{
+	/**
+	 * Gets the executable line numbers of this file based on a manual entry of line ranges. Will
+	 * need to be updated manually if this method changes.
+	 *
+	 * @return void
+	 */
+	public function testExecutableLines() {
 		do {
 			// These lines should be ignored
 		} while (false);
 
-		$result   = Inspector::executable($this, array('methods' => __FUNCTION__));
+		$result = Inspector::executable($this, array('methods' => __FUNCTION__));
 		$expected = array(__LINE__ - 1, __LINE__, __LINE__ + 1);
 		$this->assertEqual($expected, $result);
 	}
 
-	public function testLineIntrospection() 
-	{
-		$result   = Inspector::lines(__FILE__, array(__LINE__ - 1));
+	/**
+	 * Tests reading specific line numbers of a file.
+	 *
+	 * @return void
+	 */
+	public function testLineIntrospection() {
+		$result = Inspector::lines(__FILE__, array(__LINE__ - 1));
 		$expected = array(__LINE__ - 2 => "\tpublic function testLineIntrospection() {");
 		$this->assertEqual($expected, $result);
 
-		$result   = Inspector::lines(__CLASS__, array(14));
+		$result = Inspector::lines(__CLASS__, array(14));
 		$expected = array(14 => 'class InspectorTest extends \arthur\test\Unit {');
 		$this->assertEqual($expected, $result);
 
@@ -76,8 +95,13 @@ class InspectorTest extends \arthur\test\Unit
 		$this->assertNull(Inspector::lines('\arthur\core\Foo'));
 		$this->assertNull(Inspector::lines(__CLASS__, array()));
 	}
-	public function testClassParents() 
-	{
+
+	/**
+	 * Tests getting a list of parent classes from an object or string class name.
+	 *
+	 * @return void
+	 */
+	public function testClassParents() {
 		$result = Inspector::parents($this);
 		$this->assertEqual('arthur\test\Unit', current($result));
 
@@ -87,8 +111,7 @@ class InspectorTest extends \arthur\test\Unit
 		$this->assertFalse(Inspector::parents('arthur\core\Foo', array('autoLoad' => false)));
 	}
 
-	public function testClassFileIntrospection() 
-	{
+	public function testClassFileIntrospection() {
 		$result = Inspector::classes(array('file' => __FILE__));
 		$this->assertEqual(array(__CLASS__ => __FILE__), $result);
 
@@ -100,8 +123,13 @@ class InspectorTest extends \arthur\test\Unit
 		$this->assertEqual(array(), $result);
 	}
 
-	public function testTypeDetection() 
-	{
+	/**
+	 * Tests that names of classes, methods, properties and namespaces are parsed properly from
+	 * strings.
+	 *
+	 * @return void
+	 */
+	public function testTypeDetection() {
 		$this->assertEqual('namespace', Inspector::type('\arthur\util'));
 		$this->assertEqual('namespace', Inspector::type('\arthur\analysis'));
 		$this->assertEqual('class', Inspector::type('\arthur\analysis\Inspector'));
@@ -116,15 +144,19 @@ class InspectorTest extends \arthur\test\Unit
 		$this->assertEqual('namespace', Inspector::type('arthur\security\auth'));
 	}
 
-	public function testIdentifierIntrospection() 
-	{
+	/**
+	 * Tests getting reflection information based on a string identifier.
+	 *
+	 * @return void
+	 */
+	public function testIdentifierIntrospection() {
 		$result = Inspector::info(__METHOD__);
 		$this->assertEqual(array('public'), $result['modifiers']);
 		$this->assertEqual(__FUNCTION__, $result['name']);
 
 		$this->assertNull(Inspector::info('\arthur\util'));
 
-		$info   = Inspector::info('\arthur\analysis\Inspector');
+		$info = Inspector::info('\arthur\analysis\Inspector');
 		$result = str_replace('\\', '/', $info['file']);
 		$this->assertTrue(strpos($result, '/analysis/Inspector.php'));
 		$this->assertEqual('arthur\analysis', $info['namespace']);
@@ -143,11 +175,11 @@ class InspectorTest extends \arthur\test\Unit
 		$this->assertEqual(array('modifiers', 'namespace'), array_keys($result));
 
 		$this->assertNull(Inspector::info('\arthur\analysis\Inspector::$foo'));
+
 		$this->assertNull(Inspector::info('\arthur\core\Foo::$foo'));
 	}
 
-	public function testClassDependencies() 
-	{
+	public function testClassDependencies() {
 		$expected = array(
 			'Exception', 'ReflectionClass', 'ReflectionProperty', 'ReflectionException',
 			'arthur\\core\\Libraries'
@@ -157,23 +189,32 @@ class InspectorTest extends \arthur\test\Unit
 		$this->assertEqual($expected, $result);
 
 		$expected[] = 'arthur\\util\\Collection';
-		$result     = Inspector::dependencies($this->subject());
+		$result = Inspector::dependencies($this->subject());
 		$this->assertEqual($expected, $result);
 	}
 
-	public function testCaseSensitiveIdentifiers() 
-	{
-		$result   = Inspector::type('arthur\storage\Cache');
+	/**
+	 * Tests that class and namepace names which are equivalent in a case-insensitive search still
+	 * match properly.
+	 *
+	 * @return void
+	 */
+	public function testCaseSensitiveIdentifiers() {
+		$result = Inspector::type('arthur\storage\Cache');
 		$expected = 'class';
 		$this->assertEqual($expected, $result);
 
-		$result   = Inspector::type('arthur\storage\cache');
+		$result = Inspector::type('arthur\storage\cache');
 		$expected = 'namespace';
 		$this->assertEqual($expected, $result);
 	}
 
-	public function testGetClassProperties() 
-	{
+	/**
+	 * Tests getting static and non-static properties from various types of classes.
+	 *
+	 * @return void
+	 */
+	public function testGetClassProperties() {
 		$result = array_map(
 			function($property) { return $property['name']; },
 			Inspector::properties(__CLASS__)
@@ -191,16 +232,16 @@ class InspectorTest extends \arthur\test\Unit
 		$result = Inspector::properties(__CLASS__);
 		$expected = array(
 			array(
-				'modifiers'  => array('public'),
+				'modifiers' => array('public'),
 				'docComment' => false,
-				'name'       => 'test',
-				'value'      => null
+				'name' => 'test',
+				'value' => null
 			),
 			array(
-				'modifiers'  => array('public', 'static'),
+				'modifiers' => array('public', 'static'),
 				'docComment' => false,
-				'name'       => 'test2',
-				'value'      => 'bar'
+				'name' => 'test2',
+				'value' => 'bar'
 			)
 		);
 		$this->assertEqual($expected, $result);
