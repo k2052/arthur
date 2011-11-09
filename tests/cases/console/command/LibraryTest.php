@@ -1,13 +1,13 @@
 <?php
 
-namespace lithium\tests\cases\console\command;
+namespace arthur\tests\cases\console\command;
 
 use Phar;
-use lithium\console\command\Library;
-use lithium\core\Libraries;
-use lithium\console\Request;
+use arthur\console\command\Library;
+use arthur\core\Libraries;
+use arthur\console\Request;
 
-class LibraryTest extends \lithium\test\Unit 
+class LibraryTest extends \arthur\test\Unit 
 {
 	public $request;
 	protected $_backup = array();
@@ -36,8 +36,8 @@ class LibraryTest extends \lithium\test\Unit
 		));
 
 		$this->classes = array(
-			'service'  => 'lithium\tests\mocks\console\command\MockLibraryService',
-			'response' => 'lithium\tests\mocks\console\MockResponse'
+			'service'  => 'arthur\tests\mocks\console\command\MockLibraryService',
+			'response' => 'arthur\tests\mocks\console\MockResponse'
 		);
 		$this->request = new Request(array('input' => fopen('php://temp', 'w+')));
 		$this->library = new Library(array(
@@ -84,9 +84,9 @@ class LibraryTest extends \lithium\test\Unit
 		$result = $this->library->extract($this->_testPath . '/library_test');
 		$this->assertTrue($result);
 
-		$path      = '/lithium/console/command/create/template/app.phar.gz';
+		$path      = '/arthur/console/command/create/template/app.phar.gz';
 		$expected  = "library_test created in {$this->_testPath} from ";
-		$expected .= realpath(LITHIUM_LIBRARY_PATH . $path) . "\n";
+		$expected .= realpath(ARTHUR_LIBRARY_PATH . $path) . "\n";
 		$result    = $this->library->response->output;
 		$this->assertEqual($expected, $result);
 	}
@@ -96,7 +96,7 @@ class LibraryTest extends \lithium\test\Unit
 		$filepath = $this->_testPath . '/library_test/config/bootstrap/libraries.php';
 		$content  = file_get_contents($filepath);
 		$lines    = explode("\n", $content);
-		$expected = 'define(\'LITHIUM_LIBRARY_PATH\', \'' . realpath(LITHIUM_LIBRARY_PATH) . '\')';
+		$expected = 'define(\'ARTHUR_LIBRARY_PATH\', \'' . realpath(ARTHUR_LIBRARY_PATH) . '\')';
 		$this->assertTrue(strpos($content, $expected));
 	}
 
@@ -188,7 +188,7 @@ class LibraryTest extends \lithium\test\Unit
 		$this->assertTrue(file_exists($this->_testPath . '/new'));
 
 		$path     = realpath($this->_testPath);
-		$tplPath  = realpath(LITHIUM_LIBRARY_PATH . '/lithium/console/command/create/template');
+		$tplPath  = realpath(ARTHUR_LIBRARY_PATH . '/arthur/console/command/create/template');
 		$expected = "new created in {$path} from {$tplPath}/app.phar.gz\n";
 		$result   = $app->response->output;
 		$this->assertEqual($expected, $result);
@@ -206,8 +206,8 @@ class LibraryTest extends \lithium\test\Unit
 		$this->assertTrue($result);
 
 		$expected  = "library_test_plugin created in {$path} from ";
-		$target    = '/lithium/console/command/create/template/plugin.phar.gz';
-		$expected .= realpath(LITHIUM_LIBRARY_PATH . $target) . "\n";
+		$target    = '/arthur/console/command/create/template/plugin.phar.gz';
+		$expected .= realpath(ARTHUR_LIBRARY_PATH . $target) . "\n";
 		$result    = $this->library->response->output;
 		$this->assertEqual($expected, $result);
 
