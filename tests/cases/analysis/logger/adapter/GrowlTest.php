@@ -33,8 +33,7 @@ class GrowlTest extends \arthur\test\Unit
 		$this->assertEqual($bytes, $result);
 	}
 
-	public function testInvalidConnection() 
-	{
+	public function testInvalidConnection() {
 		$growl = new Growl(array(
 			'name'  => 'Arthur',
 			'title' => 'Arthur log',
@@ -52,17 +51,17 @@ class GrowlTest extends \arthur\test\Unit
 	public function testInvalidConnectionWithForcedRegistration() 
 	{
 		$growl = new Growl(array(
-			'name'       => 'Arthur',
-			'title'      => 'Arthur log',
-			'port'       => 0,
+			'name'  => 'Arthur',
+			'title' => 'Arthur log',
+			'port'  => 0,
 			'registered' => true
 		));
 		$this->expectException('/^Growl connection failed/');
 		$this->expectException('/Failed to parse address/');
 
 		$message = 'info: Test message.';
-		$params  = compact('message') + array('priority' => 'info', 'options' => array());
-		$writer  = $growl->write('info', $message, array());
+		$params = compact('message') + array('priority' => 'info', 'options' => array());
+		$writer = $growl->write('info', $message, array());
 		$writer('arthur\analysis\Logger', $params, null);
 	}
 
