@@ -2,7 +2,7 @@
 
 namespace arthur\net\http;
 
-use arthurm\util\String;
+use arthur\util\String;
 
 class Request extends \arthur\net\http\Message
 {

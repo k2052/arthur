@@ -1,5 +1,5 @@
 <?php
-s
+
 namespace arthur\tests\mocks\data\model;
 
 class MockDatabaseComment extends \arthur\data\Model 

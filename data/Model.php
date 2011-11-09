@@ -111,7 +111,7 @@ class Model extends \arthur\core\StaticObject
 
 		if($method == 'all' || $isFinder) 
 		{
-			if($params && is_scalar($params[0])) {
+			if($params && is_scalar($params[0]))
 				$params[0] = array('conditions' => array($self->_meta['key'] => $params[0]));   
 				
 			return $self::find($method, $params ? $params[0] : array());
