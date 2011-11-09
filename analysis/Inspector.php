@@ -191,7 +191,7 @@ class Inspector extends \arthur\core\StaticObject
 			case null:
 				return $methods;
 			case 'extents':
-				if($methods->getName() == array()
+				if($methods->getName() == array())
 					return array();
 
 				$extents = function($start, $end) { return array($start, $end); };
