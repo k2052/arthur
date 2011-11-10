@@ -570,35 +570,4 @@ class UnitTest extends \arthur\test\Unit
 		$result   = $this->compare('identical', array(), array(null));
 		$this->assertEqual($expected, $result);
 	}
-
-	public function testResults() 
-	{
-		$expected = 89;
-		$result   = count($this->results());
-		$this->assertEqual($expected, $result);
-	}
-
-	public function testTestMethods() 
-	{
-		$expected = array(
-			'testBaseAssertions', 'testCompareIsEqual', 'testCompareIsIdentical',
-			'testCompareTypes', 'testAssertEqualNumeric',
-			'testAssertEqualNumericFail', 'testAssertEqualAssociativeArray',
-			'testAssertEqualThreeDFail', 'testAssertWithCustomMessage',
-			'testSubject', 'testRun', 'testAssertNotEqual', 'testAssertIdentical',
-			'testAssertIdenticalArray',
-			'testAssertNull', 'testAssertNoPattern', 'testAssertPattern', 'testAssertTags',
-			'testAssertTagsNoClosingTag', 'testAssertTagsMissingAttribute',
-			'testAssertTagsString', 'testAssertTagsFailTextEqual', 'testIdenticalArrayFail',
-			'testCleanUp', 'testCleanUpWithFullPath', 'testCleanUpWithRelativePath',
-			'testSkipIf', 'testExpectException', 'testHandleException', 'testExpectExceptionRegex',
-			'testGetTest', 'testAssertCookie', 'testAssertCookieWithHeaders',
-			'testCompareWithEmptyResult',
-			'testExceptionCatching', 'testErrorHandling', 'testAssertObjects',
-			'testAssertArrayIdentical', 'testCompareIdenticalArray',
-			'testCompareEqualNullArray', 'testCompareIdenticalNullArray',
-			'testResults', 'testTestMethods'
-		);
-		$this->assertIdentical($expected, $this->methods());
-	}
 }
