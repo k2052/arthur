@@ -408,13 +408,13 @@ class LibraryTest extends \arthur\test\Unit
 			'Relies on ' . __CLASS__  . '::testPush()'
 		);
 		$this->library->path = $this->_testPath;
-		$result = $this->library->install('li3_lab');
+		$result = $this->library->install('art_lab');
 
-		$expected = "li3_lab not installed.\n";
+		$expected = "art_lab not installed.\n";
 		$result   = $this->library->response->output;
 		$this->assertEqual($expected, $result);
 
-		$result = is_dir($this->_testPath . '/li3_lab');
+		$result = is_dir($this->_testPath . '/art_lab');
 		$this->assertFalse($result);
 		$this->_cleanUp();
 	}
@@ -429,10 +429,10 @@ class LibraryTest extends \arthur\test\Unit
 		$this->skipIf(!$this->_hasNetwork(), $message);
 
 		$this->library->path = $this->_testPath;
-		$result = $this->library->install('li3_docs');
+		$result = $this->library->install('art_docs');
 		$this->assertTrue($result);
 
-		$result = is_dir($this->_testPath . '/li3_docs');
+		$result = is_dir($this->_testPath . '/art_docs');
 		$this->assertTrue($result);
 		$this->_cleanUp();
 	}
@@ -443,15 +443,15 @@ class LibraryTest extends \arthur\test\Unit
 
 $expected = <<<'test'
 --------------------------------------------------------------------------------
-lab.lithify.me > li3_lab
+lab.lithify.me > art_lab
 --------------------------------------------------------------------------------
-the li3 plugin client/server
+the art plugin client/server
 Version: 1.0
 Created: 2009-11-30
 --------------------------------------------------------------------------------
 lab.lithify.me > library_test_plugin
 --------------------------------------------------------------------------------
-an li3 plugin example
+an art plugin example
 Version: 1.0
 Created: 2009-11-30
 

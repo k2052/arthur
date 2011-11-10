@@ -40,11 +40,11 @@ class MockLibraryService extends \arthur\net\http\Service
 			return json_encode($this->__data('plugins'));
 		if(preg_match("/lab\/extensions/", $path, $match)) 
 			return json_encode($this->__data('extensions'));
-		if(preg_match("/lab\/li3_lab.json/", $path, $match))
+		if(preg_match("/lab\/art_lab.json/", $path, $match))
 			return json_encode($this->__data('plugins', 0));
 		if(preg_match("/lab\/library_test_plugin.json/", $path, $match))
 			return json_encode($this->__data('plugins', 1));
-		if(preg_match("/lab\/li3_docs.json/", $path, $match))
+		if(preg_match("/lab\/art_docs.json/", $path, $match))
 			return json_encode($this->__data('plugins', 2));
 	}
 
@@ -54,30 +54,30 @@ class MockLibraryService extends \arthur\net\http\Service
 
 		$plugins = array(
 			array(
-				'name'        => 'li3_lab', 'version' => '1.0',
-				'summary'     => 'the li3 plugin client/server',
+				'name'        => 'art_lab', 'version' => '1.0',
+				'summary'     => 'the art plugin client/server',
 				'maintainers' => array(
 					array(
 						'name'    => 'gwoo', 'email' => 'gwoo@nowhere.com',
-						'website' => 'li3.rad-dev.org'
+						'website' => 'art.rad-dev.org'
 					)
 				),
 				'created'  => '2009-11-30', 'updated' => '2009-11-30',
 				'rating'   => '9.9', 'downloads' => '1000',
 				'sources'  => array(
-					'git'  => 'git://rad-dev.org/li3_lab.git',
-					'phar' => 'http://downloads.rad-dev.org/li3_lab.phar.gz'
+					'git'  => 'git://rad-dev.org/art_lab.git',
+					'phar' => 'http://downloads.rad-dev.org/art_lab.phar.gz'
 				),
 				'requires' => array()
 			),
 			array(
 				'id'      => 'b22a2f0dfc873fd0e1a7655f4895872ae4b94ef4',
 				'name'    => 'library_test_plugin', 'version' => '1.0',
-				'summary' => 'an li3 plugin example',
+				'summary' => 'an art plugin example',
 				'maintainers' => array(
 					array(
 						'name'    => 'gwoo', 'email' => 'gwoo@nowhere.com',
-						'website' => 'li3.rad-dev.org'
+						'website' => 'art.rad-dev.org'
 					)
 				),
 				'created' => '2009-11-30', 'updated' => '2009-11-30',
@@ -86,23 +86,23 @@ class MockLibraryService extends \arthur\net\http\Service
 					'phar' =>  "{$resources}/tmp/tests/library_test_plugin.phar.gz"
 				),
 				'requires' => array(
-					'li3_lab' => array('version' => '<=1.0')
+					'art_lab' => array('version' => '<=1.0')
 				)
 			),
 			array(
-				'name'        => 'li3_docs', 'version' => '1.0',
-				'summary'     => 'the li3 plugin client/server',
+				'name'        => 'art_docs', 'version' => '1.0',
+				'summary'     => 'the art plugin client/server',
 				'maintainers' => array(
 					array(
 						'name'    => 'gwoo', 'email' => 'gwoo@nowhere.com',
-						'website' => 'li3.rad-dev.org'
+						'website' => 'art.rad-dev.org'
 					)
 				),
 				'created' => '2009-11-30', 'updated' => '2009-11-30',
 				'rating'  => '9.9', 'downloads' => '1000',
 				'sources' => array(
-					'git'  => 'git://rad-dev.org/li3_docs.git',
-					'phar' => 'http://downloads.rad-dev.org/li3_docs.phar.gz'
+					'git'  => 'git://rad-dev.org/art_docs.git',
+					'phar' => 'http://downloads.rad-dev.org/art_docs.phar.gz'
 				),
 				'requires' => array()
 			)
@@ -115,7 +115,7 @@ class MockLibraryService extends \arthur\net\http\Service
 				'maintainers' => array(
 					array(
 						'name'    => 'gwoo', 'email' => 'gwoo@nowhere.com',
-						'website' => 'li3.rad-dev.org'
+						'website' => 'art.rad-dev.org'
 					)
 				),
 				'created' => '2009-11-30', 'updated' => '2009-11-30',
@@ -127,7 +127,7 @@ class MockLibraryService extends \arthur\net\http\Service
 				'maintainers' => array(
 					array(
 						'name'    => 'gwoo', 'email' => 'gwoo@nowhere.com',
-						'website' => 'li3.rad-dev.org'
+						'website' => 'art.rad-dev.org'
 					)
 				),
 				'created' => '2009-11-30', 'updated' => '2009-11-30',

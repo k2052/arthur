@@ -177,19 +177,19 @@ class MediaTest extends \arthur\test\Unit
 		$expected = '/app/base/js/path/file.js';
 		$this->assertEqual($expected, $result);
 
-		Libraries::add('li3_foo_blog', array(
+		Libraries::add('art_foo_blog', array(
 			'path'      => ARTHUR_APP_PATH . '/libraries/plugins/blog',
 			'bootstrap' => false,
 			'route'     => false
 		));
 
 		$result = Media::asset('path/file', 'js', array(
-			'library' => 'li3_foo_blog', 'base' => '/app/base'
+			'library' => 'art_foo_blog', 'base' => '/app/base'
 		));
 		$expected = '/app/base/blog/js/path/file.js';
 		$this->assertEqual($expected, $result);
 
-		Libraries::remove('li3_foo_blog');
+		Libraries::remove('art_foo_blog');
 	}
 
 	public function testManualAssetPaths() 

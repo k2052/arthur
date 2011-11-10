@@ -16,7 +16,7 @@ class HttpTest extends \arthur\test\Unit
 
 	public function testCheckBasicIsFalse() 
 	{
-		$http   = new MockHttp(array('method' => 'basic', 'users' => array('gwoo' => 'li3')));
+		$http   = new MockHttp(array('method' => 'basic', 'users' => array('gwoo' => 'art')));
 		$result = $http->check($this->request);
 		$this->assertFalse($result);
 
@@ -28,9 +28,9 @@ class HttpTest extends \arthur\test\Unit
 	public function testCheckBasicIsTrue() 
 	{
 		$request = new Request(array(
-			'env' => array('PHP_AUTH_USER' => 'gwoo', 'PHP_AUTH_PW' => 'li3')
+			'env' => array('PHP_AUTH_USER' => 'gwoo', 'PHP_AUTH_PW' => 'art')
 		));
-		$http   = new MockHttp(array('method' => 'basic', 'users' => array('gwoo' => 'li3')));
+		$http   = new MockHttp(array('method' => 'basic', 'users' => array('gwoo' => 'art')));
 		$result = $http->check($request);
 		$this->assertTrue($result);
 
@@ -41,7 +41,7 @@ class HttpTest extends \arthur\test\Unit
 
 	public function testCheckDigestIsFalse() 
 	{
-		$http   = new MockHttp(array('realm' => 'app', 'users' => array('gwoo' => 'li3')));
+		$http   = new MockHttp(array('realm' => 'app', 'users' => array('gwoo' => 'art')));
 		$result = $http->check($this->request);
 		$this->assertFalse($result);
 		$this->assertPattern('/Digest/', $http->headers[0]);
@@ -60,7 +60,7 @@ class HttpTest extends \arthur\test\Unit
 				. 'opaque="d3fb67a7aa4d887ec4bf83040a820a46",username="gwoo",'
 				. 'response="04d7d878c67f289f37e553d2025e3a52"')
 		));
-		$http   = new MockHttp(array('realm' => 'app', 'users' => array('gwoo' => 'li3')));
+		$http   = new MockHttp(array('realm' => 'app', 'users' => array('gwoo' => 'art')));
 		$result = $http->check($request);
 		$this->assertTrue($result);
 

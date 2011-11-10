@@ -219,7 +219,7 @@ class Help extends \arthur\console\Command
 			$this->out($this->_pad($info['description']), 2);
 		}
 
-		$message  = 'See `{:command}li3 help COMMAND{:end}`';
+		$message  = 'See `{:command}art help COMMAND{:end}`';
 		$message .= ' for more information on a specific command.';
 		$this->out($message, 2);
 	}
@@ -234,7 +234,7 @@ class Help extends \arthur\console\Command
 		}); 
 		
 		$this->out($this->_pad(sprintf(
-			"{:command}li3 %s%s{:end}{:command}%s{:end}{:option}%s{:end}",
+			"{:command}art %s%s{:end}{:command}%s{:end}{:option}%s{:end}",
 			$command ?: 'COMMAND',
 			$method['name'] == 'run' ? '' : " {$method['name']}",
 			$params,

@@ -74,17 +74,17 @@ class DispatcherTest extends \arthur\test\Unit
 
 	public function testApplyRulesWithNamespacedController() 
 	{
-		$params   = array('controller' => 'li3_test\\Test', 'action' => 'test');
-		$expected = array('controller' => 'li3_test\\Test', 'action' => 'test');
+		$params   = array('controller' => 'art_test\\Test', 'action' => 'test');
+		$expected = array('controller' => 'art_test\\Test', 'action' => 'test');
 		
 		$this->assertEqual($expected, Dispatcher::applyRules($params));
 	}
 
 	public function testApplyRulesDotNamespacing() 
 	{
-		$params = array('controller' => 'li3_test.test', 'action' => 'test');
+		$params = array('controller' => 'art_test.test', 'action' => 'test');
 		$expected = array(
-			'library' => 'li3_test', 'controller' => 'li3_test.Test', 'action' => 'test'
+			'library' => 'art_test', 'controller' => 'art_test.Test', 'action' => 'test'
 		);                  
 		
 		$this->assertEqual($expected, Dispatcher::applyRules($params));
@@ -92,9 +92,9 @@ class DispatcherTest extends \arthur\test\Unit
 
 	public function testApplyRulesLibraryKeyNamespacing() 
 	{
-		$params = array('library' => 'li3_test', 'controller' => 'test', 'action' => 'test');
+		$params = array('library' => 'art_test', 'controller' => 'test', 'action' => 'test');
 		$expected = array(
-			'library' => 'li3_test', 'controller' => 'li3_test.Test', 'action' => 'test'
+			'library' => 'art_test', 'controller' => 'art_test.Test', 'action' => 'test'
 		);             
 		
 		$this->assertEqual($expected, Dispatcher::applyRules($params));
@@ -102,15 +102,15 @@ class DispatcherTest extends \arthur\test\Unit
 
 	public function testApplyRulesNamespacingCollision() 
 	{
-		$params = array('library' => 'li3_one', 'controller' => 'li3_two.test', 'action' => 'test');
+		$params = array('library' => 'art_one', 'controller' => 'art_two.test', 'action' => 'test');
 		$expected = array(
-			'library' => 'li3_one', 'controller' => 'li3_two.Test', 'action' => 'test'
+			'library' => 'art_one', 'controller' => 'art_two.Test', 'action' => 'test'
 		);
 		$this->assertEqual($expected, Dispatcher::applyRules($params));
 
-		$params = array('library' => 'li3_one', 'controller' => 'li3_two\Test', 'action' => 'test');
+		$params = array('library' => 'art_one', 'controller' => 'art_two\Test', 'action' => 'test');
 		$expected = array(
-			'library' => 'li3_one', 'controller' => 'li3_two\Test', 'action' => 'test'
+			'library' => 'art_one', 'controller' => 'art_two\Test', 'action' => 'test'
 		);
 		$this->assertEqual($expected, Dispatcher::applyRules($params));
 	}

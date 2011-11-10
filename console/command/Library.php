@@ -347,7 +347,7 @@ class Library extends \arthur\console\Command
 		if(!file_exists("phar://{$file}/config/{$name}.json")) 
 		{
 			$this->error(array(
-				"The forumla for {$name} is missing.", "Run li3 library formulate {$name}"
+				"The forumla for {$name} is missing.", "Run art library formulate {$name}"
 			));
 			return false;
 		}
@@ -359,7 +359,7 @@ class Library extends \arthur\console\Command
 		if(!$isValid) 
 		{
 			$this->error(array(
-				"The forumla for {$name} is not valid.", "Run li3 library formulate {$name}"
+				"The forumla for {$name} is not valid.", "Run art library formulate {$name}"
 			)); 
 			
 			return false;
@@ -405,7 +405,7 @@ class Library extends \arthur\console\Command
 			return false;
 		}          
 		
-		$this->error(array("{$file} does not exist.", "Run li3 library archive {$name}"));
+		$this->error(array("{$file} does not exist.", "Run art library archive {$name}"));
 		return false;
 	}
 

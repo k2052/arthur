@@ -55,7 +55,7 @@ class HelpTest extends \arthur\test\Unit
 		$result = $command->run('test');
 		$this->assertTrue($result);
 
-		$expected = "li3 test [--filters=<string>] [--format=<string>] [<path>]";
+		$expected = "art test [--filters=<string>] [--format=<string>] [<path>]";
 		$expected = preg_quote($expected);
 		$result   = $command->response->output;
 		$this->assertPattern("/{$expected}/", $result);

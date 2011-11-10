@@ -128,12 +128,12 @@ return array(
 );
 ?>
 EOD;
-		file_put_contents("{$this->_path}/fr/message/li3_docs.php", $data);
+		file_put_contents("{$this->_path}/fr/message/art_docs.php", $data);
 
 		$result = $this->adapter->read('message', 'fr', null);
 		$this->assertFalse($result);
 
-		$result = $this->adapter->read('message', 'fr', 'li3_docs');
+		$result = $this->adapter->read('message', 'fr', 'art_docs');
 		$expected = array(
 			'politics' => array(
 				'id'          => 'politics',

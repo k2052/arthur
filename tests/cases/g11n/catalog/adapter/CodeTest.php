@@ -213,12 +213,12 @@ EOD;
 	}
 
 	public function testReadWithScope() {
-		$this->adapter = new Code(array('path' => $this->_path, 'scope' => 'li3_bot'));
+		$this->adapter = new Code(array('path' => $this->_path, 'scope' => 'art_bot'));
 
 		$results = $this->adapter->read('messageTemplate', 'root', null);
 		$this->assertFalse($results);
 
-		$results = $this->adapter->read('messageTemplate', 'root', 'li3_bot');
+		$results = $this->adapter->read('messageTemplate', 'root', 'art_bot');
 		$expected = array('singular' => 'simple 1');
 		$result = $results['simple 1']['ids'];
 		$this->assertEqual($expected, $result);
