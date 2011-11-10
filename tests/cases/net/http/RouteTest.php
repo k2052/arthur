@@ -1,5 +1,6 @@
 <?php
 
+
 namespace arthur\tests\cases\net\http;
 
 use arthur\action\Request;
@@ -11,7 +12,7 @@ class RouteTest extends \arthur\test\Unit
 	{
 		$route = new Route(array(
 			'template' => '/',
-			'params'   => array('controller' => 'posts', 'action' => 'archive', 'page' => 1)
+			'params' => array('controller' => 'posts', 'action' => 'archive', 'page' => 1)
 		));
 
 		$result = $route->match(array('controller' => 'posts', 'action' => 'archive', 'page' => 1));
@@ -26,9 +27,9 @@ class RouteTest extends \arthur\test\Unit
 
 	public function testBaseRouteParsing() 
 	{
-		$params       = array('controller' => 'posts', 'action' => 'archive', 'page' => 1);
-		$route        = new Route(array('template' => '/', 'params' => $params));
-		$request      = new Request();
+		$params = array('controller' => 'posts', 'action' => 'archive', 'page' => 1);
+		$route = new Route(array('template' => '/', 'params' => $params));
+		$request = new Request();
 		$request->url = '/';
 
 		$result = $route->parse($request);
@@ -36,7 +37,7 @@ class RouteTest extends \arthur\test\Unit
 		$this->assertEqual(array('controller'), $result->persist);
 
 		$request->url = '';
-		$result       = $route->parse($request);
+		$result = $route->parse($request);
 		$this->assertEqual($params, $result->params);
 		$this->assertEqual(array('controller'), $result->persist);
 
@@ -61,16 +62,16 @@ class RouteTest extends \arthur\test\Unit
 
 	public function testSimpleRouteParsing() 
 	{
-		$route   = new Route(array('template' => '/{:controller}'));
+		$route = new Route(array('template' => '/{:controller}'));
 		$request = new Request();
 		$default = array('action' => 'index');
 
 		$request->url = '/posts';
-		$result       = $route->parse($request);
+		$result = $route->parse($request);
 		$this->assertEqual(array('controller' => 'posts') + $default, $result->params);
 
 		$request->url = '/users';
-		$result       = $route->parse($request);
+		$result = $route->parse($request);
 		$this->assertEqual(array('controller' => 'users') + $default, $result->params);
 
 		$request->url = '/users/index';
@@ -103,31 +104,31 @@ class RouteTest extends \arthur\test\Unit
 		$this->assertFalse($result);
 	}
 
-	public function testRouteParsingWithOptionalParam()
+	public function testRouteParsingWithOptionalParam() 
 	{
-		$route   = new Route(array('template' => '/{:controller}/{:action}'));
+		$route = new Route(array('template' => '/{:controller}/{:action}'));
 		$request = new Request();
 		$default = array('action' => 'index');
 
 		$request->url = '/posts';
-		$result       = $route->parse($request);
+		$result = $route->parse($request);
 		$this->assertEqual(array('controller' => 'posts') + $default, $result->params);
 
 		$request->url = '/users';
-		$result       = $route->parse($request);
+		$result = $route->parse($request);
 		$this->assertEqual(array('controller' => 'users') + $default, $result->params);
 
 		$request->url = '/1';
-		$result       = $route->parse($request);
+		$result = $route->parse($request);
 		$this->assertEqual(array('controller' => '1') + $default, $result->params);
 
 		$request->url = '/users/index';
-		$result       = $route->parse($request);
+		$result = $route->parse($request);
 		$this->assertEqual(array('controller' => 'users') + $default, $result->params);
 
 		$request->url = '/users/view';
-		$result       = $route->parse($request);
-		$expected     = array('controller' => 'users', 'action' => 'view');
+		$result = $route->parse($request);
+		$expected = array('controller' => 'users', 'action' => 'view');
 		$this->assertEqual($expected, $result->params);
 
 		$request->url = '/users/view/5';
@@ -145,21 +146,21 @@ class RouteTest extends \arthur\test\Unit
 		$request = new Request();
 
 		$request->url = '/posts';
-		$result       = $route->parse($request);
-		$expected     = array('controller' => 'posts', 'action' => 'index', 'id' => null);
+		$result = $route->parse($request);
+		$expected = array('controller' => 'posts', 'action' => 'index', 'id' => null);
 		$this->assertEqual($expected, $result->params);
 
 		$request->url = '/posts/index';
-		$result       = $route->parse($request);
+		$result = $route->parse($request);
 		$this->assertEqual($expected, $result->params);
 
 		$request->url = '/posts/index/';
-		$result       = $route->parse($request);
+		$result = $route->parse($request);
 		$this->assertEqual($expected, $result->params);
 
 		$request->url = '/posts/view/5';
-		$result       = $route->parse($request);
-		$expected     = array('controller' => 'posts', 'action' => 'view', 'id' => '5');
+		$result = $route->parse($request);
+		$expected = array('controller' => 'posts', 'action' => 'view', 'id' => '5');
 		$this->assertEqual($expected, $result->params);
 
 		$request->url = '/';
@@ -173,24 +174,24 @@ class RouteTest extends \arthur\test\Unit
 	{
 		$route = new Route(array(
 			'template' => '/{:controller}/{:action}/{:id}.{:type}',
-			'params'   => array('id' => null)
+			'params' => array('id' => null)
 		));
 		$request = new Request();
 		$default = array('controller' => 'posts');
 
 		$request->url = '/posts/view/5.xml';
-		$result       = $route->parse($request);
-		$expected     = array('action' => 'view', 'id' => '5', 'type' => 'xml') + $default;
+		$result = $route->parse($request);
+		$expected = array('action' => 'view', 'id' => '5', 'type' => 'xml') + $default;
 		$this->assertEqual($expected, $result->params);
 
 		$request->url = '/posts/index.xml';
-		$result       = $route->parse($request);
-		$expected     = array('action' => 'index', 'id' => '', 'type' => 'xml') + $default;
+		$result = $route->parse($request);
+		$expected = array('action' => 'index', 'id' => '', 'type' => 'xml') + $default;
 		$this->assertEqual($expected, $result->params);
 
 		$request->url = '/posts.xml';
-		$result       = $route->parse($request);
-		$expected     = array('action' => 'index', 'id' => '', 'type' => 'xml') + $default;
+		$result = $route->parse($request);
+		$expected = array('action' => 'index', 'id' => '', 'type' => 'xml') + $default;
 		$this->assertEqual($expected, $result->params);
 	}
 
@@ -207,17 +208,17 @@ class RouteTest extends \arthur\test\Unit
 		$result = $route->match(array('controller' => 'posts', 'args' => array('foo', 'bar')));
 		$this->assertEqual('/posts/index/foo/bar', $result);
 
-		$request      = new Request();
+		$request = new Request();
 		$request->url = '/posts/index/foo/bar';
 
-		$result   = $route->parse($request);
+		$result = $route->parse($request);
 		$expected = array(
 			'controller' => 'posts', 'action' => 'index', 'args' => array('foo', 'bar')
 		);
 		$this->assertEqual($expected, $result->params);
 	}
 
-	public function testStaticRouteMatching()
+	public function testStaticRouteMatching() 
 	{
 		$route = new Route(array('template' => '/login', 'params' => array(
 			'controller' => 'sessions', 'action' => 'add'
@@ -228,99 +229,104 @@ class RouteTest extends \arthur\test\Unit
 		$result = $route->match(array());
 		$this->assertFalse($result);
 
-		$request  = new Request();
+		$request = new Request();
 		$expected = array('controller' => 'sessions', 'action' => 'add');
 
 		$request->url = '/login';
-		$result       = $route->parse($request);
+		$result = $route->parse($request);
 		$this->assertEqual($expected, $result->params);
 
 		$request->url = 'login';
-		$result       = $route->parse($request);
+		$result = $route->parse($request);
 		$this->assertEqual($expected, $result->params);
 	}
-	
+
 	public function testManualRouteDefinition() 
 	{
 		$route = new Route(array(
 			'template' => '/{:controller}',
-			'pattern'  => '/(?P<controller>[A-Za-z0-9_-]+)/',
-			'keys'     => array('controller' => 'controller'),
-			'match'    => array('action' => 'index'),
-			'options'  => array('wrap' => false, 'compile' => false)
+			'pattern' => '/(?P<controller>[A-Za-z0-9_-]+)/',
+			'keys' => array('controller' => 'controller'),
+			'match' => array('action' => 'index'),
+			'options' => array('wrap' => false, 'compile' => false)
 		));
 
-		$request      = new Request();
+		$request = new Request();
 		$request->url = '/posts';
 
-		$result   = $route->parse($request);
+		$result = $route->parse($request);
 		$expected = array('controller' => 'posts', 'action' => 'index');
 		$this->assertEqual($expected, $result->params);
 
-		$result   = $route->match(array('controller' => 'posts', 'action' => 'index'));
+		$result = $route->match(array('controller' => 'posts', 'action' => 'index'));
 		$expected = '/posts';
 		$this->assertEqual($expected, $result);
 	}
-	
-	public function testRouteExporting() 
-	{
+
+	/**
+	 * Tests exporting a the details of a compiled route to an array.
+	 */
+	public function testRouteExporting() {
 		$result = new Route(array(
 			'template' => '/{:controller}/{:action}',
-			'params'   => array('action' => 'view')
+			'params' => array('action' => 'view')
 		));
 		$result = $result->export();
 
 		$expected = array(
-			'template'    => '/{:controller}/{:action}',
-			'pattern'     => '@^(?:/(?P<controller>[^\\/]+))(?:/(?P<action>[^\\/]+)?)?$@',
-			'params'      => array('action' => 'view'),
-			'defaults'    => array('action' => 'view'),
-			'match'       => array(),
-			'meta'        => array(),
-			'keys'        => array('controller' => 'controller', 'action' => 'action'),
+			'template' => '/{:controller}/{:action}',
+			'pattern' => '@^(?:/(?P<controller>[^\\/]+))(?:/(?P<action>[^\\/]+)?)?$@',
+			'params' => array('action' => 'view'),
+			'defaults' => array('action' => 'view'),
+			'match' => array(),
+			'meta' => array(),
+			'keys' => array('controller' => 'controller', 'action' => 'action'),
 			'subPatterns' => array(),
-			'persist'     => array('controller'),
-			'handler'     => null
+			'persist' => array('controller'),
+			'handler' => null
 		);
 		$this->assertEqual($expected, $result);
 
 		$result = new Route(array(
 			'template' => '/images/image_{:width}x{:height}.{:format}',
-			'params'   => array('format' => 'png')
+			'params' => array('format' => 'png')
 		));
 		$expected = array(
-			'template'    => '/images/image_{:width}x{:height}.{:format}',
-			'pattern'     => '@^/images/image_(?P<width>[^\\/]+)x(?P<height>[^\\/]+)\\.(?P<format>[^\\/]+)?$@',
-			'params'      => array('format' => 'png', 'action' => 'index'),
-			'match'       => array('action' => 'index'),
-			'meta'        => array(),
-			'keys'        => array('width' => 'width', 'height' => 'height', 'format' => 'format'),
-			'defaults'    => array('format' => 'png'),
+			'template' => '/images/image_{:width}x{:height}.{:format}',
+			'pattern' => '@^/images/image_(?P<width>[^\\/]+)x(?P<height>[^\\/]+)\\.(?P<format>[^\\/]+)?$@',
+			'params' => array('format' => 'png', 'action' => 'index'),
+			'match' => array('action' => 'index'),
+			'meta' => array(),
+			'keys' => array('width' => 'width', 'height' => 'height', 'format' => 'format'),
+			'defaults' => array('format' => 'png'),
 			'subPatterns' => array(),
-			'persist'     => array(),
-			'handler'     => null
+			'persist' => array(),
+			'handler' => null
 		);
 		$result = $result->export();
 		$this->assertEqual($expected, $result);
 	}
 
-	public function testRoutingMultipleMatch() 
-	{
+	/**
+	 * Tests creating a route with a custom pattern that accepts URLs in two formats but only
+	 * generates them in one.
+	 */
+	public function testRoutingMultipleMatch() {
 		$route = new Route(array(
 			'template' => '/users/{:user}',
-			'pattern'  => '@^/u(?:sers)?(?:/(?P<user>[^\/]+))$@',
-			'params'   => array('controller' => 'users', 'action' => 'index'),
-			'match'    => array('controller' => 'users', 'action' => 'index'),
+			'pattern' => '@^/u(?:sers)?(?:/(?P<user>[^\/]+))$@',
+			'params' => array('controller' => 'users', 'action' => 'index'),
+			'match' => array('controller' => 'users', 'action' => 'index'),
 			'defaults' => array('controller' => 'users'),
-			'keys'     => array('user' => 'user'),
-			'compile'  => false
+			'keys' => array('user' => 'user'),
+			'compile' => false
 		));
 
-		$result   = $route->match(array('controller' => 'users', 'user' => 'alke'));
+		$result = $route->match(array('controller' => 'users', 'user' => 'alke'));
 		$expected = '/users/alke';
 		$this->assertEqual($expected, $result);
 
-		$request      = new Request();
+		$request = new Request();
 		$request->url = '/users/alke';
 		$expected = array('controller' => 'users', 'action' => 'index', 'user' => 'alke');
 
@@ -328,59 +334,62 @@ class RouteTest extends \arthur\test\Unit
 		$this->assertEqual($expected, $result->params);
 
 		$request->url = '/u/alke';
-		$result       = $route->parse($request);
+		$result = $route->parse($request);
 		$this->assertEqual($expected, $result->params);
 	}
 
-	public function testCustomSubPattern() 
-	{
+	/**
+	 * Tests creating a route with a custom regex sub-pattern in a template.
+	 */
+	public function testCustomSubPattern() {
 		$route = new Route(array('template' => '/{:controller}/{:action}/{:user:\d+}'));
 
-		$request      = new Request();
+		$request = new Request();
 		$request->url = '/users/view/10';
-		$expected     = array('controller' => 'users', 'action' => 'view', 'user' => '10');
+		$expected = array('controller' => 'users', 'action' => 'view', 'user' => '10');
 
 		$result = $route->parse($request);
 		$this->assertEqual($expected, $result->params);
 
 		$request->url = '/users/view/my_login';
-		$result       = $route->parse($request);
+		$result = $route->parse($request);
 		$this->assertFalse($result);
 	}
 
-	public function testRoutesWithQueryStrings() 
-	{
+	/**
+	 * Tests that routes with querystrings are correctly processed.
+	 */
+	public function testRoutesWithQueryStrings() {
 		$route = new Route(array('template' => '/{:controller}/{:action}/{:args}'));
 
 		$expected = '/posts?foo=bar';
-		$result   = $route->match(array('controller' => 'posts', '?' => 'foo=bar'));
+		$result = $route->match(array('controller' => 'posts', '?' => 'foo=bar'));
 		$this->assertEqual($expected, $result);
 
 		$expected = '/posts?foo=bar&baz=dib';
-		$result   = $route->match(array('controller' => 'posts', '?' => 'foo=bar&baz=dib'));
+		$result = $route->match(array('controller' => 'posts', '?' => 'foo=bar&baz=dib'));
 		$this->assertEqual($expected, $result);
 
 		$expected = '/posts?foo=bar';
-		$result   = $route->match(array('controller' => 'posts', '?' => array('foo' => 'bar')));
+		$result = $route->match(array('controller' => 'posts', '?' => array('foo' => 'bar')));
 		$this->assertEqual($expected, $result);
 
 		$expected = '/posts/archive?foo=bar&baz=dib';
-		$result   = $route->match(array('controller' => 'posts', 'action' => 'archive', '?' => array(
+		$result = $route->match(array('controller' => 'posts', 'action' => 'archive', '?' => array(
 			'foo' => 'bar', 'baz' => 'dib'
 		)));
 		$this->assertEqual($expected, $result);
 
 		$expected = '/posts/archive?foo[]=bar&foo[]=baz';
-		$result   = $route->match(array(
+		$result = $route->match(array(
 			'controller' => 'posts',
-			'action'     => 'archive',
-			'?'          => 'foo[]=bar&foo[]=baz'
+			'action' => 'archive',
+			'?' => 'foo[]=bar&foo[]=baz'
 		));
 		$this->assertEqual($expected, $result);
 	}
 
-	public function testReversingRegexRoutes() 
-	{
+	public function testReversingRegexRoutes() {
 		$route = new Route(array('template' => '/{:controller}/{:id:[0-7]+}'));
 
 		$result = $route->match(array('controller' => 'posts', 'id' => '007'));
@@ -389,17 +398,19 @@ class RouteTest extends \arthur\test\Unit
 		$this->assertFalse($route->match(array('controller' => 'posts', 'id' => '009')));
 	}
 
-	public function testPatternsWithRepetition() 
-	{
+	/**
+	 * Tests that route templates with elements containing repetition patterns are correctly parsed.
+	 */
+	public function testPatternsWithRepetition() {
 		$route = new Route(array('template' => '/{:id:[0-9a-f]{24}}.{:type}'));
-		$data  = $route->export();
+		$data = $route->export();
 		$this->assertEqual('@^(?:/(?P<id>[0-9a-f]{24}))\.(?P<type>[^\/]+)$@', $data['pattern']);
 
 		$this->assertEqual(array('id' => 'id', 'type' => 'type'), $data['keys']);
 		$this->assertEqual(array('id' => '[0-9a-f]{24}'), $data['subPatterns']);
 
 		$route = new Route(array('template' => '/{:key:[a-z]{5}[0-9]{2,3}}'));
-		$data  = $route->export();
+		$data = $route->export();
 		$this->assertEqual('@^(?:/(?P<key>[a-z]{5}[0-9]{2,3}))$@', $data['pattern']);
 		$this->assertEqual(array('key' => '[a-z]{5}[0-9]{2,3}'), $data['subPatterns']);
 
@@ -407,7 +418,7 @@ class RouteTest extends \arthur\test\Unit
 		$this->assertFalse($route->match(array('key' => 'abcdef13')));
 
 		$route = new Route(array('template' => '/{:key:z[a-z]{5}[0-9]{2,3}0}/{:val:[0-9]{2}}'));
-		$data  = $route->export();
+		$data = $route->export();
 
 		$expected = '@^(?:/(?P<key>z[a-z]{5}[0-9]{2,3}0))(?:/(?P<val>[0-9]{2}))$@';
 		$this->assertEqual($expected, $data['pattern']);
@@ -424,46 +435,49 @@ class RouteTest extends \arthur\test\Unit
 		$this->assertFalse($route->match(array('key' => 'zgheug941', 'val' => '13')));
 	}
 
-	public function testHandlerModification() 
-	{
+	/**
+	 * Tests that route handlers are able to modify route parameters.
+	 */
+	public function testHandlerModification() {
 		$route = new Route(array(
 			'template' => '/{:id:[0-9a-f]{24}}.{:type}',
-			'handler'  => function($request) 
-			{
+			'handler' => function($request) {
 				$request->params += array('lang' => $request->env('ACCEPT_LANG') ?: 'en');
 				return $request;
 			}
 		));
 
 		$request = new Request(array('url' => '/4bbf25bd8ead0e5180120000.json'));
-		$result  = $route->parse($request);
-		$lang    = $request->env('ACCEPT_LANG') ?: 'en';
+		$result = $route->parse($request);
+		$lang = $request->env('ACCEPT_LANG') ?: 'en';
 		$this->assertEqual($lang, $result->params['lang']);
 	}
 
-	public function testHeaderAndMethodBasedRouting() 
-	{
+	/**
+	 * Tests that requests can be routed based on HTTP method verbs or HTTP headers.
+	 */
+	public function testHeaderAndMethodBasedRouting() {
 		$parameters = array('controller' => 'users', 'action' => 'edit');
 
 		$route = new Route(array(
 			'template' => '/',
-			'params'   => $parameters + array('http:method' => 'POST')
+			'params' => $parameters + array('http:method' => 'POST')
 		));
 
-		$request      = new Request(array('env' => array('HTTP_METHOD' => 'GET')));
+		$request = new Request(array('env' => array('HTTP_METHOD' => 'GET')));
 		$request->url = '/';
 		$this->assertFalse($route->parse($request));
 
-		$request      = new Request(array('env' => array('REQUEST_METHOD' => 'POST')));
+		$request = new Request(array('env' => array('REQUEST_METHOD' => 'POST')));
 		$request->url = '/';
 		$this->assertEqual($parameters, $route->parse($request)->params);
 
 		$route = new Route(array(
 			'template' => '/{:controller}/{:id:[0-9]+}',
-			'params'   => $parameters + array('http:method' => array('POST', 'PUT'))
+			'params' => $parameters + array('http:method' => array('POST', 'PUT'))
 		));
 
-		$request      = new Request(array('env' => array('REQUEST_METHOD' => 'PUT')));
+		$request = new Request(array('env' => array('REQUEST_METHOD' => 'PUT')));
 		$request->url = '/users/abc';
 		$this->assertFalse($route->parse($request));
 
@@ -471,27 +485,32 @@ class RouteTest extends \arthur\test\Unit
 		$this->assertEqual($parameters + array('id' => '54'), $route->parse($request)->params);
 	}
 
-	public function testMatchingEmptyRoute() 
-	{
+	/**
+	 * Tests that a successful match against a route with template `'/'` operating at the root of
+	 * a domain never returns an empty string.
+	 */
+	public function testMatchingEmptyRoute() {
 		$route = new Route(array(
 			'template' => '/',
-			'params'   => array('controller' => 'users', 'action' => 'view')
+			'params' => array('controller' => 'users', 'action' => 'view')
 		));
 
 		$request = new Request(array('base' => '/'));
-		$url     = $route->match(array('controller' => 'users', 'action' => 'view'), $request);
+		$url = $route->match(array('controller' => 'users', 'action' => 'view'), $request);
 		$this->assertEqual('/', $url);
 
 		$request = new Request(array('base' => ''));
-		$url     = $route->match(array('controller' => 'users', 'action' => 'view'), $request);
+		$url = $route->match(array('controller' => 'users', 'action' => 'view'), $request);
 		$this->assertEqual('/', $url);
 	}
 
-	public function testTrimmingEmptyPathElements() 
-	{
+	/**
+	 * Tests that routes with optional trailing elements have unnecessary slashes trimmed.
+	 */
+	public function testTrimmingEmptyPathElements() {
 		$route = new Route(array(
 			'template' => '/{:controller}/{:id:[0-9]+}',
-			'params'   => array('action' => 'index', 'id' => null)
+			'params' => array('action' => 'index', 'id' => null)
 		));
 
 		$url = $route->match(array('controller' => 'posts', 'id' => '13'));
@@ -501,12 +520,11 @@ class RouteTest extends \arthur\test\Unit
 		$this->assertEqual("/posts", $url);
 	}
 
-	public function testUrlEncodedArgs() 
-	{
-		$route        = new Route(array('template' => '/{:controller}/{:action}/{:args}'));
-		$request      = new Request();
+	public function testUrlEncodedArgs() {
+		$route = new Route(array('template' => '/{:controller}/{:action}/{:args}'));
+		$request = new Request();
 		$request->url = '/posts/index/Food%20%26%20Dining';
-		$result       = $route->parse($request);
+		$result = $route->parse($request);
 		$expected = array(
 			'controller' => 'posts', 'action' => 'index', 'args' => array('Food%20%26%20Dining')
 		);
@@ -524,7 +542,7 @@ class RouteTest extends \arthur\test\Unit
 		$route = new Route(array(
 			'template' => '/admin/{:args}',
 			'continue' => true,
-			'params'   => array('admin' => true)
+			'params' => array('admin' => true)
 		));
 
 		$result = $route->match(array('admin' => true, 'args' => ''));
@@ -536,7 +554,7 @@ class RouteTest extends \arthur\test\Unit
 		$route = new Route(array(
 			'template' => '/admin/{:args}',
 			'continue' => true,
-			'params'   => array('admin' => true)
+			'params' => array('admin' => true)
 		));
 
 		$result = $route->match(array(
@@ -553,7 +571,7 @@ class RouteTest extends \arthur\test\Unit
 		$route = new Route(array(
 			'template' => '/admin/{:args}',
 			'continue' => true,
-			'params'   => array('admin' => true)
+			'params' => array('admin' => true)
 		));
 
 		$result = $route->match(array('Posts::index', 'admin' => true, '?' => array('page' => 2)));
@@ -564,24 +582,24 @@ class RouteTest extends \arthur\test\Unit
 	{
 		$route = new Route(array(
 			'template' => '/posts/list/{:foobar:[0-9a-f]{5}}/todday/fooo',
-			'params'   => array('controller' => 'posts', 'action' => 'archive')
+			'params' => array('controller' => 'posts', 'action' => 'archive')
 		));
 
 		$expected = '@^/posts/list(?:/(?P<foobar>[0-9a-f]{5}))/todday/fooo$@';
-		$result   = $route->export();
+		$result = $route->export();
 		$this->assertEqual($expected, $result['pattern']);
-	}
-
+	}                   
+	
 	public function testTwoParameterRoutes() 
 	{
 		$route = new Route(array(
 			'template' => '/personnel/{:personnel_id}/position/{:position_id}/actions/create',
-			'params'   => array('controller' => 'actions', 'action' => 'create'),
+			'params' => array('controller' => 'actions', 'action' => 'create'),
 		));
 
 		$route->compile();
-		$data      = $route->export(); $actual = $data['pattern'];
-		$expected  = '@^/personnel(?:/(?P<personnel_id>[^\\/]+))/position(?:/';
+		$data = $route->export(); $actual = $data['pattern'];
+		$expected = '@^/personnel(?:/(?P<personnel_id>[^\\/]+))/position(?:/';
 		$expected .= '(?P<position_id>[^\\/]+))/actions/create$@';
 
 		$this->assertEqual($expected, $actual);
