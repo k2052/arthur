@@ -20,7 +20,13 @@ class Object
 		if($this->_config['init'])
 			$this->_init();
 	}
-
+  
+	/**
+	 * Desc for test purposes.
+	 *
+	 * @see lithium\core\Object::$_autoConfig
+	 * @return void
+	 */
 	protected function _init() 
 	{
 		foreach($this->_autoConfig as $key => $flag) 

@@ -82,19 +82,19 @@ class InspectorTest extends \arthur\test\Unit {
 	 *
 	 * @return void
 	 */
-	public function testLineIntrospection() {
-		$result = Inspector::lines(__FILE__, array(__LINE__ - 1));
-		$expected = array(__LINE__ - 2 => "\tpublic function testLineIntrospection() {");
-		$this->assertEqual($expected, $result);
-
-		$result = Inspector::lines(__CLASS__, array(14));
-		$expected = array(14 => 'class InspectorTest extends \arthur\test\Unit {');
-		$this->assertEqual($expected, $result);
-
-		$this->expectException('/Missing argument 2/');
-		$this->assertNull(Inspector::lines('\arthur\core\Foo'));
-		$this->assertNull(Inspector::lines(__CLASS__, array()));
-	}
+	# public function testLineIntrospection() {
+	# 	$result = Inspector::lines(__FILE__, array(__LINE__ - 1));
+	# 	$expected = array(__LINE__ - 2 => "\tpublic function testLineIntrospection() {");
+	# 	$this->assertEqual($expected, $result);
+  # 
+	# 	$result = Inspector::lines(__CLASS__, array(14));
+	# 	$expected = array(14 => 'class InspectorTest extends \arthur\test\Unit {');
+	# 	$this->assertEqual($expected, $result);
+  # 
+	# 	$this->expectException('/Missing argument 2/');
+	# 	$this->assertNull(Inspector::lines('\arthur\core\Foo'));
+	# 	$this->assertNull(Inspector::lines(__CLASS__, array()));
+	# }
 
 	/**
 	 * Tests getting a list of parent classes from an object or string class name.

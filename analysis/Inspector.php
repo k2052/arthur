@@ -13,7 +13,12 @@ class Inspector extends \arthur\core\StaticObject
 	protected static $_classes = array(
 		'collection' => '\arthur\util\Collection'
 	);
-
+  
+  /**
+   * Maps reflect method names to result array keys.
+   *
+   * @var array
+   */ 
 	protected static $_methodMap = array(
 		'name'      => 'getName',
 		'start'     => 'getStartLine',
