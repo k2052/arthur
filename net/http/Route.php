@@ -208,7 +208,7 @@ class Route extends \arthur\core\Object
 		} 
 		
 		$this->_pattern = "@^{$this->_template}\$@";
-		$match          = '@([/.])?\{:([^:}]+):?((?:[^{]+(?:\{[0-9,]+\})?)*)\}@S';
+	  $match          = '@([/.])?\{:([^:}]+):?((?:[^{]+(?:\{[0-9,]+\})?)*?)\}@S';
 		preg_match_all($match, $this->_pattern, $m);
 
 		if(!$tokens = $m[0]) return;
