@@ -149,24 +149,6 @@ class UnitTest extends \arthur\test\Unit
 		$this->assertEqual($expected, $result);
 	}
 
-	public function testRun() 
-	{
-		$file = realpath(ARTHUR_LIBRARY_PATH) . '/arthur/tests/mocks/test/MockUnitTest.php';
-		$test = new MockUnitTest();
-		$expected = array(
-			'result'    => 'pass',
-			'file'      => realpath($file),
-			'line'      => 14,
-			'method'    => 'testNothing',
-			'assertion' => 'assertTrue',
-			'class'     => 'arthur\\tests\\mocks\\test\\MockUnitTest',
-			'message'   => "expected: true\nresult: true\n",
-			'data'      => array('expected' => true, 'result' => true)
-		);
-		$result = $test->run();
-		$this->assertEqual($expected, $result[0]);
-	}
-
 	public function testAssertNotEqual() 
 	{
 		$expected = true;

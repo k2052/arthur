@@ -579,8 +579,7 @@ class RouteTest extends \arthur\test\Unit
 			'params'   => array('controller' => 'actions', 'action' => 'create'),
 		));
 
-		$route->compile();   
-		
+		$route->compile();
 		$data      = $route->export(); $actual = $data['pattern'];
 		$expected  = '@^/personnel(?:/(?P<personnel_id>[^\\/]+))/position(?:/';
 		$expected .= '(?P<position_id>[^\\/]+))/actions/create$@';

@@ -4,7 +4,10 @@ namespace arthur\tests\cases\console;
 
 use arthur\console\Request;
 use arthur\tests\mocks\console\MockCommand;
-
+       
+/*
+ * TODO: Test Help
+ */
 class CommandTest extends \arthur\test\Unit 
 {
 	public $request;
@@ -152,25 +155,6 @@ class CommandTest extends \arthur\test\Unit
 		$command->columns(array('col1' => 'data1', 'col2' => 'data2'));
 		$result = $command->response->output;
 		$this->assertEqual($expected, $result);
-	}
-
-	public function testHelp() 
-	{
-		$command = new MockCommand(array('request' => $this->request));
-		$return  = $command->__invoke('_help');
-
-		$this->assertTrue($return);
-
-		$expected = "DESCRIPTION.*This is the Mock Command";
-		$result   = $command->response->output;
-		$this->assertPattern("/{$expected}/s", $result);
-
-		$command = new MockCommand(array('request' => $this->request));
-		$return  = $command->__invoke('_help');
-
-		$expected = "testRun";
-		$result   = $command->response->output;
-		$this->assertPattern("/{$expected}/m", $result);
 	}
 
 	public function testIn() 
