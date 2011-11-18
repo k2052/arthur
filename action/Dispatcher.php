@@ -37,7 +37,7 @@ class Dispatcher extends \arthur\core\StaticObject
 		return static::_filter(__FUNCTION__, $params, function($self, $params) use ($router) 
 		{
 			$request = $params['request'];
-			$options = $params['options'];
+			$options = $params['options'];  
 
 			if(($result = $router::process($request)) instanceof Response)
 				return $result;
